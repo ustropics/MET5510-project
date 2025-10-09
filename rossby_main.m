@@ -113,4 +113,12 @@ eigVec3 = eigVec(:,sortdx);
 
 toc
 
-save('data/Rossby_wave_2.mat') % save data file for use later on
+data_folder = 'data';
+file_name = 'Rossby_wave_2.mat'
+data_file = fullfile(data_folder, file_name) % path to data file
+
+if ~exist(data_folder, 'dir') % check if 'data' folder exists, create it if not
+    mkdir(data_folder)
+end
+
+save(data_file) % save data file for use later on
