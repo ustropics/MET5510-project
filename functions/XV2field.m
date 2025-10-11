@@ -1,4 +1,24 @@
-% functions/XV2field.m
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Filename: XV2field.m
+
+% Description: Transforms the 1D eigenvector (XV) into a 3D field 
+% (e.g., geopotential height) over longitude, latitude, and height grids using 
+% spectral or finite difference methods in the quasi-geostrophic model 
+
+% Math/functions: Field = XV2field(XV, ii, dx) * f₀/g, where 
+% XV is the eigenvector
+% ii is longitude points
+% dx is grid spacing
+% f₀ is Coriolis parameter
+% and g is gravity
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 function field= XV2field(XV,ii,dx)
 
 global jj kk ll cplx m0 Lx

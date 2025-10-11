@@ -1,4 +1,21 @@
-% functions/l2jk.m
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Filename: l2jk.m
+
+% Description: Converts a single linear index (l) to 2D grid indices (j, k) 
+% representing latitude and height for use in the quasi-geostrophic model 
+
+% Math/functions: [j, k] = [mod(l-1, jj-1)+1, floor((l-1)/(jj-1))+1], where 
+% jj is the number of latitude points
+% l is the linear index adjusted for interior points 
+% (1 to ll, where ll = (jj-1)*(kk+1))
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 function [j,k] = l2jk(l)
 global jj
 k = floor((l-1)/(jj-1))+1;

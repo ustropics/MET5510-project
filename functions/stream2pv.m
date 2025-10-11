@@ -1,3 +1,23 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Filename: stream2pv.m
+
+% Description: Converts streamfunction (XV) to potential vorticity (QV) 
+% for the quasi-geostrophic modeapplying boundary conditions and 
+% interior PV calculation.
+
+% Math/functions: Q = ∇²ψ + (f₀²/N²) ∂²ψ/∂z² + β, where 
+% ψ is streamfunction
+% f₀ is Coriolis parameter
+% N² is Brunt-Vaisala frequency
+% β is meridional PV gradien
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % functions/stream2pv.m
 function QV = stream2pv(XV)
 global jj kk ll NN2 m0 f0 dy dz Lx

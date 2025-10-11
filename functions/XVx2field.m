@@ -1,4 +1,23 @@
-% functions/XVx2field.m
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Filename: XVx2field.m
+
+% Description: Converts the x-derivative of the eigenvector (XVx) into a 
+% 3D meridional wind field over the grid in the quasi-geostrophic model, 
+% accounting for geostrophic balance.
+
+% Math/functions: v' = (g/f₀) ∂ψ/∂x, where 
+% ψ is streamfunction, 
+% g is gravity
+% f₀ is Coriolis parameter,
+% ∂/∂x is derived from XVx
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 function field= XVx2field(XV,ii,dx) 
 
 global jj kk ll cplx m0 Lx 

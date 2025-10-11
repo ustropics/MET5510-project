@@ -1,4 +1,23 @@
-% functions/XVy2field.m
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Filename: XVy2field.m
+
+% Description: Converts the y-derivative of the eigenvector (XVy) into a 
+% 3D zonal wind field over the grid in the quasi-geostrophic model, 
+% accounting for geostrophic balance.
+
+% Math/functions: u' = -(g/f₀) ∂ψ/∂y, where 
+% ψ is streamfunction
+% g is gravity
+% f₀ is Coriolis parameter
+% ∂/∂y is derived from XVy
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 function field= XVy2field(XV,ii,dx) 
 global jj kk ll cplx m0 Lx dy
 

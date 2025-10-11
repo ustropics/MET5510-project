@@ -1,4 +1,23 @@
-% functions/XV2streamxtime.m
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Filename: XV2streamxtime.m
+
+% Description: Converts the 1D eigenvector (XV) into a streamfunction field 
+% varying with longitude and time, tracking wave propagation in 
+% the quasi-geostrophic model.
+
+% Math/functions: ψ(x,t) = XV * exp(i(kx - ωt)), where
+% k is wavenumber
+% ω is growth rate from eigenvalues
+% x is longitude
+% and t is time
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 function xtime = XV2streamxtime(XV,ii,dx,omega,ylat,zlev)
 global cplx m0 Lx
 

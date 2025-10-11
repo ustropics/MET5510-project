@@ -1,4 +1,21 @@
-% functions/stream2xPVadv.m
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Filename: stream2xPVadv.m
+
+% Description: Calculates the zonal advection of potential vorticity (PV) 
+% based on the streamfunction (XV), used in the linear QG model matrix 
+% construction.
+
+% Math/functions: -u ∂q/∂x, where 
+% u = -∂ψ/∂y
+% ∂q/∂x is computed via finite differences on the PV field
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 function xQVadv = stream2xPVadv(QV)
 global jj kk ll Lx Ubar cplx m0
 

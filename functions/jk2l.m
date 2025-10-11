@@ -1,4 +1,22 @@
-% functions/jk2l.m
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Filename: jk2l.m
+
+% Description: Converts 2D grid indices (j, k) representing latitude and height 
+% to a single linear index (l) with an adjusted scheme in the 
+% quasi-geostrophic model.
+
+% Math/functions: l = (k-1) * (jj-1) + (j-1), where 
+% jj is the number of latitude points
+% j is the latitude index (1 to jj-1 for interior)
+% k is the height index (1 to kk+1)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 function l = jk2l(j,k)
 global jj  
 

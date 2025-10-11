@@ -1,4 +1,21 @@
-% functions/w2ellipse.m
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Filename: w2ellipse.m
+
+% Description: Transforms vertical velocity into an elliptical representation
+% possibly for visualizing wave structures or perturbation shapes 
+% in the quasi-geostrophic model.
+
+% Math/functions: Ellipse parameters derived from w, where
+% b = w / aspect
+% a and b are semi-axesand
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 function EW = w2ellipse (w)
 global jj kk LW NN2 m0 f0 dy dz Lx 
 EW=zeros(LW,1);

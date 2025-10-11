@@ -1,4 +1,24 @@
-% functions/XVz2field.m
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Filename: XVz2field.m
+
+% Description: Converts the z-derivative of the eigenvector (XVz) into a 
+% 3D vertical velocity or temperature perturbation field over the grid in 
+% the quasi-geostrophic model.
+
+% Math/functions: w' or T' = (f₀ * H / R) ∂ψ/∂z, where 
+% ψ is streamfunction
+% f₀ is Coriolis parameter
+% H is scale heigh
+%  R is gas constant
+% ∂/∂z is derived from XVz 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 function field= XVz2field(XV,ii,dx) 
 global jj kk ll cplx m0 Lx dz
 field=zeros(ii+1,jj+1,kk+1); % initalize 3D field
