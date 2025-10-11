@@ -1,5 +1,7 @@
-% functions/stream2pv.m
 function QV = stream2pv(XV)
+% Inverts the PV-streamfunction relation using finite differences
+% From Dr. Cai's 3D_spectral_linear_QG_model_numnerics.pdf
+% for combining equations in interior and at the top/boundary (page 8)
 global jj kk ll NN2 m0 f0 dy dz Lx
 
 QV = zeros(ll,1);
@@ -11,7 +13,7 @@ for j = 2:jj
     lup = jk2l(j, k+1); % get one level from above
     ldn = l; % we've reached bottom boundary
 
-    QV(l) = ( XV(lup) - XV(ldn) )/dz;
+    QV(l) = ( XV(lup) - XV(ldn) ) / dz;
 end
 
 % top boundary (k=kk+1)
@@ -26,9 +28,7 @@ end
 
 % interior points (quasi-geostrophic PV)
 for k = 2:kk
-
     for j = 2:jj
-
         l = jk2l(j, k); % current index
         lup = jk2l(j, k+1); % above
         ldn = jk2l(j, k-1); % below
@@ -36,27 +36,23 @@ for k = 2:kk
         lsh = jk2l(j-1,k); % south (-j)
 
         % meridional boundary condition
-        if (j == 2)
-            XVsh=0; % southern boundary
+        if j == 2
+            XVsh = 0; % southern boundary
         else
             XVsh = XV(lsh);
         end
 
-        if (j == jj)
+        if j == jj
             XVnh = 0; % northern boundary
-
         else
             XVnh = XV(lnh);
-
         end
 
         % PV = - (k^2 + laplacian_psi) + (f0^2 / N^2) * d^2 psi / dz^2
         % Where k = 2*pi*m0/Lx  (zonal wavenumber)
         QV(l) = -((2*pi*m0/Lx)^2)*XV(l) ...
-            + ( XVsh - 2*XV(l) + XVnh) / dy/dy ... 
+            + ( XVsh - 2*XV(l) + XVnh) / dy / dy ... 
             + (f0/dz)^2 * (XV(lup) - 2*XV(l) + XV(ldn)) / NN2;
-
     end
-
 end
 end

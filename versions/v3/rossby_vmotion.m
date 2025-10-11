@@ -1,15 +1,18 @@
-% Filename: rossby_vmotion.m
-
-load('eady_wave.mat');
+% main_script.m
+% Load data and set up global variables
+load('data/Rossby_wave_2.mat');
 %load('Rossby_wave_6.mat');
 tic
 
-global jj kk ll LW BPVy NN2 f0 dy dz m0 Lx Ubar f0 beta cplx
+global jj kk ll LW BPVy NN2 f0 dy dz m0 Lx Ubar f0 beta cplx HH gg
+
+% Add functions directory to MATLAB path
+addpath('functions');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONSTANTS/VARIABLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
+
 %% grid parameters
 ii = 360; % longitude grid points
 dx = Lx/ii; % longitude grid spacing
@@ -21,8 +24,8 @@ xx=0.0:360/ii:360; % longitude grid
 yy=linspace(45-25,45+25,jj+1); % latitude grid
 zz=linspace(0.0,10,kk+1); % height grid
 
-% initalize x-vector and compute related field
-XV=zeros(ll,1); % initalize x-vector
+% initialize x-vector and compute related field
+XV=zeros(ll,1); % initialize x-vector
 XV(:)=eigVec3(:,7); % extract 7th eigenvector
 QV = B*XV; % PV vector x matrix B
 
@@ -43,7 +46,7 @@ temp = (f0*HH/287)*XVz2field(XV,ii,dx); % temperature
 ug=XVy2field(XV,ii,dx); % zonal wind (u)
 vg=XVx2field(XV,ii,dx); % meridional wind (v)
 
-%% initalize G matrix for vertical motion
+%% initialize G matrix for vertical motion
 G=zeros(LW,LW);
 for l0 = 1:LW
     w=zeros(LW,1);
@@ -129,14 +132,8 @@ wfield=w2wfield(w,ii,dx); % Vertical_motion_analysis_linear_QG_model.pdf (page 9
 toc
 clear title
 
-% Create plots folder if it doesn't exist
-if ~exist('plots', 'dir')
-    mkdir('plots');
-end
-
-% Plot 1-6: Combined figure with subplots
-fig = figure('units','inch','position',[1,1,24,16], 'Visible', 'off');
-
+% Plot 1: Cross-section of geopotential height at latitude 45N
+figure('units','inch','position',[1,1,24,16]);
 subplot(2,3,1);
 contourf(xx,zz,(squeeze(gpt_h(:,jj/2+1,:)))',-50:2:50,'linestyle', 'none');
 colorbar;
@@ -147,11 +144,11 @@ set(gca,'ytick',0:1:10);
 title('Cross section of geop. height at lat = 45')
 set(gca,'Fontsize',16,'Fontweight','Bold');
 
+% Plot 2: Cross-section of vertical motion at latitude 45N
 subplot(2,3,4);
 ttt=squeeze(wfield(:,jj/2+1,:));
 ttt(abs(ttt)<1.0e-8)=0; %set all noise data to zero
 contourf(xx,zz,ttt','linestyle', 'none');
-%contourf(xx,zz,ttt',-50:0.2:50,'linestyle', 'none');
 colorbar;
 xlabel('Longitude')
 ylabel('Height')
@@ -160,6 +157,7 @@ set(gca,'ytick',0:1:10);
 title('Cross section of vertical motions at lat = 45')
 set(gca,'Fontsize',16,'Fontweight','Bold');
 
+% Plot 3: Temperature and geopotential height at 300 hPa (~7 km)
 subplot(2,3,2)
 ttt=squeeze(temp(:,:,kk/2+1+10));
 ttt(abs(ttt)<1.0e-8)=0; %set all noise data to zero
@@ -176,6 +174,7 @@ set(gca,'ytick',25:5:65);
 title('Temp/height (shading/contour) at 300 hPa')
 set(gca,'Fontsize',16,'Fontweight','Bold');
 
+% Plot 4: Temperature and geopotential height at 700 hPa (~3 km)
 subplot(2,3,5)
 ttt=squeeze(temp(:,:,kk/2+1-10));
 ttt(abs(ttt)<1.0e-8)=0; %set all noise data to zero
@@ -185,7 +184,6 @@ contour(xx,yy,(squeeze(gpt_h(:,:,kk/2+1-10)))',0:2:50,'w');
 contour(xx,yy,(squeeze(gpt_h(:,:,kk/2+1-10)))',-50:2:-2,'--w');
 colorbar;
 set(gca,'clim',[-1 1]);
-%set(gca,'clim',[-max(ttt(:))-0.000001 max(ttt(:))+0.000001]);
 xlabel('Longitude')
 ylabel('latitude')
 set(gca,'xtick',0:60:360);
@@ -193,6 +191,7 @@ set(gca,'ytick',25:5:65);
 title('Temp/height (shading/contour) at 700 hPa')
 set(gca,'Fontsize',16,'Fontweight','Bold');
 
+% Plot 5: Vertical motion at 300 hPa
 subplot(2,3,3)
 contourf(xx,yy,(squeeze(wfield(:,:,kk/2+1+10)))','linestyle', 'none');
 colorbar;
@@ -203,17 +202,13 @@ set(gca,'ytick',25:5:65);
 title('Vertical motion at 300 hPa')
 set(gca,'Fontsize',16,'Fontweight','Bold');
 
+% Plot 6: Vertical motion at 800 hPa (~2 km)
 subplot(2,3,6)
 contourf(xx,yy,(squeeze(wfield(:,:,kk/2+1-10)))','linestyle', 'none');
-% contourf(xx,yy,(squeeze(vg(:,:,kk/2+1)))',-10:0.1:10);
 colorbar;
 xlabel('Longitude')
 ylabel('latitude')
-%set(gca,'xlim',[40 110])
 set(gca,'xtick',0:60:360);
 set(gca,'ytick',25:5:65);
-title('Vetical motion at 800 hPa')
+title('Vertical motion at 800 hPa')
 set(gca,'Fontsize',16,'Fontweight','Bold');
-
-% Save the figure
-saveas(fig, 'plots/vertical_motion_diagnosis.png');

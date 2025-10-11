@@ -1,5 +1,5 @@
-% functions/XVy2field.m
-function field= XVy2field(XV,ii,dx) 
+function field= XVy2field(XV,ii,dx)
+% Compute zonal wind (u) from X-vector
 global jj kk ll cplx m0 Lx dy
 
 field=zeros(ii+1,jj+1,kk+1); % initialize 3D field
@@ -8,7 +8,6 @@ for l = 1:ll
     [j,k]=l2jk(l);
     for i = 1:ii
         xlon=(i-1)*dx;
-        
         if (j == 2)
             lnh=jk2l(j+1,k);
             field(i,j,k)=-real((XV(lnh)-0.0)*exp(cplx*2*pi*m0*xlon/Lx))/(2*dy);
@@ -20,7 +19,6 @@ for l = 1:ll
             lsh=jk2l(j-1,k);
             field(i,j,k)=-real((XV(lnh)-XV(lsh))*exp(cplx*2*pi*m0*xlon/Lx))/(2*dy);
         end
-        
     end
 end
 
@@ -33,6 +31,5 @@ for k = 1:kk+1
        field(i,1,k)=-real((XV(lj2)-0.0)*exp(cplx*2*pi*m0*xlon/Lx))/dy;
        field(i,jj+1,k)=-real((0-XV(ljj))*exp(cplx*2*pi*m0*xlon/Lx))/dy;
     end
-
 end
-end  
+end

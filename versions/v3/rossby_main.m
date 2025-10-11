@@ -1,10 +1,11 @@
-% Filename: rossby_main.m
-
-
-addpath('functions')
-
-global jj kk ll BPVy NN2 f0 dy m0 dz Lx Ubar beta cplx
+% main_script.m
+% Set up global variables and initialize simulation
 tic
+
+global jj kk ll BPVy NN2 f0 dy m0 dz Lx Ubar beta cplx Theta0 delta_Theta0 HH gg Ly
+
+% Add functions directory to MATLAB path
+addpath('functions');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONSTANTS/VARIABLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -30,7 +31,7 @@ gg = 9.81; % gravity (m s^-2)
 
 %% Reference potential temperatures, height, and additional domain gridding
 Theta0 = 300; % reference potential temperature (K)
-delta_Theta0 = 30; % potential temperature difference across dmain (K)
+delta_Theta0 = 30; % potential temperature difference across domain (K)
 HH = 10000; % scale height (m)
 
 Ly = 6.37 * 1.0e6*50 * pi/180; % meridional domain length (50° latitude range, m)
@@ -63,8 +64,7 @@ yQVadv = zeros(ll,1); % meridional advection of PV
 %% Initialize matrices
 B = zeros(ll,ll); % matrix for PV inversion
 C = zeros(ll, ll); % matrix for zonal PV advection
-D = zeros(ll,ll); %  matrix for meridional PV advection (beta term = constant)
-
+D = zeros(ll,ll); % matrix for meridional PV advection (beta term = constant)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MAIN LOOP & EIGENVECTORS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -88,7 +88,6 @@ for l0 = 1:ll
     % D MATRIX
     yQVadv = stream2yPVadv(XV);
     D(:,l0) = yQVadv(:);
-
 end
 
 %% Start eigenvector and eigenvalue part
@@ -100,7 +99,6 @@ eigVal = diag(eigValm); % eigValm = eigenvalue matrix
 
 % test values in descending order
 [test, sortdx] = sort(real(eigVal), 'descend');
-
 
 % this is a solution to the real part
 eigVal2 = eigVal(sortdx);
@@ -115,4 +113,12 @@ eigVec3 = eigVec(:,sortdx);
 
 toc
 
-save('Rossby_wave_2.mat') % save data file for use later on
+data_folder = 'data';
+file_name = 'Rossby_wave_2.mat'
+data_file = fullfile(data_folder, file_name) % path to data file
+
+if ~exist(data_folder, 'dir') % check if 'data' folder exists, create it if not
+    mkdir(data_folder)
+end
+
+save(data_file) % save data file for use later on
