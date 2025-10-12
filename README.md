@@ -32,16 +32,16 @@ The program simulates various atmospheric wave patterns using different modeling
 ### Functions are stored in /functions
 
 #### Hoskins-West Eady-Type Model Scripts
-- `hwe_BPVyCalc.m`: Computes the meridional PV gradient at interior grid points for the Eady-type model, using a $\cos^4$-modulated mean zonal wind $\bar{u}(y, z)$. Essential for wave propagation studies.
-- `hwe_PV2bndgrad.m`: Calculates PV gradients at the surface ($z=0$) and tropopause ($z=HH$) for the Eady-type model, incorporating vertical shear with $\cos^4$ meridional variation. Critical for boundary condition enforcement.
-- `hwe_PV2intgrad.m`: Determines the interior PV gradient for the Eady-type model, including the meridional second derivative of the mean flow. Supports stability and dynamics analysis.
-- `hwe_ubar.m`: Generates the mean zonal wind field $\bar{u}(y, z)$ for the Eady-type model, using linear shear with $\cos^4$ meridional modulation. Foundational for background flow setup.
+- `hwe_BPVyCalc.m`: Computes the meridional PV gradient at interior grid points for the Eady-type model, using a $\cos^4$-modulated mean zonal wind $\bar{u}(y, z)$.
+- `hwe_PV2bndgrad.m`: Calculates PV gradients at the surface ($z=0$) and tropopause ($z=HH$) for the Eady-type model, incorporating vertical shear with $\cos^4$ meridional variation. 
+- `hwe_PV2intgrad.m`: Determines the interior PV gradient for the Eady-type model, including the meridional second derivative of the mean flow.
+- `hwe_ubar.m`: Generates the mean zonal wind field $\bar{u}(y, z)$ for the Eady-type model, using linear shear with $\cos^4$ meridional modulation.
 
 #### Hoskins-West Modified Model Scripts
-- `hwm_BPVyCalc.m`: Computes the meridional PV gradient for the original Hoskins-West model, using sinusoidal modulation and vertical shear terms. Included for reference.
-- `hwm_PV2bndgrad.m`: Calculates PV gradients at boundaries for the Hoskins-West model, incorporating complex shear terms. Retained for historical context.
-- `hwm_PV2intgrad.m`: Computes the interior PV gradient for the Hoskins-West model, using planetary $\beta$ and vertical shear effects. Kept for comparison.
-- `hwm_ubar.m`: Generates the mean zonal wind field for the Hoskins-West model with sinh-based modulation. Preserved for legacy support.
+- `hwm_BPVyCalc.m`: Computes the meridional PV gradient for the original Hoskins-West model, using sinusoidal modulation and vertical shear terms.
+- `hwm_PV2bndgrad.m`: Calculates PV gradients at boundaries for the Hoskins-West model, incorporating complex shear terms.
+- `hwm_PV2intgrad.m`: Computes the interior PV gradient for the Hoskins-West model, using planetary $\beta$ and vertical shear effects.
+- `hwm_ubar.m`: Generates the mean zonal wind field for the Hoskins-West model with sinh-based modulation.
 
 #### Rossby Wave Model Scripts
 - `row_F123.m`: Generates row vectors $F1$, $F2$, and $F3$ for matrix assembly, supporting the linearized PV equation.
