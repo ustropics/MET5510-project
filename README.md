@@ -67,7 +67,11 @@ The program simulates various atmospheric wave patterns using different modeling
 - `XVz2field.m`: Converts the z-derivative of an eigenvector to a 3D field, supporting vertical perturbation analysis.
 
 ### Plots are stored in /plots
-- `
-### Data files are in /data
+- `output/plots/*.png` with model prefixes
 
+#### Example Plots
+![Alt text for image](https://i.imgur.com/58LJSsK.png)
+
+### Data files are in /data
+- `output/data/*.mat` with model and wave number prefixes
 
