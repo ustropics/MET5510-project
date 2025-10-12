@@ -2,14 +2,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: hoskins_main.m
+% Filename: hwe_main.m
 
-% Description: Script for setting up the modified Hoskins-West Model in the 
-% quasi-geostrophic framework, initializing grid parameters, computing the 
-% mean zonal wind (Ubar) and PV gradient (BPVy) with analytical formulas, 
-% constructing matrices (B, C, D) for PV inversion and advection, and 
-% solving the eigenvalue problem to determine wave stability, saving results 
-% to 'data/HoskinsWest_wave.mat'.
+% Description: Script for setting up the Modified Hoskins-West Eady-type Model 
+% in the quasi-geostrophic framework, initializing grid parameters, computing 
+% the mean zonal wind (Ubar) and PV gradient (BPVy) with analytical formulas, 
+% constructing matrices (B, C, D) for PV inversion and advection, and solving 
+% the eigenvalue problem to determine wave stability, saving results to 
+% 'data/HoskinsWest_wave.mat'.
 
 % Functions used: 
 % - l2jk: Converts linear index to 2D indices (j, k).
@@ -18,7 +18,7 @@
 % - stream2xPVadv: Calculates zonal advection of potential vorticity.
 % - stream2yPVadv: Computes meridional advection of potential vorticity.
 % - eig: Performs eigenvalue decomposition.
-% - ubarCalc: Computes mean zonal wind field.
+% - hwe_ubar: Computes mean zonal wind field.
 % - BPVyCalc: Computes beta-plane PV gradient.
 % - matricesBCD: Constructs matrices B, C, D for PV inversion and advection.
 
@@ -29,7 +29,7 @@ global jj kk ll BPVy NN2 f0 dy m0 dz Lx Ubar beta cplx
 tic
 
 addpath('functions'); % add functions folder
-addpath('.'); % add current directory for hoskins_config.m
+addpath('.'); % add current directory for hwe_config.m
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%% CONSTANTS/VARIABLES %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -38,13 +38,13 @@ addpath('.'); % add current directory for hoskins_config.m
 % These can be found in Dr. Cai's 3D_spectral_linear_QG_model_numnerics.pdf
 % beginning on slides 5 - 6
 
-%% Load constants from hoskins_config.m and assign global variables
-params = hoskins_config();
+%% Load constants from hwe_config.m and assign global variables
+params = hwe_config();
 
 % get directories
-hoskins_data_dir = params.hoskins_data_dir;
-hoskins_data_filename = params.hoskins_data_filename;
-hoskins_data = fullfile(hoskins_data_dir, hoskins_data_filename);
+hwe_data_dir = params.hwe_data_dir;
+hwe_data_filename = params.hwe_data_filename;
+hwe_data = fullfile(hwe_data_dir, hwe_data_filename);
 
 cplx = params.cplx; % imaginary unit for complex number operations
 m0 = params.m0; % wave number (set to 7 as in examples)
@@ -56,26 +56,25 @@ f0 = params.f0; % coriolis parameter at 45° latitude (s^-1)
 beta = params.beta; % beta parameter (meridional PV gradient, m^-1 s^-1)
 gg = params.gg; % gravity (m s^-2)
 Theta0 = params.Theta0; % reference potential temperature (K)
-delta_Theta0 = params.delta_Theta0; % vertical potential temperature difference (K)
+DeltaTheta = params.DeltaTheta; % vertical/horizontal potential temperature difference (K)
 HH = params.HH; % scale height (m)
 Ly = params.Ly; % meridional domain length (50° latitude range, m)
 dy = params.dy; % meridional grid spacing (in meters)
 dz = params.dz; % vertical grid spacing (in meters)
 NN2 = params.NN2; % brunt-vaisala frequency squared (s^-2)
 DeltaT_hor = params.DeltaT_hor; % horizontal temperature difference (K)
-mu = params.mu; % mu parameter (0.5 or 1)
-U0 = params.U0; % mean zonal wind offset (set to 0)
+mu = params.mu; % mu parameter (unused in Eady, kept for compatibility)
+U0 = params.U0; % mean zonal wind offset (set to 5)
 L_d = params.L_d; % Rossby deformation radius
-m_y = params.m_y; % meridional wavenumber
-gamma = params.gamma; % gamma for sinh term
-y0 = params.y0; % center y
-Lambda = params.Lambda; % shear rate
+m_y = params.m_y; % meridional wavenumber (unused in Eady, kept for compatibility)
+gamma = params.gamma; % gamma for sinh term (unused in Eady, kept for compatibility)
+% Removed Lambda as it's now derived in hwe_ubar
 
-%% Set Ubar with Modified Hoskins-West formula
-Ubar = ubarCalc(params);
+%% Set Ubar with Modified Hoskins-West Eady-type formula
+Ubar = hwe_ubar(params);
 
 %% Initialize BPVy and set interior points using analytical formula
-BPVy = BPVyCalc(params);
+BPVy = hwe_BPVyCalc(params);
 
 %% This is just for testing
 [j,k] = l2jk(98); % convert linear index 98 to 2D indices (j,k)
@@ -123,11 +122,11 @@ eigVec3 = eigVec(:,sortdx);
 toc
 
 %% Create data folder if it doesn't exist and save data file
-if ~exist(hoskins_data_dir, 'dir')
-    mkdir(hoskins_data_dir);
+if ~exist(hwe_data_dir, 'dir')
+    mkdir(hwe_data_dir);
 end
 
 % save it
-save(hoskins_data, 'Ubar', 'BPVy', 'eigVec', 'eigVal', 'eigVec2', 'eigVal2', ...
+save(hwe_data, 'Ubar', 'BPVy', 'eigVec', 'eigVal', 'eigVec2', 'eigVal2', ...
     'eigVec3', 'eigVal3', 'jj', 'kk', 'll', 'NN2', 'f0', 'dy', 'dz', 'm0', ...
     'Lx', 'beta', 'cplx', 'gg', 'Theta0', 'HH', 'Ly');

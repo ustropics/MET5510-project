@@ -2,7 +2,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: hoskins_config.m
+% Filename: hwm_config.m
 
 % Description: Defines constants and derived parameters for the modified 
 % Hoskins-West Model in the quasi-geostrophic framework. Returns a structure 
@@ -11,7 +11,7 @@
 
 % Variables defined in params structure:
 % - cplx: Imaginary unit for complex number operations (sqrt(-1))
-% - m0: Wave number (integer, typically 7
+% - m0: Wave number (integer, typically 7)
 % - jj: Number of latitude grid points
 % - kk: Number of height grid points
 % - Lx: Zonal domain length at 45° latitude (m)
@@ -35,10 +35,15 @@
 % - y0: Meridional domain center (m)
 % - Lambda: Shear rate for zonal wind calculation
 
+% Directories and filenames:
+% - hwm_plot_dir: Directory for saving plots
+% - hwm_data_dir: Directory for saving data
+% - hwm_data_filename: Filename for saving data, includes wave number
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function params = hoskins_config()
+function params = hwm_config()
 params = struct();
 
 %% Initial variables for complex and wave number
@@ -59,7 +64,7 @@ params.gg = 9.81; % gravity (m s^-2)
 
 %% Reference potential temperatures, height, and additional domain gridding
 params.Theta0 = 300; % reference potential temperature (K)
-params.delta_Theta0 = 30; % vertical potential temperature difference (K)
+params.delta_Theta0 = 40; % vertical potential temperature difference (K)
 params.HH = 10000; % scale height (m)
 
 %% Derived grid parameters
@@ -81,9 +86,8 @@ params.y0 = params.Ly / 2; % center y
 params.Lambda = params.gg * params.delta_Theta0 / (params.f0 * params.Theta0 * params.Ly); % shear rate
 
 %% Directory variables
-params.hoskins_plot_dir = 'output/plots/hoskins/';
-params.hoskins_data_dir = 'output/data/';
-params.hoskins_data_filename = ['hoskins_wave_', num2str(params.m0), '.mat'];
-
+params.hwm_plot_dir = 'output/plots/'; % directory for saving plots
+params.hwm_data_dir = 'output/data/'; % directory for saving data
+params.hwm_data_filename = ['hwm_wave_', num2str(params.m0), '.mat']; % data filename
 
 end
