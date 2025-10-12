@@ -1,13 +1,13 @@
 # MET5510 Project
-This repository contains the files and code for Grace and Matthew's MET5510 project under the guidance of Dr. Cai and Dr. Sun.
+This repository contains the files, code, and plots for Grace and Matthew's MET5510 project under the guidance of Dr. Cai and Dr. Sun.
 
 ## Project Overview
 The program simulates various atmospheric wave patterns using different modeling techniques for mid-latitude systems. Currently, simulations can be run for Rossby waves and the modified Hoskins-West model. The program computes potential vorticity (PV) gradients, mean zonal wind fields, and related dynamics for the Eady-type and Hoskins-West models. The scripts are designed for wave propagation, stability analysis, and quasi-geostrophic dynamics studies.
 
 ### Available Models
-**ROS** - Rossby Wave Model
-**HWM** - Hoskins-West Modified Model
-**HWE** - Hoskins-West Eady-type Model
+- **ROS** - Rossby Wave Model
+- **HWM** - Hoskins-West Modified Model
+- **HWE** - Hoskins-West Eady-type Model
 
 ## Instructions
 ### Calculate Model Data
