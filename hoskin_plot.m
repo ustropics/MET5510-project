@@ -1,10 +1,22 @@
-% plot_HoskinsWest_results.m
-% Loads HoskinsWest_wave.mat and plots background flow in one figure like the PDF
-% Ubar, d(PVbar)/dy interior, boundary PV gradients
-% Saves plot to 'plots' folder
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-clear all;
-close all;
+% Filename: plot_HoskinsWest_results.m
+
+% Description: Script for loading data from 'HoskinsWest_wave.mat' and 
+% generating plots of the Modified Hoskins-West Model's background flow, 
+% including Ubar, d(PVbar)/dy interior, and boundary PV gradients, along 
+% with perturbation fields (meridional wind, temperature, and geopotential 
+% height) for a specified mode, saving results to the 'plots' folder.
+
+% Functions used: 
+% - XV2field: Transforms eigenvector to 3D field.
+% - XV2XVz: Computes z-derivative of eigenvector.
+% - XVx2field: Converts x-derivative of eigenvector to 3D field.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Load data from HoskinsWest_wave.mat
 load('HoskinsWest_wave.mat');

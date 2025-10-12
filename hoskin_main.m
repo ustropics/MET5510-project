@@ -1,3 +1,27 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Filename: rossby_modified_HoskinsWest.m
+
+% Description: Script for setting up the Modified Hoskins-West Model in the 
+% quasi-geostrophic framework, initializing grid parameters, computing the 
+% mean zonal wind (Ubar) and PV gradient (BPVy) with analytical formulas, 
+% constructing matrices (B, C, D) for PV inversion and advection, and 
+% solving the eigenvalue problem to determine wave stability, saving results 
+% to 'data/HoskinsWest_wave.mat'.
+
+% Functions used: 
+% - l2jk: Converts linear index to 2D indices (j, k).
+% - jk2l: Converts 2D indices (j, k) to linear index.
+% - stream2pv: Computes potential vorticity from streamfunction.
+% - stream2xPVadv: Calculates zonal advection of potential vorticity.
+% - stream2yPVadv: Computes meridional advection of potential vorticity.
+% - eig: Performs eigenvalue decomposition.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 global jj kk ll BPVy NN2 f0 dy m0 dz Lx Ubar beta cplx
 tic
 
