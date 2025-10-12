@@ -47,11 +47,11 @@ n_mode = params.n_mode;
 HH = params.HH;
 Ly = params.Ly;
 
-
 %% Load data from hoskins_wave_#.mat
 hoskins_data_dir = params.hoskins_data_dir;
-hoskins_data_filename = params.hoskins_data_filename;
+hoskins_plot_dir = params.hoskins_plot_dir;
 
+hoskins_data_filename = params.hoskins_data_filename;
 hoskins_data = fullfile(hoskins_data_dir, hoskins_data_filename);
 load(hoskins_data);
 
@@ -73,8 +73,8 @@ gamma = params.gamma; % gamma for sinh term
 y0 = params.y0; % center y
 
 % Create plots folder if it doesn't exist
-if ~exist('plots', 'dir')
-    mkdir('plots');
+if ~exist(hoskins_plot_dir, 'dir')
+    mkdir(hoskins_plot_dir);
 end
 
 %% Combined Plot: Background flow for Modified Hoskins-West model
@@ -118,9 +118,10 @@ grid on;
 set(gca, 'FontSize', 12, 'FontWeight', 'Bold');
 
 % Overall title
-sgtitle(sprintf('Modified Hoskins-West Model''s background flow \Delta T = 60; \mu = %.1f; U_0 = 0', mu));
+sgtitle(sprintf('Modified Hoskins-West Model''s background flow Delta T = 60; \mu = %.1f; U_0 = 0', mu));
 
-saveas(fig, 'plots/background_flow_HW.png');
+HW_BG_FILE = fullfile(hoskins_plot_dir, 'background_flow_HW.png');
+saveas(fig, HW_BG_FILE);
 
 %% Plot perturbations (optional, similar to Eady)
 n_mode = params.n_mode;
@@ -147,7 +148,9 @@ xlabel('Longitude (degrees)');
 ylabel('Height (km)');
 title(sprintf('Meridional Wind Perturbation (m/s) - Mode %d', n_mode));
 set(gca, 'FontSize', 16, 'FontWeight', 'Bold');
-saveas(fig4, 'plots/meridional_wind_perturbation_cross_section_HW.png');
+
+HW_MERIDIONAL_CROSS = fullfile(hoskins_plot_dir, 'meridional_wind_perturbation_cross_section_HW.png');
+saveas(fig5, HW_MERIDIONAL_CROSS);
 
 % Plot: Temperature Perturbation (T') 
 fig5 = figure('units', 'inch', 'position', [4, 2, 16, 12], 'Visible', 'off');
@@ -157,7 +160,9 @@ xlabel('Longitude (degrees)');
 ylabel('Height (km)');
 title(sprintf('Temperature Perturbation (K) - Mode %d', n_mode));
 set(gca, 'FontSize', 16, 'FontWeight', 'Bold');
-saveas(fig5, 'plots/temperature_perturbation_cross_section_HW.png');
+
+HW_TEMP_CROSS = fullfile(hoskins_plot_dir, 'temperature_perturbation_cross_section_HW.png');
+saveas(fig5, HW_TEMP_CROSS);
 
 % Plot: Geopotential height perturbation (for completeness)
 fig6 = figure('units', 'inch', 'position', [4, 2, 16, 12], 'Visible', 'off');
@@ -167,4 +172,6 @@ xlabel('Longitude (degrees)');
 ylabel('Height (km)');
 title(sprintf('Perturbation Geopotential Height - Mode %d', n_mode));
 set(gca, 'FontSize', 16, 'FontWeight', 'Bold');
-saveas(fig6, 'plots/geopotential_perturbation_mode7_HW.png');
+
+HW_GPH_PERT = fullfile(hoskins_plot_dir, 'geopotential_perturbation_HW.png');
+saveas(fig6, HW_GPH_PERT);

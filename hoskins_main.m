@@ -44,7 +44,6 @@ params = hoskins_config();
 % get directories
 hoskins_data_dir = params.hoskins_data_dir;
 hoskins_data_filename = params.hoskins_data_filename;
-
 hoskins_data = fullfile(hoskins_data_dir, hoskins_data_filename);
 
 cplx = params.cplx; % imaginary unit for complex number operations
@@ -128,7 +127,7 @@ if ~exist(hoskins_data_dir, 'dir')
     mkdir(hoskins_data_dir);
 end
 
-% create filename and save it
+% save it
 save(hoskins_data, 'Ubar', 'BPVy', 'eigVec', 'eigVal', 'eigVec2', 'eigVal2', ...
     'eigVec3', 'eigVal3', 'jj', 'kk', 'll', 'NN2', 'f0', 'dy', 'dz', 'm0', ...
     'Lx', 'beta', 'cplx', 'gg', 'Theta0', 'HH', 'Ly');

@@ -15,10 +15,12 @@
 % - QV: 1D array representing the potential vorticity field
 
 % Math/functions: Q = ∇²ψ + (f₀²/N²) ∂²ψ/∂z², where 
-% ψ is streamfunction
-% f₀ is Coriolis parameter
-% N² is Brunt-Vaisala frequency
-% derivatives are calculated via finite differences
+
+% - Variables:
+%   - ψ is streamfunction
+%   - f₀ is Coriolis parameter
+%   - N² is Brunt-Vaisala frequency
+%   - derivatives are calculated via finite differences
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -29,7 +31,7 @@ function QV = stream2pv(XV)
     
     QV = zeros(ll,1);
     
-    % bottom boundary (k = 1)
+    %% bottom boundary (k = 1)
     k = 1; 
     for j = 2:jj
         l = jk2l(j,k); % from j value we can get eigen value
@@ -39,7 +41,7 @@ function QV = stream2pv(XV)
         QV(l) = ( XV(lup) - XV(ldn) )/dz;
     end
     
-    % top boundary (k=kk+1)
+    %% top boundary (k=kk+1)
     k = kk + 1;
     for j = 2:jj
         l = jk2l(j, k);
@@ -49,7 +51,7 @@ function QV = stream2pv(XV)
         QV(l) = ( XV(lup) - XV(ldn) ) / dz;
     end
     
-    % interior points (quasi-geostrophic PV)
+    %% interior points (quasi-geostrophic PV)
     for k = 2:kk
         for j = 2:jj
             l = jk2l(j, k); % current index
@@ -71,7 +73,7 @@ function QV = stream2pv(XV)
                 XVnh = XV(lnh);
             end
     
-            % PV = - (k^2 + laplacian_psi) + (f0^2 / N^2) * d^2 psi / dz^2
+            %% PV = - (k^2 + laplacian_psi) + (f0^2 / N^2) * d^2 psi / dz^2
             % Where k = 2*pi*m0/Lx  (zonal wavenumber)
             QV(l) = -((2*pi*m0/Lx)^2)*XV(l) ...
                 + ( XVsh - 2*XV(l) + XVnh) / dy/dy ... 

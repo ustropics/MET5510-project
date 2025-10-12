@@ -14,10 +14,12 @@
 % Output:
 % - l: Linear index
 
-% Math/functions: l = j + (k-2)*(jj+1), where 
-% jj is the number of latitude points
-% j is the latitude index
-% k is the height index
+% - Math/functions: l = j + (k-2)*(jj+1)
+
+% - Variables:
+%   - jj is the number of latitude points
+%   - j is the latitude index
+%   - k is the height index
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

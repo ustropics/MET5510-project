@@ -28,23 +28,26 @@
 % - BPVy: 2D array of PV gradient values (s^-1) with dimensions (jj+1, kk+1), 
 %         representing the meridional PV gradient at interior grid points
 
-% Math/functions: BPVy = β - 2 * Λ * H * m_y^3 * sinh(γ * z / H) / sinh(γ) * sin(m_y * (y - y0)), where
-% - β is the planetary vorticity gradient
-% - Λ is the amplitude of the mean zonal wind
-% - H is the scale height
-% - m_y is the meridional wavenumber
-% - γ is the nondimensional shear parameter
-% - y is the meridional coordinate
-% - y0 is the reference latitude
-% - z is the vertical coordinate
-% - sinh_term is approximated as z/H for small γ to avoid numerical issues
+% Math/functions: BPVy = β - 2 * Λ * H * m_y^3 * sinh(γ * z / H) / sinh(γ) * sin(m_y * (y - y0))
+
+% - Variables:
+%   - β is the planetary vorticity gradient
+%   - Λ is the amplitude of the mean zonal wind
+%   - H is the scale height
+%   - m_y is the meridional wavenumber
+%   - γ is the nondimensional shear parameter
+%   - y is the meridional coordinate
+%   - y0 is the reference latitude
+%   - z is the vertical coordinate
+%   - sinh_term is approximated as z/H for small γ to avoid numerical issues
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function BPVy = BPVyCalc(params)
-    % Extract parameters
+    
+    %% Extract parameters
     jj = params.jj;
     kk = params.kk;
     dy = params.dy;
@@ -56,19 +59,21 @@ function BPVy = BPVyCalc(params)
     Lambda = params.Lambda;
     beta = params.beta;
     
-    % Initialize output array
+    %% Initialize output array
     BPVy = zeros(jj+1, kk+1);
     
-    % Compute BPVy for interior points
-    for j = 2:jj
-        y = (j-1)*dy;
+    %% Compute BPVy for interior points
+    for j = 2:jj % skip boundaries
+        y = (j-1)*dy; % meridional coordinate
         for k = 2:kk
-            z = (k-1)*dz;
+            z = (k-1)*dz; % vertical coordinate
+            
             if abs(gamma) > 1e-10
-                sinh_term = sinh(gamma * z / HH) / sinh(gamma);
+                sinh_term = sinh(gamma * z / HH) / sinh(gamma); % avoid division by zero
             else
-                sinh_term = 0;
+                sinh_term = 0; % for very small gamma, sinh(gamma*z/HH)/sinh(gamma) ~ z/HH
             end
+
             BPVy(j,k) = beta - 2 * Lambda * HH * m_y^3 * sinh_term * sin(m_y * (y - y0));
         end
     end

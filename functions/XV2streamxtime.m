@@ -19,11 +19,13 @@
 % Output:
 % - xtime: 2D array representing the streamfunction field over longitude and time
 
-% Math/functions: ψ(x,t) = XV * exp(i(kx - ωt)), where
-% k is wavenumber
-% ω is growth rate from eigenvalues
-% x is longitude
-% t is time
+% Math/functions: ψ(x,t) = XV * exp(i(kx - ωt))
+
+% - Variables:
+%   - k is wavenumber
+%   - ω is growth rate from eigenvalues
+%   - x is longitude
+%   - t is time
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

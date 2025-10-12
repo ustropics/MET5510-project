@@ -16,11 +16,13 @@
 % Output:
 % - field: 3D array representing the zonal wind field
 
-% Math/functions: u' = -(g/f₀) ∂ψ/∂y, where 
-% ψ is streamfunction
-% g is gravity
-% f₀ is Coriolis parameter
-% ∂/∂y is derived from XVy
+% Math/functions: u' = -(g/f₀) ∂ψ/∂y
+
+% - Variables:
+%   - ψ is streamfunction
+%   - g is gravity
+%   - f₀ is Coriolis parameter
+%   - ∂/∂y is derived from XVy
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -36,12 +38,18 @@ function field= XVy2field(XV,ii,dx)
         for i = 1:ii
             xlon=(i-1)*dx;
             
+            %% Apply boundary conditions and compute finite difference
+            % For forward difference at southern boundary
             if (j == 2)
                 lnh=jk2l(j+1,k);
-                field(i,j,k)=-real((XV(lnh)-0.0)*exp(cplx*2*pi*m0*xlon/Lx))/(2*dy);
+                field(i,j,k)=-real((XV(lnh)-0.0)*exp(cplx*2*pi*m0*xlon/Lx))/(2*dy); % forward difference at southern boundary
+
+            % For backward difference at northern boundary
             elseif (j == jj)
                 lsh=jk2l(j-1,k);
                 field(i,j,k)=-real( (0-XV(lsh))*exp(cplx*2*pi*m0*xlon/Lx) )/(2*dy);
+
+            % For centered difference at interior points
             else
                 lnh=jk2l(j+1,k);
                 lsh=jk2l(j-1,k);
@@ -50,10 +58,10 @@ function field= XVy2field(XV,ii,dx)
         end
     end
     
-    % Boundary conditions for j=1 and j=jj+1
+    %% Boundary conditions for j=1 and j=jj+1
     for k = 1:kk+1
-        lj2=jk2l(2,k);
-        ljj=jk2l(jj,k);
+        lj2=jk2l(2,k); % index at j=2
+        ljj=jk2l(jj,k); % index at j=jj
         for i = 1:ii
            xlon=(i-1)*dx;
            field(i,1,k)=-real((XV(lj2)-0.0)*exp(cplx*2*pi*m0*xlon/Lx))/dy;

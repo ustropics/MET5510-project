@@ -16,12 +16,14 @@
 % Output:
 % - field: 3D array representing the vertical velocity or temperature perturbation field
 
-% Math/functions: w' or T' = (f₀ * H / R) ∂ψ/∂z, where 
-% ψ is streamfunction
-% f₀ is Coriolis parameter
-% H is scale height
-% R is gas constant
-% ∂/∂z is derived from XVz 
+% Math/functions: w' or T' = (f₀ * H / R) ∂ψ/∂z
+
+% - Variables: 
+%   - ψ is streamfunction
+%   - f₀ is Coriolis parameter
+%   - H is scale height
+%   - R is gas constant
+%   - ∂/∂z is derived from XVz 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

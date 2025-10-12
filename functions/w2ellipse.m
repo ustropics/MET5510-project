@@ -4,18 +4,31 @@
 
 % Filename: w2ellipse.m
 
-% Description: Transforms vertical velocity into an elliptical representation
-% for visualizing wave structures or perturbation shapes in the 
-% quasi-geostrophic model.
+% Description: Transforms the vertical velocity field into an elliptical 
+% representation for visualizing wave structures or perturbation shapes in the 
+% quasi-geostrophic model. This function applies an elliptical operator to the 
+% vertical velocity, incorporating zonal, meridional, and vertical derivatives, 
+% which is useful for analyzing wave dynamics and stability in the atmosphere.
 
 % Input:
-% - w: Vertical velocity field
+% - w: 1D array representing the vertical velocity field (m/s), with length LW
 
 % Output:
-% - EW: 1D array representing the elliptical transformation of the vertical velocity
+% - EW: 1D array representing the elliptical transformation of the vertical 
+%       velocity (s^-2), with length LW
 
-% Math/functions: Ellipse parameters derived from w, where
-% the transformation includes zonal wavenumber, meridional, and vertical derivatives
+% Math/functions: EW = -(k² * w) + (∂²w/∂y²) + (f₀²/N²) * (∂²w/∂z²)
+
+% - Variables:
+%   - k = 2π * m0 / Lx is the zonal wavenumber
+%   - ∂²w/∂y² is the second meridional derivative, computed via finite differences
+%   - ∂²w/∂z² is the second vertical derivative, scaled by (f₀/dz)² / N²
+%   - m0: Zonal wavenumber (dimensionless)
+%   - Lx: Domain length in the zonal direction (m)
+%   - f₀: Coriolis parameter (s^-1)
+%   - N²: Brunt-Vaisala frequency squared (s^-2)
+%   - dy: Meridional grid spacing (m)
+%   - dz: Vertical grid spacing (m)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -93,4 +106,4 @@ function EW = w2ellipse (w)
         +(f0/dz)^2*( wup-2*w(l)+wdn )/NN2;   
         end
     end
-    end
+end

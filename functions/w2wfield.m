@@ -15,10 +15,12 @@
 % Output:
 % - wfield: 3D array representing the wind field
 
-% Math/functions: wfield = w * exp(i * k * x), where 
-% w is the vertical velocity
-% k is the zonal wavenumber
-% x is the longitude coordinate
+% Math/functions: wfield = w * exp(i * k * x)
+
+% - Variables:
+%   - w is the vertical velocity
+%   - k is the zonal wavenumber
+%   - x is the longitude coordinate
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

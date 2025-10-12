@@ -16,10 +16,12 @@
 % Output:
 % - field: 3D array representing the geopotential height field
 
-% Math/functions: Field = XV * exp(i * k * x), where 
-% XV is the eigenvector
-% k is the zonal wavenumber
-% x is the longitude coordinate
+% Math/functions: Field = XV * exp(i * k * x)
+
+% - Variables:
+%   - XV is the eigenvector
+%   - k is the zonal wavenumber
+%   - x is the longitude coordinate
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

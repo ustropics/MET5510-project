@@ -2,48 +2,46 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: XV2XVy.m
+% Filename: XVx2field.m
 
-% Description: Computes the y-derivative (meridional) of the 1D eigenvector 
-% (XV) to derive the meridional component of the streamfunction gradient in 
-% the quasi-geostrophic model.
+% Description: Converts the x-derivative of the eigenvector (XVx) into a 
+% 3D meridional wind field over the grid in the quasi-geostrophic model, 
+% accounting for geostrophic balance.
 
 % Input:
 % - XV: Eigenvector representing the streamfunction
+% - ii: Number of grid points in the x-direction
+% - dx: Grid spacing in the x-direction
 
 % Output:
-% - XVy: 1D array representing the meridional derivative of the streamfunction
+% - field: 3D array representing the meridional wind field
 
-% Math/functions: XVy = ∂XV/∂y
+% Math/functions: v' = (g/f₀) ∂ψ/∂x
+
+% - Variables:
+%   - ψ is streamfunction
+%   - g is gravity
+%   - f₀ is Coriolis parameter
+%   - ∂/∂x is derived from XVx
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function XVy = XV2XVy (XV)
-    global jj kk ll dy
-    
-    XVy = zeros(ll,1);
-    
-    for k = 1:kk+1
-        for j = 2:jj
-            l = jk2l(j,k);
-            lnh = jk2l(j+1,k);
-            lsh = jk2l(j-1,k);
-    
-            if(j == 2)
-                XVsh=0;
-            else
-                XVsh=XV(lsh);
-            end
-    
-            if(j == jj)
-                XVnh = 0;
-            else
-                XVnh = XV(lnh);
-            end
-    
-            XVy(l) = ( XVnh - XVsh) /2/dy;
-        end
+function field= XVx2field(XV,ii,dx) 
+
+global jj kk ll cplx m0 Lx 
+
+field=zeros(ii+1,jj+1,kk+1); % initialize 3D field
+
+for l = 1:ll
+    [j,k]=l2jk(l); % convert linear index to (j,k)
+    for i = 1:ii
+        xlon=(i-1)*dx; % longitude coordinate
+ 
+        field(i,j,k)=real( (cplx*2*pi*m0/Lx)*XV(l) ...
+            *exp(cplx*2*pi*m0*xlon/Lx) );
+      
     end
-    end
+end
+end
