@@ -8,6 +8,12 @@
 % to derive the zonal component of the streamfunction gradient in the 
 % quasi-geostrophic model.
 
+% Input:
+% - XV: Eigenvector representing the streamfunction
+
+% Output:
+% - XVx: 1D array representing the zonal derivative of the streamfunction
+
 % Math/functions: XVx = ∂XV/∂x
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -15,15 +21,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function XVx = XV2XVx (XV)
-global jj kk ll m0 Lx cplx
-
-XVx = zeros(ll, 1);
-
-for k = 1:kk+1
-
-    for j = 2:jj
-        l=jk2l(j,kk);
-        XVx(l) = cplx*(2*pi*m0/Lx) * XV(l);
+    global jj kk ll m0 Lx cplx
+    
+    XVx = zeros(ll, 1);
+    
+    for k = 1:kk+1
+        for j = 2:jj
+            l=jk2l(j,kk);
+            XVx(l) = cplx*(2*pi*m0/Lx) * XV(l);
+        end
     end
-end
-end
+    end

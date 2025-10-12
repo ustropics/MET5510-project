@@ -5,8 +5,14 @@
 % Filename: jk2l.m
 
 % Description: Converts 2D grid indices (j, k) representing latitude and height 
-% to a single linear index (l) with an adjusted scheme in the 
-% quasi-geostrophic model.
+% to a single linear index (l) in the quasi-geostrophic model.
+
+% Input:
+% - j: Latitude index
+% - k: Height index
+
+% Output:
+% - l: Linear index
 
 % Math/functions: l = (k-1) * (jj-1) + (j-1), where 
 % jj is the number of latitude points
@@ -18,8 +24,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function l = jk2l(j,k)
-global jj  
-
-l = j-1 + (k-1)*(jj-1);
-
-end
+    global jj  
+    
+    l = j-1 + (k-1)*(jj-1);
+    
+    end
