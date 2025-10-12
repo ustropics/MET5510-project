@@ -12,17 +12,44 @@ The program simulates various atmospheric wave patterns using different modeling
 4. Generated data files are saved in `output/data/*.mat`
 
 ### Create Initial Plots
-1. Run `row_plot.m` to generate initial plots using the generated Rossby data
+1. Run `row_plot.m` to generate initial plots using the generated Rossby Wave data
 2. Run `hwm_plot.m` to generate initial plots using the generated Hoskins-West Modified data
 3. Run `hwe_plot.m` to generate initial plots using the generated Hoskins-West Eady-type data
-4. Additional Rossby plots are available using `rossby_vmotion.m`
-5. Generated plots are saved in `output/plots/*.png`
+4. Generated plots are saved in `output/plots/*.png`
 
 ### Config Options
 1. Available config options for the the 
 
 ## File Structure
 ### Functions are stored in /functions
+`hwe_BPVyCalc.m` - Computes the meridional potential vorticity (PV) gradient for the Eady-type model at interior grid points, using the new $  \bar{u}(y, z)  $ formulation with $  \cos^4  $ modulation, essential for wave propagation studies.
+`hwe_PV2bndgrad.m`
+`hwe_PV2intgrad.m`
+`hwe_ubar.m`
+`hwm_BPVyCalc.m`
+`hwm_PV2bndgrad.m`
+`hwm_PV2intgrad.m`
+`hwm_ubar.m`
+`jk2l.m`
+`jk2lw.m`
+`l2jk.m`
+`lw2jk.m`
+`matricesBCD.m`
+`row_F123.m`
+`stream2pv.m`
+`stream2xPVadv.m`
+`stream2yPVadv.m`
+`w2ellipse.m`
+`w2wfield.m`
+`XV2field.m`
+`XV2streamxtime.m`
+`XV2XVx.m`
+`XV2XVy.m`
+`XV2XVz.m`
+`XVx2field.m`
+`XVy2field.m`
+`XVz2field.m`
+
 ### Plots are stored in /plots
 ### Data files are in /data
 

@@ -29,7 +29,7 @@ global jj kk ll BPVy NN2 f0 dy m0 dz Lx Ubar beta cplx
 tic
 
 addpath('functions'); % add functions folder
-addpath('.'); % add current directory for hwm_config.m
+addpath('config'); % add config folder
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%% CONSTANTS/VARIABLES %%%%%%%%%%%%%%%%%%%%%%%%%%%

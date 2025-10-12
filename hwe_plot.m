@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 addpath('functions'); % add functions folder
-addpath('.'); % add current directory for hwe_config.m
+addpath('config'); % add config folder
 
 % Load constants from hwe_config.m and assign global variables
 params = hwe_config();
