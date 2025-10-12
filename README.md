@@ -6,33 +6,40 @@ The program simulates various atmospheric wave patterns using different modeling
 
 ## Instructions
 ### Calculate Model Data
-1. Run `row_main.m` to process the Rossby Wave Model calculations
-2. Run `hwm_main.m` to process the Hoskins-West Modified calculations
-3. Run `hwe_main.m` to process the Hoskins-West Eady-type calculations
+1. `row_main.m` to process the Rossby Wave Model calculations
+2. `hwm_main.m` to process the Hoskins-West Modified calculations
+3. `hwe_main.m` to process the Hoskins-West Eady-type calculations
 4. Generated data files are saved in `output/data/*.mat`
 
 ### Create Initial Plots
-1. Run `row_plot.m` to generate initial plots using the generated Rossby Wave data
-2. Run `hwm_plot.m` to generate initial plots using the generated Hoskins-West Modified data
-3. Run `hwe_plot.m` to generate initial plots using the generated Hoskins-West Eady-type data
+1. `row_plot.m` to generate initial plots using the generated Rossby Wave data
+2. `hwm_plot.m` to generate initial plots using the generated Hoskins-West Modified data
+3. `hwe_plot.m` to generate initial plots using the generated Hoskins-West Eady-type data
 4. Generated plots are saved in `output/plots/*.png`
 
 ### Config Options
-1. Available config options for the the 
+1. `row_config.m` contains all config, variable, and constants needed for Rossby Wave calculations
+2. `hwm_config.m` contains all config, variable, and constants needed for Hoskins-West Modified calculations
+3. `hwe_config.m` contains all config, variable, and constants needed for Hoskins-West Eady-type data
+4. Config files are stored in `config/*.m`
 
 ## File Structure
 ### Functions are stored in /functions
-#### Eady-Type Model Scripts
+
+#### Hoskins-West Eady-Type Model Scripts
 - `hwe_BPVyCalc.m`: Computes the meridional PV gradient at interior grid points for the Eady-type model, using a $\cos^4$-modulated mean zonal wind $\bar{u}(y, z)$. Essential for wave propagation studies.
 - `hwe_PV2bndgrad.m`: Calculates PV gradients at the surface ($z=0$) and tropopause ($z=HH$) for the Eady-type model, incorporating vertical shear with $\cos^4$ meridional variation. Critical for boundary condition enforcement.
 - `hwe_PV2intgrad.m`: Determines the interior PV gradient for the Eady-type model, including the meridional second derivative of the mean flow. Supports stability and dynamics analysis.
 - `hwe_ubar.m`: Generates the mean zonal wind field $\bar{u}(y, z)$ for the Eady-type model, using linear shear with $\cos^4$ meridional modulation. Foundational for background flow setup.
 
-#### Hoskins-West Model Scripts (Legacy)
+#### Hoskins-West Modified Model Scripts
 - `hwm_BPVyCalc.m`: Computes the meridional PV gradient for the original Hoskins-West model, using sinusoidal modulation and vertical shear terms. Included for reference.
 - `hwm_PV2bndgrad.m`: Calculates PV gradients at boundaries for the Hoskins-West model, incorporating complex shear terms. Retained for historical context.
 - `hwm_PV2intgrad.m`: Computes the interior PV gradient for the Hoskins-West model, using planetary $\beta$ and vertical shear effects. Kept for comparison.
 - `hwm_ubar.m`: Generates the mean zonal wind field for the Hoskins-West model with sinh-based modulation. Preserved for legacy support.
+
+#### Rossby Wave Model Scripts
+- `row_F123.m`: Generates row vectors $F1$, $F2$, and $F3$ for matrix assembly, supporting the linearized PV equation.
 
 #### Utility Scripts
 - `jk2l.m`: Converts 2D indices $(j, k)$ to a single linear index for grid operations, facilitating array manipulation.
@@ -40,7 +47,6 @@ The program simulates various atmospheric wave patterns using different modeling
 - `l2jk.m`: Converts a linear index back to 2D indices $(j, k)$, supporting grid coordinate recovery.
 - `lw2jk.m`: Converts a weighted linear index back to 2D indices $(j, k)$, aiding in weighted grid operations.
 - `matricesBCD.m`: Constructs matrices $B$, $C$, and $D$ for PV inversion and advection in the eigenvalue problem, central to stability analysis.
-- `row_F123.m`: Generates row vectors $F1$, $F2$, and $F3$ for matrix assembly, supporting the linearized PV equation.
 - `stream2pv.m`: Computes potential vorticity from the streamfunction, a key step in quasi-geostrophic dynamics.
 - `stream2xPVadv.m`: Calculates the zonal advection of PV, contributing to advection terms in the model.
 - `stream2yPVadv.m`: Computes the meridional advection of PV, essential for capturing cross-flow dynamics.
@@ -56,6 +62,7 @@ The program simulates various atmospheric wave patterns using different modeling
 - `XVz2field.m`: Converts the z-derivative of an eigenvector to a 3D field, supporting vertical perturbation analysis.
 
 ### Plots are stored in /plots
+- `
 ### Data files are in /data
 
 
