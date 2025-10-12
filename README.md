@@ -22,8 +22,8 @@ The program simulates various atmospheric wave patterns using different modeling
 
 ## File Structure
 ### Functions are stored in /functions
-`hwe_BPVyCalc.m` - Computes the meridional potential vorticity (PV) gradient for the Eady-type model at interior grid points, using the new $  \bar{u}(y, z)  $ formulation with $  \cos^4  $ modulation, essential for wave propagation studies.
-`hwe_PV2bndgrad.m`
+- `hwe_BPVyCalc.m` - Computes the meridional potential vorticity (PV) gradient for the Eady-type model at interior grid points, using the new $  \bar{u}(y, z)  $ formulation with $  \cos^4  $ modulation, essential for wave propagation studies.
+- `hwe_PV2bndgrad.m`
 `hwe_PV2intgrad.m`
 `hwe_ubar.m`
 `hwm_BPVyCalc.m`
