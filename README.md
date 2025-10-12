@@ -70,7 +70,23 @@ The program simulates various atmospheric wave patterns using different modeling
 - `output/plots/*.png` with model prefixes
 
 #### Example Plots
-![Alt text for image](https://i.imgur.com/58LJSsK.png)
+**Hoskins-West Modified Background Flow**
+![hwm_background_flow.png](https://i.imgur.com/Eoe0sqx.png)
+
+**Hoskins-West Eady-type Background Flow**
+![hwm_background_flow.png](https://i.imgur.com/JfLbQt6.png)
+
+**Rossby Wave Eigenvector Amplitude**
+![row_eigenvector_amplitude.png](https://i.imgur.com/58LJSsK.png)
+
+**Rossby Wave Geopotential Height Hovmoller**
+![row_hovmoller_geopotential.png](https://i.imgur.com/KZIcWUE.png)
+
+**Rossby Wave Geopotential Height Hovmoller**
+![row_meridional_cross_section_geopotential.png](https://i.imgur.com/fsyTOZN.png)
+
+**Rossby Wave Vertical Motion Diagnosis**
+![row_vertical_motion_diagnosis.png](https://i.imgur.com/NriIuM2.png)
 
 ### Data files are in /data
 - `output/data/*.mat` with model and wave number prefixes
