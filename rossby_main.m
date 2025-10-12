@@ -141,5 +141,5 @@ if ~exist('data', 'dir')
 end
 
 % create filename and save it
-filename = ['data/Rossby_wave_', num2str(m0), '.mat'];
+filename = ['data/rossby_wave_', num2str(m0), '.mat'];
 save(filename);

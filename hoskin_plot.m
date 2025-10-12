@@ -23,22 +23,22 @@ load('HoskinsWest_wave.mat');
 
 global jj kk ll BPVy NN2 f0 dy dz m0 Lx Ubar beta cplx gg Theta0 HH
 
-% Define coordinates
+%% Define coordinates
 ii = 360; % longitude grid points
 dx = Lx/ii; % longitude grid spacing
 xx = 0.0:360/ii:360; % longitude grid
 yy = linspace(45-25, 45+25, jj+1); % latitude grid
 zz = linspace(0.0, 10, kk+1); % height grid
 
-% Parameters from the model (consistent with rossby_main.m)
+%% Parameters from the model (consistent with rossby_main.m)
 DeltaT_hor = 60; % K (from PDF page 2)
-Lambda = gg * DeltaT_hor / (f0 * Theta0 * Ly); % Shear rate
+Lambda = gg * DeltaT_hor / (f0 * Theta0 * Ly); % shear rate
 mu = 0.5; % mu parameter (from Modified Hoskins-West, adjust to 1 for page 21)
-U0 = 0; % Mean zonal wind offset
-L_d = sqrt(NN2) * HH / f0; % Rossby deformation radius
-m_y = 2 * pi / Ly; % Meridional wavenumber
-gamma = m_y * L_d; % Gamma for sinh term
-y0 = Ly / 2; % Center y
+U0 = 0; % mean zonal wind offset
+L_d = sqrt(NN2) * HH / f0; % rossby deformation radius
+m_y = 2 * pi / Ly; % meridional wavenumber
+gamma = m_y * L_d; % gamma for sinh term
+y0 = Ly / 2; % center y
 
 % Create plots folder if it doesn't exist
 if ~exist('plots', 'dir')
@@ -70,7 +70,8 @@ for j = 1:jj+1
             sinh_term = z / HH; % Approximation for small gamma
             cosh_term = 1;
         end
-        % Analytical d(PVbar)/dy from Modified Hoskins-West Model
+
+        % analytical d(PVbar)/dy from Modified Hoskins-West Model
         % d(PVbar)/dy = β - (∂²U/∂y²) + (f₀²/N²) (∂²U/∂z²)
         d2U_dy2 = -Lambda * HH * m_y^2 * sinh_term * cos(m_y * (y - y0)); % Second y derivative
         d2U_dz2 = Lambda * HH * (1/HH - mu * 2 * z / HH^2 + gamma * cosh_term * cos(m_y * (y - y0))); % Second z derivative

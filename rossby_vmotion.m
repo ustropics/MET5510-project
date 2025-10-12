@@ -31,18 +31,18 @@ global jj kk ll LW BPVy NN2 f0 dy dz m0 Lx Ubar f0 beta cplx
 %%%%%%%%%%%%%%%%%%%%%%%%%%% CONSTANTS/VARIABLES %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  
-%% grid parameters
+%% Grid parameters
 ii = 360; % longitude grid points
 dx = Lx/ii; % longitude grid spacing
 
 LW=(jj+1)*(kk-1); % matrix for vertical motion
 
-% coordinate arrays
+%% Coordinate arrays
 xx=0.0:360/ii:360; % longitude grid
 yy=linspace(45-25,45+25,jj+1); % latitude grid
 zz=linspace(0.0,10,kk+1); % height grid
 
-% initalize x-vector and compute related field
+%% Initalize x-vector and compute related field
 XV=zeros(ll,1); % initalize x-vector
 XV(:)=eigVec3(:,7); % extract 7th eigenvector
 QV = B*XV; % PV vector x matrix B
@@ -52,19 +52,19 @@ gpt_h = XV2field(XV,ii,dx)*f0/gg;
 [valuemax,indexmax]=max(gpt_h(:));
 XV=(10/valuemax)*XV;
 
-%% recalculate fields after normalization
-% From Dr. Cai's EigenValue_elementary_analysis_linear_QG_model.pdf
+%% Recalculate fields after normalization
+% From EigenValue_elementary_analysis_linear_QG_model.pdf
 % Page 7
 gpt_h = XV2field(XV,ii,dx)*f0/gg; % geopotential height
 pv= XV2field(QV,ii,dx); % PV 
 temp = (f0*HH/287)*XVz2field(XV,ii,dx); % temperature
 
-% From Dr. Cai's EigenValue_elementary_analysis_linear_QG_model.pdf
+% From EigenValue_elementary_analysis_linear_QG_model.pdf
 % Pages 9-11 (3D fields for v', u', T')
 ug=XVy2field(XV,ii,dx); % zonal wind (u)
 vg=XVx2field(XV,ii,dx); % meridional wind (v)
 
-%% initalize G matrix for vertical motion
+%% Initalize G matrix for vertical motion
 G=zeros(LW,LW);
 for l0 = 1:LW
     w=zeros(LW,1);
@@ -75,8 +75,8 @@ for l0 = 1:LW
     G(:,l0)=EW(:);
 end
 
-%% calculating F1, F2, and F3
-% from Dr. Cai's Vertical_motion_analysis_linear_QG_model.pdf (slide 1)
+%% Calculating F1, F2, and F3
+% from Vertical_motion_analysis_linear_QG_model.pdf (slide 1)
 F1=zeros(LW,1);
 F2=zeros(LW,1);
 F3=zeros(LW,1);
@@ -85,7 +85,7 @@ F3=zeros(LW,1);
 %%%%%%%%%%%%%%%%%%%%%%%%%% F1, F2, F3 FOR LOOPS %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% compute F2 and F3 for interior latitude points (j = 2 to jj)
+%% Compute F2 and F3 for interior latitude points (j = 2 to jj)
 for j = 2:jj
     for k = 2:kk
     l = jk2lw(j,k);
@@ -95,7 +95,7 @@ for j = 2:jj
     end
 end
 
-%% compute F1 for boundary latitude (j = 1)
+%% Compute F1 for boundary latitude (j = 1)
 j = 1;
 for k = 2:kk
     l = jk2lw(j,k);
@@ -103,7 +103,7 @@ for k = 2:kk
         *(XV(jk2l(3,k))-2*XV(jk2l(2,k)))/(2*dz*dy*dy);
 end
 
-%% compute F1 for latitude j = 2
+%% Compute F1 for latitude j = 2
 j = 2;
 for k = 2:kk
     l = jk2lw(j,k);
@@ -112,7 +112,7 @@ for k = 2:kk
         (XV(jk2l(3,k))-2*XV(jk2l(2,k)))/dy/dy)/(2*dz);
 end
 
-%% compute F1 for latitude j = jj
+%% Compute F1 for latitude j = jj
 j = jj ;
 for k = 2:kk
     l = jk2lw(j,k);
@@ -121,7 +121,7 @@ for k = 2:kk
          (XV(jk2l(jj-1,k))-2*XV(jk2l(jj,k)))/dy/dy)/(2*dz);
 end
 
-%% compute F1 for latitude j = jj + 1
+%% Compute F1 for latitude j = jj + 1
 j = jj + 1;
 for k = 2:kk
     l = jk2lw(j,k);
@@ -129,7 +129,7 @@ for k = 2:kk
           *(XV(jk2l(jj-1,k))-2*XV(jk2l(jj,k)))/(2*dz*dy*dy);
 end
 
-%% compute F1 for interior latitudes (j = 3 to jj-1)
+%% Compute F1 for interior latitudes (j = 3 to jj-1)
 for j = 3:jj-1
     for k = 2:kk
     l = jk2lw(j,k);
@@ -139,7 +139,7 @@ for j = 3:jj-1
     end
 end
 
-%% vertical velocity (w) using the elliptic equation: G*w = F1 + F2 + F3
+%% Vertical velocity (w) using the elliptic equation: G*w = F1 + F2 + F3
 w=(f0/NN2)*(G^-1)*(F1+F2+F3);
 wfield=w2wfield(w,ii,dx); % Vertical_motion_analysis_linear_QG_model.pdf (page 9)
 
@@ -148,14 +148,14 @@ wfield=w2wfield(w,ii,dx); % Vertical_motion_analysis_linear_QG_model.pdf (page 9
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 toc
-clear title
+clear title % fix annoying bug from rossby_plot.m
 
 % Create plots folder if it doesn't exist
 if ~exist('plots', 'dir')
     mkdir('plots');
 end
 
-% Plot 1-6: Combined figure with subplots
+%% Plot 1-6: Combined figure with subplots
 fig = figure('units','inch','position',[1,1,24,16], 'Visible', 'off');
 
 subplot(2,3,1);
@@ -170,9 +170,8 @@ set(gca,'Fontsize',16,'Fontweight','Bold');
 
 subplot(2,3,4);
 ttt=squeeze(wfield(:,jj/2+1,:));
-ttt(abs(ttt)<1.0e-8)=0; %set all noise data to zero
+ttt(abs(ttt)<1.0e-8)=0; % set all noise data to zero
 contourf(xx,zz,ttt','linestyle', 'none');
-%contourf(xx,zz,ttt',-50:0.2:50,'linestyle', 'none');
 colorbar;
 xlabel('Longitude')
 ylabel('Height')
@@ -183,7 +182,7 @@ set(gca,'Fontsize',16,'Fontweight','Bold');
 
 subplot(2,3,2)
 ttt=squeeze(temp(:,:,kk/2+1+10));
-ttt(abs(ttt)<1.0e-8)=0; %set all noise data to zero
+ttt(abs(ttt)<1.0e-8)=0;
 contourf(xx,yy,ttt',-50:0.2:50,'linestyle', 'none');
 hold on;
 contour(xx,yy,(squeeze(gpt_h(:,:,kk/2+1+10)))',0:2:50,'w');
@@ -199,14 +198,13 @@ set(gca,'Fontsize',16,'Fontweight','Bold');
 
 subplot(2,3,5)
 ttt=squeeze(temp(:,:,kk/2+1-10));
-ttt(abs(ttt)<1.0e-8)=0; %set all noise data to zero
+ttt(abs(ttt)<1.0e-8)=0; 
 contourf(xx,yy,ttt',-50:0.2:50,'linestyle', 'none');
 hold on;
 contour(xx,yy,(squeeze(gpt_h(:,:,kk/2+1-10)))',0:2:50,'w');
 contour(xx,yy,(squeeze(gpt_h(:,:,kk/2+1-10)))',-50:2:-2,'--w');
 colorbar;
 set(gca,'clim',[-1 1]);
-%set(gca,'clim',[-max(ttt(:))-0.000001 max(ttt(:))+0.000001]);
 xlabel('Longitude')
 ylabel('latitude')
 set(gca,'xtick',0:60:360);
@@ -226,11 +224,9 @@ set(gca,'Fontsize',16,'Fontweight','Bold');
 
 subplot(2,3,6)
 contourf(xx,yy,(squeeze(wfield(:,:,kk/2+1-10)))','linestyle', 'none');
-% contourf(xx,yy,(squeeze(vg(:,:,kk/2+1)))',-10:0.1:10);
 colorbar;
 xlabel('Longitude')
 ylabel('latitude')
-%set(gca,'xlim',[40 110])
 set(gca,'xtick',0:60:360);
 set(gca,'ytick',25:5:65);
 title('Vetical motion at 800 hPa')
