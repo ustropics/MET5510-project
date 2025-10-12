@@ -7,8 +7,8 @@ The program simulates various atmospheric wave patterns using different modeling
 
 ## Instructions
 ### Generate Data
-1. Run 'rossby_main.m' to generate an initial rossby_wave_#.mat file
-2. Run 'hoskin_main.m' to generate an initial hoskin_wave_#.mat file
+1. Run `rossby_main.m` to generate an initial rossby_wave_#.mat file
+2. Run `hoskin_main.m` to generate an initial hoskin_wave_#.mat file
 
 
 ## File Structure
