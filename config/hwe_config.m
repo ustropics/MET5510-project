@@ -48,7 +48,7 @@ params = struct();
 
 %% Initial variables for complex and wave number
 params.cplx = sqrt(-1); % imaginary unit for complex number operations
-params.m0 = 7; % wave number
+params.m0 = 1; % wave number
 params.n_mode = 7; 
 
 %% Grid point parameterization
