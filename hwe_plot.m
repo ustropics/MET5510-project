@@ -5,7 +5,7 @@
 % Filename: hwe_plot.m
 
 % Description: Script for loading data from 'hwe_wave_#.mat' and 
-% generating plots of the Modified Hoskins-West Eady-type Model's background flow, 
+% generating plots of the Hoskins-West Eady-type Model's background flow, 
 % including Ubar, d(PVbar)/dy interior, and boundary PV gradients, along 
 % with perturbation fields (meridional wind, temperature, and geopotential 
 % height) for a specified mode, saving results to the 'plots' folder.

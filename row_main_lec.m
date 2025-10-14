@@ -2,13 +2,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: hwe_main.m
+% Filename: row_main.m
 
-% Description: Script for setting up the Hoskins-West Eady-type Model 
-% in the quasi-geostrophic framework, initializing grid parameters, computing 
-% the mean zonal wind (Ubar) and PV gradient (BPVy) with analytical formulas, 
-% constructing matrices (B, C, D) for PV inversion and advection, and solving 
-% the eigenvalue problem to determine wave stability.
+% Description: Script for setting up the Rossby wave model in the 
+% quasi-geostrophic framework, initializing grid parameters, computing 
+% the mean zonal wind (Ubar) and PV gradient (BPVy), constructing matrices 
+% (B, C, D) for PV inversion and advection, and solving the eigenvalue 
+% problem to determine wave stability, saving results to 
+% 'data/rossby_wave_#.mat'.
 
 % Functions used: 
 % - l2jk: Converts linear index to 2D indices (j, k).
@@ -17,9 +18,6 @@
 % - stream2xPVadv: Calculates zonal advection of potential vorticity.
 % - stream2yPVadv: Computes meridional advection of potential vorticity.
 % - eig: Performs eigenvalue decomposition.
-% - hwe_ubar: Computes mean zonal wind field.
-% - hwe_BPVyCalc: Computes beta-plane PV gradient.
-% - matricesBCD: Constructs matrices B, C, D for PV inversion and advection.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -34,19 +32,16 @@ addpath('config'); % add config folder
 %%%%%%%%%%%%%%%%%%%%%%%%%%% CONSTANTS/VARIABLES %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% These can be found in Dr. Cai's 3D_spectral_linear_QG_model_numnerics.pdf
-% beginning on slides 5 - 6
-
-%% Load constants from hwe_config.m and assign global variables
-params = hwe_config();
+%% Load constants from row_config.m and assign global variables
+params = row_config();
 
 % get directories
-hwe_data_dir = params.hwe_data_dir;
-hwe_data_filename = params.hwe_data_filename;
-hwe_data = fullfile(hwe_data_dir, hwe_data_filename);
+row_data_dir = params.row_data_dir;
+row_data_filename = params.row_data_filename;
+row_data = fullfile(row_data_dir, row_data_filename);
 
 cplx = params.cplx; % imaginary unit for complex number operations
-m0 = params.m0; % wave number (set to 7 as in examples)
+m0 = params.m0; % wave number
 jj = params.jj; % number of latitude grid points
 kk = params.kk; % number of height grid points
 ll = params.ll; % total number of linear indices for interior points
@@ -55,25 +50,50 @@ f0 = params.f0; % coriolis parameter at 45° latitude (s^-1)
 beta = params.beta; % beta parameter (meridional PV gradient, m^-1 s^-1)
 gg = params.gg; % gravity (m s^-2)
 Theta0 = params.Theta0; % reference potential temperature (K)
-DeltaTheta = params.DeltaTheta; % vertical/horizontal potential temperature difference (K)
+delta_Theta0 = params.delta_Theta0; % potential temperature difference (K)
 HH = params.HH; % scale height (m)
-Ly = params.Ly; % meridional domain length (50° latitude range, m)
 dy = params.dy; % meridional grid spacing (in meters)
 dz = params.dz; % vertical grid spacing (in meters)
 NN2 = params.NN2; % brunt-vaisala frequency squared (s^-2)
-DeltaT_hor = params.DeltaT_hor; % horizontal temperature difference (K)
-mu = params.mu; % mu parameter (unused in Eady, kept for compatibility)
-U0 = params.U0; % mean zonal wind offset (set to 5)
-L_d = params.L_d; % Rossby deformation radius
-m_y = params.m_y; % meridional wavenumber (unused in Eady, kept for compatibility)
-gamma = params.gamma; % gamma for sinh term (unused in Eady, kept for compatibility)
-% Removed Lambda as it's now derived in hwe_ubar
 
-%% Set Ubar with Modified Hoskins-West Eady-type formula
-Ubar = hwe_ubar(params);
+%% Set Ubar with constant value
+Ubar = zeros(jj+1, kk+1); % initialize mean zonal wind field
+Ubar(:,:) = Ubar(:,:) + params.Ubar_const; % set uniform zonal wind speed
 
-%% Initialize BPVy and set interior points using analytical formula
-BPVy = hwe_BPVyCalc(params);
+%% Initialize BPVy and set interior points to beta
+% BPVy = zeros(jj+1, kk+1); % initialize beta-plane PV gradient
+% for k = 2 : kk
+%     for j = 2:jj
+%         BPVy(j,k) = beta; % assign constant beta to the PV gradient
+%     end
+% end
+
+ZZ=0.0:dz:HH;
+Y0=6.37*1.0e6*pi/4; % (central lat = 45)
+Ly = 6.37 * 1.0e6 * 50 * pi/180;
+YY = 6.37*1.0e6*pi/4 - Ly/2:dy:6.37*1.0e6*pi/4+Ly/2;
+
+dTbar = 60;
+Ubar = zeros(jj+1, kk+1);
+
+beta = 0;
+Ubar0=0;
+for k = 1:kk+1
+    Ubar(:,k)=(gg/f0/Theta0)*(dTbar/Ly)*ZZ(k)+Ubar0;
+end
+
+BPVy = zeros(jj+1, kk+1);
+for j = 2:jj
+    for k = 2:kk
+        BPVy(j,k) = beta - (Ubar(j+1,k)-2*Ubar(j,k) + Ubar(j-1,k)) / dy^2 ...
+            -(f0*f0/NN2) * (Ubar(j,k+1) - 2*Ubar(j,k) + Ubar(j,k-1))/dz^2;
+    end
+
+    k=1;
+    BPVy(j,k)=-(Ubar(j,k+1) - Ubar(j,k))/dz;
+    k = kk+1;
+    BPVy(j,k)=-(Ubar(j,k) - Ubar(j,k-1))/dz;
+end
 
 %% This is just for testing
 [j,k] = l2jk(98); % convert linear index 98 to 2D indices (j,k)
@@ -95,7 +115,22 @@ D = zeros(ll,ll); % matrix for meridional PV advection (beta term = constant)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Main loop to construct matrices B, C, and D
-[B, C, D] = matricesBCD(ll, @stream2pv, @stream2xPVadv, @stream2yPVadv);
+for l0 = 1:ll
+    XV = zeros(ll,1); % reset streamfunction vector
+    XV(l0) = 1;  % set to 1 for matrix construction
+
+    % B MATRIX
+    QV = stream2pv(XV);
+    B(:, l0) = QV(:);
+
+    % C MATRIX
+    xQVadv = stream2xPVadv(QV);
+    C(:, l0) = xQVadv(:);
+
+    % D MATRIX
+    yQVadv = stream2yPVadv(XV);
+    D(:,l0) = yQVadv(:);
+end
 
 %% Start eigenvector and eigenvalue part
 % Linearized PV equation in matrix form for eigenvalue problem
@@ -104,28 +139,25 @@ A = B^(-1) * (C+D);
 [eigVec, eigValm] = eig(A); % eigVec = eigenvectors
 eigVal = diag(eigValm); % eigValm = eigenvalue matrix
 
-% test values in descending order
+% Sort by descending real part
 [test, sortdx] = sort(real(eigVal), 'descend');
 
-% this is a solution to the real part
 eigVal2 = eigVal(sortdx);
 eigVec2 = eigVec(:, sortdx);
 
-% test values in ascending order
+% Sort by ascending real part of imaginary eigenvalue
 [test, sortdx] = sort(real(cplx*eigVal), 'ascend');
-
-% this is a solution for the complex/imaginary part
 eigVal3 = eigVal(sortdx);
 eigVec3 = eigVec(:,sortdx);
 
 toc
 
 %% Create data folder if it doesn't exist and save data file
-if ~exist(hwe_data_dir, 'dir')
-    mkdir(hwe_data_dir);
+if ~exist(row_data_dir, 'dir')
+    mkdir(row_data_dir);
 end
 
 % save it
-save(hwe_data, 'Ubar', 'BPVy', 'eigVec', 'eigVal', 'eigVec2', 'eigVal2', ...
+save(row_data, 'Ubar', 'BPVy', 'eigVec', 'eigVal', 'eigVec2', 'eigVal2', ...
     'eigVec3', 'eigVal3', 'jj', 'kk', 'll', 'NN2', 'f0', 'dy', 'dz', 'm0', ...
-    'Lx', 'beta', 'cplx', 'gg', 'Theta0', 'HH', 'Ly');
+    'Lx', 'beta', 'cplx', 'gg', 'Theta0', 'HH');
