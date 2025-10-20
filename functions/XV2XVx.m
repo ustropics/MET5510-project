@@ -35,7 +35,7 @@ function XVx = XV2XVx (XV)
     
     for k = 1:kk+1
         for j = 2:jj
-            l=jk2l(j,kk);
+            l=jk2l(j,k);
             XVx(l) = cplx*(2*pi*m0/Lx) * XV(l);
         end
     end

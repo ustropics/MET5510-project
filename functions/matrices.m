@@ -2,11 +2,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: matricesBCD.m
+% Filename: matrices.m
 
-% Description: Constructs matrices B, C, D for PV inversion and advection
+% Description: Constructs matrices B, C, D for potential vorticity (PV) 
+% inversion and advection in the quasi-geostrophic model.
 
-% Input: 
+% Input:
 % - ll: Total number of linear indices
 % - stream2pv: Function handle to compute PV from streamfunction
 % - stream2xPVadv: Function handle for zonal PV advection
@@ -21,8 +22,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function [B, C, D] = matricesBCD(ll, stream2pv, stream2xPVadv, stream2yPVadv)
-
+function [B, C, D] = construct_matrices(ll, stream2pv, stream2xPVadv, stream2yPVadv)
 %% Initialize matrices
 B = zeros(ll, ll);
 C = zeros(ll, ll);
@@ -32,16 +32,16 @@ D = zeros(ll, ll);
 for l0 = 1:ll
     XV = zeros(ll, 1); % reset streamfunction vector
     XV(l0) = 1; % set to 1 at index l0
-    
-    %% B MATRIX: PV from streamfunction
+
+    % B MATRIX: PV from streamfunction
     QV = stream2pv(XV);
     B(:, l0) = QV(:);
-    
-    %% C MATRIX: Zonal PV advection
+
+    % C MATRIX: Zonal PV advection
     xQVadv = stream2xPVadv(QV);
     C(:, l0) = xQVadv(:);
-    
-    %% D MATRIX: Meridional PV advection
+
+    % D MATRIX: Meridional PV advection
     yQVadv = stream2yPVadv(XV);
     D(:, l0) = yQVadv(:);
 end
