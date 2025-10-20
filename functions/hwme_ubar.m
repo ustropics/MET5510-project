@@ -31,13 +31,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function Ubar = hwme_ubar(jj, kk, gg, f0, Theta0, dTbar, HH, Ly, ZZ, YY, mu, y_s, Lr)
+function Ubar = hwme_ubar(jj, kk, gg, f0, Theta0, dTbar, HH, Ly, ZZ, YY, mu, Lr)
 Ubar = zeros(jj + 1, kk + 1);
 prefac = (gg / (f0 * Theta0)) * (HH * dTbar / Ly);
 A = 2 * pi * Lr / Ly;
 
 for j = 1:(jj + 1)
     y = YY(j);
+    y_s = (YY(j)-YY(1))/Lr;
     for k = 1:(kk + 1)
         zH = ZZ(k) / HH;
         sinh_term = sinh(A * zH) / sinh(A);

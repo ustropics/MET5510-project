@@ -49,7 +49,7 @@ params = struct();
 params.model = 'hwme';
 params.cplx = sqrt(-1); % imaginary unit
 params.m0 = 7; % wave number
-params.n_mode = 7; % wave frequency
+params.n_mode = 2; % wave frequency
 
 %% Grid point parameterization
 params.jj = 50; % number of latitude grid points
@@ -96,7 +96,7 @@ params.YY = 6.37 * 1.0e6 * pi / 4 - params.Ly / 2 : params.dy : 6.37 * 1.0e6 * p
 %% Constants for Ubar initialization
 params.dTbar = 60; % potential temperature gradient (K)
 params.mu = 1; % curvature parameter
-params.y_s = mean(params.YY); % reference latitude (m)
+% params.y_s = ; % reference latitude (m)
 params.prefac = (params.gg / (params.f0 * params.Theta0)) * (params.HH * params.dTbar / params.Ly); % prefactor for Ubar
 
 %% Directory variables

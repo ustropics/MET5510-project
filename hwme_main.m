@@ -54,7 +54,7 @@ ZZ = params.ZZ; % vertical grid coordinates (m)
 YY = params.YY; % meridional grid coordinates (m)
 dTbar = params.dTbar; % potential temperature gradient (K)
 mu = params.mu; % curvature parameter
-y_s = params.y_s; % reference latitude (m)
+% y_s = params.y_s; % reference latitude (m)
 N = params.N; % Brunt-Vaisala frequency (s^-1)
 Lr = params.Lr; % Rossby radius of deformation (m)
 Ly = params.Ly; % meridional domain length (50° latitude range, m)
@@ -62,7 +62,7 @@ prefac = params.prefac; % prefactor for Ubar calculation
 hwme_data = fullfile(params.hwme_data_dir, params.hwme_data_filename);
 
 %% Initialize Ubar and BPVy
-Ubar = hwme_ubar(jj, kk, gg, f0, Theta0, dTbar, HH, Ly, ZZ, YY, mu, y_s, Lr);
+Ubar = hwme_ubar(jj, kk, gg, f0, Theta0, dTbar, HH, Ly, ZZ, YY, mu, Lr);
 BPVy = hwme_bpvy(jj, kk, beta, Ubar, dy, f0, NN2, dz);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
