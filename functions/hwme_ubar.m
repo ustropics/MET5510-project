@@ -38,11 +38,11 @@ A = 2 * pi * Lr / Ly;
 
 for j = 1:(jj + 1)
     y = YY(j);
-    y_s = (YY(j)-YY(1))/Lr;
+    y_s = (YY(j)-YY(1));
     for k = 1:(kk + 1)
         zH = ZZ(k) / HH;
         sinh_term = sinh(A * zH) / sinh(A);
-        cos_term = cos(2 * pi * (y - y_s) / Ly);
+        cos_term = cos(2 * pi * (y_s) / Ly);
         Ubar(j, k) = prefac * (zH - 0.5 * mu * (zH + sinh_term * cos_term));
     end
 end
