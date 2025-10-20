@@ -153,4 +153,4 @@ plot_dpvdym_int(yy, zz, BPVy, model, m0);
 plot_dpvdym_boundaries(yy, BPVy, beta, kk, model, m0);
 
 % Plot combo plot for hwme
-plot_hwme_bg_flow(yy, zz, Ubar, BPVy, model, m0)
+plot_hwme_bg_flow(yy, zz, jj, kk, Ubar, BPVy, model, m0)

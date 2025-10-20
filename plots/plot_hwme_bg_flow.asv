@@ -50,7 +50,6 @@ caxis([min(Ubar(:)) max(Ubar(:))]);  % Adjust color limits based on data
 subplot(1, 3, 2);
 contourf(BPVy(2:jj,2:kk)', 'LineStyle','none');
 hold on;
-contour(BPVy(2:jj,2:kk)',[0 0], 'LineStyle', '-', 'color', 'white');
 colorbar;
 xlabel('Latitude (degrees)');
 ylabel('Height (km)');
