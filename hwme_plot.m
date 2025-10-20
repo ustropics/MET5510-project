@@ -102,6 +102,10 @@ pvfield = XV2field(QV, ii, dx);
 gpt_h_hovmoler = XV2streamxtime(XV, ii, dx, omega, hlat, hlevel) * f0 / gg;
 ug_hovmoler = XV2ugxtime(XVy, ii, dx, omega, hlat, hlevel);
 
+if ~exist(params.hwme_plot_dir, 'dir')
+    mkdir(params.hwme_plot_dir);
+end
+
 %% Plot eigenvector amplitude
 eVec_amp = zeros(jj + 1, kk + 1);
 for l = 1 : ll
@@ -109,6 +113,8 @@ for l = 1 : ll
     eVec_amp(j, k) = XV(l) .* conj(XV(l));
 end
 plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, model);
+
+
 
 %% Plot geopotential height
 plot_gph(xx, zz, gpt_h, jj, model, m0);

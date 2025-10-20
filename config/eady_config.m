@@ -106,7 +106,7 @@ params.time = 0 : 1 : 50; % time coordinates (days)
 params.n_mode = 7; % mode number
 
 %% Directory variables
-params.eady_plot_dir = 'output/plots/'; % directory for saving plots
+params.eady_plot_dir = 'output/figures/'; % directory for saving plots
 params.eady_data_dir = 'output/data/'; % directory for saving data
 params.eady_data_filename = ['eady_wave_', num2str(params.m0), '.mat']; % data filename
 

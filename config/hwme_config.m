@@ -100,7 +100,7 @@ params.y_s = mean(params.YY); % reference latitude (m)
 params.prefac = (params.gg / (params.f0 * params.Theta0)) * (params.HH * params.dTbar / params.Ly); % prefactor for Ubar
 
 %% Directory variables
-params.hwme_plot_dir = 'output/plots/'; % directory for saving plots
+params.hwme_plot_dir = 'output/figures/'; % directory for saving plots
 params.hwme_data_dir = 'output/data/'; % directory for saving data
 params.hwme_data_filename = ['hwme_wave_', num2str(params.m0), '.mat']; % data filename
 
