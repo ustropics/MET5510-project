@@ -24,7 +24,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function plot_rossby_bg_flow(yy, zz, Ubar, qy_surf, qy_trop, model, m0, jj, kk)
+function plot_rossby_bg_flow(yy, zz, Ubar, qy_surf, qy_trop, model, m0, jj, kk, n_mode, fig_path)
 
     % Clear any variable named 'title' to avoid shadowing
     clear title;
@@ -95,7 +95,8 @@ function plot_rossby_bg_flow(yy, zz, Ubar, qy_surf, qy_trop, model, m0, jj, kk)
         % set global font size
         set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
 
-    saveas(gcf, ['output', filesep, 'figures', filesep, 'rossby_background_flow_', model, '_m0_', num2str(m0), '.png']);
-    close(gcf);
-    
+    %% Save figure
+    outFile = fullfile(fig_path, [model, '_rossby_bg_flow_', '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    saveas(gcf, outFile);
+    close(gcf);    
 end

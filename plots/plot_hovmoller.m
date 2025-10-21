@@ -18,7 +18,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function plot_hovmoller(xx, time, gpt_h_hovmoler, model, m0)
+function plot_hovmoller(xx, time, gpt_h_hovmoler, model, m0, n_mode, fig_path)
+
+    %% Create figure
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
     contourf(xx, time, gpt_h_hovmoler', 'linestyle', 'none');
     xlabel('Longitude')
@@ -29,7 +31,9 @@ function plot_hovmoller(xx, time, gpt_h_hovmoler, model, m0)
     % set global font size
     set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
     
-    % Save plot
-    saveas(gcf, ['output', filesep, 'figures', filesep, 'hovmoller_', model, '_m0_', num2str(m0), '.png']);
+    %% Save figure
+    outFile = fullfile(fig_path, [model, '_hovmoller_', '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    saveas(gcf, outFile);
     close(gcf);
+
 end

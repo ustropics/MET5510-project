@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function plot_zonal_wind(xx, yy, ug, model, m0)
+function plot_zonal_wind(xx, yy, ug, model, m0, n_mode, fig_path)
 
     %% Create figure
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
@@ -33,7 +33,9 @@ function plot_zonal_wind(xx, yy, ug, model, m0)
     % set global font size
     set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
     
-    %% Save plot
-    saveas(gcf, ['output', filesep, 'figures', filesep, 'zonal_wind_', model, '_m0_', num2str(m0), '.png']);
+    %% Save figure
+    outFile = fullfile(fig_path, [model, '_zonal_wind_', '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    saveas(gcf, outFile);
     close(gcf);
+    
 end

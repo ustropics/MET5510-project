@@ -22,7 +22,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function plot_hwme_bg_flow(yy, zz, jj, kk, Ubar, BPVy, model, m0)
+function plot_hwme_bg_flow(yy, zz, jj, kk, Ubar, BPVy, model, m0, n_mode, fig_path)
 
     % Clear any variable named 'title' to avoid shadowing
     clear title;
@@ -95,10 +95,12 @@ function plot_hwme_bg_flow(yy, zz, jj, kk, Ubar, BPVy, model, m0)
 
     hold off;
 
-        % set global font size
-        set(findall(gcf, '-property', 'FontSize'), 'FontSize',15);
+    % set global font size
+    set(findall(gcf, '-property', 'FontSize'), 'FontSize',15);
 
-    saveas(gcf, ['output', filesep, 'figures', filesep, 'hwme_background_', model, '_m0_', num2str(m0), '.png']);
+    %% Save figure
+    outFile = fullfile(fig_path, [model, '_hwme_bg_', '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    saveas(gcf, outFile);
     close(gcf);
-
+    
 end

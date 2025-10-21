@@ -21,7 +21,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function plot_dpvdym_boundaries(yy, BPVy, beta, kk, model, m0)
+function plot_dpvdym_boundaries(yy, BPVy, beta, kk, model, m0, n_mode, fig_path)
 
     %% Extract d(PVbar)/dy at surface (k=1), mid-level (k=kk/2+1), and top (k=kk+1)
     dpvdy_surface = BPVy(:, 1) * 1e12; % Scale to 10^-12 s^-1
@@ -47,7 +47,8 @@ function plot_dpvdym_boundaries(yy, BPVy, beta, kk, model, m0)
     grid on;
 
     %% Save figure
-    saveas(gcf, ['output', filesep, 'figures', filesep, 'dpvdym_boundaries_', model, '_m0_', num2str(m0), '.png']);
+    outFile = fullfile(fig_path, [model, '_dpvdym_boundaries_', '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    saveas(gcf, outFile);
     close(gcf);
 
 end

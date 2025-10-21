@@ -122,45 +122,45 @@ for l = 1 : ll
     [j, k] = l2jk(l);
     eVec_amp(j, k) = XV(l) .* conj(XV(l));
 end
-plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, model);
+plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, model, fig_path);
 
 
-
-%% Plot geopotential height
+%% Create list of figures to plot
+% Plot geopotential height
 plot_gph(xx, zz, gpt_h, jj, model, m0, n_mode, fig_path);
 
-%% Plot Hovmoller diagram
-plot_hovmoller(xx, time, gpt_h_hovmoler, model, m0);
+% Plot Hovmoller diagram
+plot_hovmoller(xx, time, gpt_h_hovmoler, model, m0, n_mode, fig_path);
 
-%% Plot zonal wind
-plot_zonal_wind(xx, yy, ug, model, m0);
+% Plot zonal wind
+plot_zonal_wind(xx, yy, ug, model, m0, n_mode, fig_path);
 
-%% Plot meridional wind
-plot_meridional_wind(xx, yy, vg, model, m0);
+% Plot meridional wind
+plot_meridional_wind(xx, yy, vg, model, m0, n_mode, fig_path);
 
-%% Plot temperature at mid-level
-plot_temperature(xx, yy, temp, kk, model, m0);
+% Plot temperature at mid-level
+plot_temperature(xx, yy, temp, kk, model, m0, n_mode, fig_path);
 
-%% Plot geopotential height at top boundary
-plot_gph_top(xx, yy, gpt_h, model, m0);
+% Plot geopotential height at top boundary
+plot_gph_top(xx, yy, gpt_h, model, m0, n_mode, fig_path);
 
-%% Plot potential vorticity at surface
-plot_pvfield(xx, yy, pvfield, model, m0);
+% Plot potential vorticity at surface
+plot_pvfield(xx, yy, pvfield, model, m0, n_mode, fig_path);
 
-%% Plot meridional wind vertical cross-section
-plot_vg_cross_section(xx, zz, vg, jj, model, m0);
+% Plot meridional wind vertical cross-section
+plot_vg_cross_section(xx, zz, vg, jj, model, m0, n_mode, fig_path);
 
-%% Plot Hovmoller diagram for zonal wind
-plot_ug_hovmoller(xx, time, ug_hovmoler, hlat, hlevel, model, m0);
+% Plot Hovmoller diagram for zonal wind
+plot_ug_hovmoller(xx, time, ug_hovmoler, hlat, hlevel, model, m0, n_mode, fig_path);
 
-%% Plot Ubar contour
-plot_ubar_contour(yy, zz, Ubar, model, m0);
+% Plot Ubar contour
+plot_ubar_contour(yy, zz, Ubar, model, m0, n_mode, fig_path);
 
-%% Plot d(PVbar)/dy interior
-plot_dpvdym_int(yy, zz, BPVy, model, m0);
+% Plot d(PVbar)/dy interior
+plot_dpvdym_int(yy, zz, BPVy, model, m0, n_mode, fig_path);
 
-%% Plot d(PVbar)/dy at boundaries with beta
-plot_dpvdym_boundaries(yy, BPVy, beta, kk, model, m0);
+% Plot d(PVbar)/dy at boundaries with beta
+plot_dpvdym_boundaries(yy, BPVy, beta, kk, model, m0, n_mode, fig_path);
 
 % Plot combo plot for hwme
-plot_hwme_bg_flow(yy, zz, jj, kk, Ubar, BPVy, model, m0)
+plot_hwme_bg_flow(yy, zz, jj, kk, Ubar, BPVy, model, m0, n_mode, fig_path)

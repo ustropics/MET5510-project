@@ -22,7 +22,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function plot_background_flow(yy, zz, Ubar, qy_surf, qy_trop, model, m0)
+function plot_background_flow(yy, zz, Ubar, qy_surf, qy_trop, model, m0, n_mode, fig_path)
     clear title;
 
     % Create the combined figure
@@ -86,8 +86,9 @@ function plot_background_flow(yy, zz, Ubar, qy_surf, qy_trop, model, m0)
 
     hold off;
 
-    end
-    saveas(gcf, ['output', filesep, 'figures', filesep, 'eady_background_', model, '_m0_', num2str(m0), '.png']);
+    %% Save figure
+    outFile = fullfile(fig_path, [model, '_eady_bg_', '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    saveas(gcf, outFile);
     close(gcf);
 
 end
