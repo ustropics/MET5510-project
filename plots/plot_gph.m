@@ -20,7 +20,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function plot_gph(xx, zz, gpt_h, jj, model, m0)
+function plot_gph(xx, zz, gpt_h, jj, model, m0, n_mode, hwme_plot_dir)
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
     contourf(xx, zz, squeeze(gpt_h(:,floor(jj/2)+1,:))', 'LineStyle', 'none');
     colorbar;
@@ -34,6 +34,7 @@ function plot_gph(xx, zz, gpt_h, jj, model, m0)
     set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
 
     % Save plot
-    saveas(gcf, ['output', filesep, 'figures', filesep, 'gph_', model, '_m0_', num2str(m0), '.png']);
+    outFile = fullfile(hwme_plot_dir, [model, '_gph', '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    saveas(gcf, outFile);
     close(gcf);
 end

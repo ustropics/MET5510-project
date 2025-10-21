@@ -58,6 +58,7 @@ dz = params.dz;
 NN2 = params.NN2;
 cplx = params.cplx;
 m0 = params.m0;
+fig_path = params.hwme_plot_dir;
 
 % Assign plotting parameters
 ii = params.ii;
@@ -117,7 +118,7 @@ plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, model);
 
 
 %% Plot geopotential height
-plot_gph(xx, zz, gpt_h, jj, model, m0);
+plot_gph(xx, zz, gpt_h, jj, model, m0, n_mode, fig_path);
 
 %% Plot Hovmoller diagram
 plot_hovmoller(xx, time, gpt_h_hovmoler, model, m0);
