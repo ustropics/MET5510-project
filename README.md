@@ -9,7 +9,6 @@ The program simulates various atmospheric wave patterns using different modeling
 - **Rossby** - Rossby Wave Model
 - **Eady** - Eady Wave Model
 
-
 ## Instructions
 ### Calculate Model Data
 1. `hwme_main.m` to process the Hoskins-West Modified Eady-type calculations
