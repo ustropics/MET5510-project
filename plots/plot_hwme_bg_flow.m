@@ -29,13 +29,13 @@ qy_trop_plot = qy_trop * 1e11;  % (jj+1) x 1 vector
 beta_plot = params.beta * 1e11;  % Scalar (ensure beta is a scalar)
 
 % Create the combined figure
-figure('units', 'inch', 'position', [4, 2, 16, 6], ...
+figure('units', 'inch', 'position', [4, 2, 20, 8], ...
        'Name', sprintf('%s Model Background Flow', model), 'Visible', 'off');
 
 % Title for the whole figure
-annotation('textbox', [0.3, 0.9, 0.4, 0.1], 'String', ...
-    ['Hoskins-West Modified Eady Model''s background flow' newline '$\Delta T = 60$; $U_0 = 0$'], ...
-    'FontSize', 14, 'HorizontalAlignment', 'center', 'EdgeColor', 'none', 'Interpreter', 'latex');
+% annotation('textbox', [0.3, 1, 0.4, 0.1], 'String', ...
+%     ['Hoskins-West Modified Eady Model''s background flow' newline '$\Delta T = 60$; $U_0 = 0$'], ...
+%     'FontSize', 14, 'HorizontalAlignment', 'center', 'EdgeColor', 'none', 'Interpreter', 'latex');
 
 %% Subplot 1: Ubar (mean zonal wind)
 subplot(1, 3, 1);
@@ -70,10 +70,10 @@ ylabel('$\frac{d(\overline{PV})}{dy} \times 10^{-11} \, (s^{-1} m^{-1})$', 'Inte
 title('$\frac{d(\overline{PV})}{dy}$ at surf./trop./beta (red/blue/black)', 'Interpreter', 'latex');
 
 % Add equations as annotations with proper TeX syntax
-annotation('textbox', [0.72, 0.55, 0.25, 0.1], 'String', ...
+annotation('textbox', [0.67, 0.5, 0.25, 0.1], 'String', ...
     '$(\frac{\partial q}{\partial y})_{\mathrm{Trop.}} = \frac{f_0^2}{N^2 H} (\frac{\partial \bar{u}}{\partial z})_{\mathrm{Trop.}}$', ...
     'FontSize', 10, 'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'Interpreter', 'latex');
-annotation('textbox', [0.72, 0.25, 0.25, 0.1], 'String', ...
+annotation('textbox', [0.67, 0.3, 0.25, 0.1], 'String', ...
     '$(\frac{\partial q}{\partial y})_{\mathrm{Surf.}} = -\frac{f_0^2}{N^2 H} (\frac{\partial \bar{u}}{\partial z})_{\mathrm{Surf.}}$', ...
     'FontSize', 10, 'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'Interpreter', 'latex');
 
@@ -83,6 +83,9 @@ ylim_max = max([max(qy_surf_plot), max(qy_trop_plot), beta_plot]) * 1.2;
 ylim([ylim_min, ylim_max]);
 
 hold off;
+
+    % set global font size
+    set(findall(gcf, '-property', 'FontSize'), 'FontSize',15);
 
 % Save the combined plot
 if ~exist('output/plots', 'dir')

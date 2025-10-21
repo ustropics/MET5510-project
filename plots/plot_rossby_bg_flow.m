@@ -82,6 +82,9 @@ yline(0, 'k-', 'LineWidth', 1);
 
 hold off;
 
+    % set global font size
+    set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
+
 % Save the plot
 if ~exist('output/figures', 'dir')
     mkdir('output/figures');

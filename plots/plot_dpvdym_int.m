@@ -29,6 +29,9 @@ function plot_dpvdym_int(yy, zz, BPVy, model, m0)
     ylabel('Height (km)')
     title('d(PVbar)/dy (Interior, 10^-12 s^-1)');
 
+    % set global font size
+    set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
+
     % Save plot
     saveas(gcf, ['output', filesep, 'figures', filesep, 'dpvdym_int_', model, '_m0_', num2str(m0), '.png']);
     close(gcf);

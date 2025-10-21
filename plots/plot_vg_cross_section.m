@@ -30,6 +30,9 @@ function plot_vg_cross_section(xx, zz, vg, jj, model, m0)
     set(gca, 'ytick', 0:2:10)
     title('Meridional Wind Vertical Cross-Section');
 
+    % set global font size
+    set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
+
     % Save plot
     saveas(gcf, ['output', filesep, 'figures', filesep, 'vg_cross_section_', model, '_m0_', num2str(m0), '.png']);
     close(gcf);

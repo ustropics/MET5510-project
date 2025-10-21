@@ -28,6 +28,9 @@ function plot_pvfield(xx, yy, pvfield, model, m0)
     set(gca, 'xtick', 0:30:360)
     title('Potential Vorticity at Surface');
 
+    % set global font size
+    set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
+
     % Save plot
     saveas(gcf, ['output', filesep, 'figures', filesep, 'pvfield_', model, '_m0_', num2str(m0), '.png']);
     close(gcf);

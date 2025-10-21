@@ -26,6 +26,9 @@ function plot_ubar_contour(yy, zz, Ubar, model, m0)
     xlabel('Latitude (degrees)')
     ylabel('Height (km)')
     title('Background Zonal Wind (Ubar)');
+
+    % set global font size
+    set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
     
     % Save plot
     saveas(gcf, ['output', filesep, 'figures', filesep, 'ubar_', model, '_m0_', num2str(m0), '.png']);

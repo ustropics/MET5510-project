@@ -28,6 +28,9 @@ function rossby_gph_top(xx, yy, gpt_h, model, m0)
     set(gca, 'xtick', 0:30:360)
     title('Geopotential Height at Top Boundary');
 
+    % set global font size
+    set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
+
     % Save plot
     saveas(gcf, ['output', filesep, 'figures', filesep, 'gph_top_', model, '_m0_', num2str(m0), '.png']);
     close(gcf);

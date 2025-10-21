@@ -30,6 +30,9 @@ function plot_gph(xx, zz, gpt_h, jj, model, m0)
     set(gca, 'ytick', 0:2:10)
     title('Geopotential Height at Middle Latitude');
     
+    % set global font size
+    set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
+
     % Save plot
     saveas(gcf, ['output', filesep, 'figures', filesep, 'gph_', model, '_m0_', num2str(m0), '.png']);
     close(gcf);

@@ -29,6 +29,9 @@ xlabel('Longitude')
 ylabel('Time (days)')
 title(['Hovmoller Diagram for Zonal Wind at lat=', num2str(hlat), ', level=', num2str(hlevel)]);
 
+% set global font size
+set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
+
 % Save plot
 saveas(gcf, ['output', filesep, 'figures', filesep, 'ug_hovmoller_', model, '_m0_', num2str(m0), '.png']);
 close(gcf);

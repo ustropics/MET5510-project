@@ -72,6 +72,9 @@ text(mean(yy), qy_surf_plot * 1.15, ...
 ylim([qy_surf_plot*1.5, qy_trop_plot*1.5]);
 yline(0, 'k-', 'LineWidth', 1);
 
+    % set global font size
+    set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
+
 hold off;
 
 % Save the plot

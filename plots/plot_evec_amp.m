@@ -33,6 +33,9 @@ function plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, model)
     title(title_str);
     colorbar
     
+    % set global font size
+    set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
+
     % Save plot
     saveas(gcf, ['output', filesep, 'figures', filesep, 'evec_amp_', model, '_m0_', num2str(m0), '.png']);
     close(gcf);
