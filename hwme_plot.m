@@ -76,10 +76,10 @@ load(hwme_data)
 
 %% Select mode and compute properties
 XV = zeros(ll, 1);
-XV(:) = eigVec3(:, n_mode);
-omega = imag(eigVal3(n_mode));
+XV(:) = eigVec2(:, n_mode);
+omega = imag(eigVal2(n_mode));
 phase_speed = -omega / (2 * pi * m0 / Lx);
-growth_rate = real(eigVal3(n_mode));
+growth_rate = real(eigVal2(n_mode));
 eFolding = (1 / growth_rate) / 86400; % in days
 
 %% Normalize XV

@@ -31,15 +31,12 @@ global cplx m0 Lx
 
 ugxtime = zeros(ii+1, 51);
 
-% Compute the full ug field at the specified latitude and height
-% ug_field = -XV2field(XVy, ii, dx); % 3D field (ii+1 x jj+1 x kk+1)
-% ug_slice = squeeze(ug_field(:, ylat, zlev)); % Extract 1D longitude slice
-
+l = jk2l(ylat, zlev);
 for day = 1:51
     sec = (day-1)*86400;
     for n = 1:ii+1
         xlon = (n-1)*dx;
-        ugxtime(n, day) = real(XVy(ylat,zlev) * exp(cplx * (2 * pi * m0 * xlon / Lx + omega * sec)));
+        ugxtime(n, day) = real( - XVy(l) * exp(cplx * (2 * pi * m0 * xlon / Lx + omega * sec)));
     end
 end
 end
