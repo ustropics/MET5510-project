@@ -1,41 +1,41 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: row_F123.m
+% FILENAME: eady_F123.m
 
-% Description: Computes the forcing terms F1, F2, and F3 for vertical motion 
-% calculations in the Rossby wave model within the quasi-geostrophic framework. 
+% DESCRIPTION: Computes the forcing terms F1, F2, and F3 for vertical motion 
+% calculations in the Eady wave model within the quasi-geostrophic framework. 
 % These terms represent contributions to the vertical velocity equation, 
 % incorporating the effects of zonal wind shear, potential vorticity gradients, 
 % and beta-plane dynamics. The function is designed to be used with the 
-% row_plot.m script for generating vertical motion diagnostics.
+% eady_plot.m script for generating vertical motion diagnostics.
 
-% Input:
-% - params: Structure containing model parameters (from row_config.m)
-%   - jj: Number of latitude grid points (integer)
-%   - kk: Number of height grid points (integer)
-%   - dy: Grid spacing in the meridional direction (m)
-%   - dz: Grid spacing in the vertical direction (m)
-%   - m0: Zonal wavenumber (integer)
-%   - Lx: Zonal domain length (m)
-%   - cplx: Imaginary unit for complex number operations (sqrt(-1))
-%   - beta: Planetary vorticity gradient (s^-1 m^-1)
+% INPUT:
+% - jj: Number of latitude grid points (integer)
+% - kk: Number of height grid points (integer)
+% - dy: Grid spacing in the meridional direction (m)
+% - dz: Grid spacing in the vertical direction (m)
+% - m0: Zonal wavenumber (integer)
+% - Lx: Zonal domain length (m)
+% - cplx: Imaginary unit for complex number operations (sqrt(-1))
+% - beta: Planetary vorticity gradient (s^-1 m^-1)
 % - XV: Streamfunction vector (size ll x 1)
 % - Ubar: Mean zonal wind field (jj+1 x kk+1 array, m/s)
 
-% Output:
+% OUTPUT:
 % - F1: Forcing term related to vorticity advection (LW x 1 vector)
 % - F2: Forcing term related to meridional PV gradient (LW x 1 vector)
 % - F3: Forcing term related to beta effect (LW x 1 vector)
 
-% Math/functions: 
+% MATH/FUNCTIONS: 
 % - F1: Represents vorticity advection term, computed as:
 %       F1 = 2 * (2πm₀/Lx) * i * (∂U/∂z) * [-(2πm₀/Lx)²ψ + ∂²ψ/∂y²] / (2dz)
 % - F2: Represents meridional PV gradient term, computed as:
 %       F2 = -2 * (2πm₀/Lx) * i * (∂²U/∂y²) * (∂ψ/∂z) / (2dz * dy²)
 % - F3: Represents beta effect term, computed as:
 %       F3 = (2πm₀/Lx) * i * β * (∂ψ/∂z) / (2dz)
+
 % - where:
 %   - m₀: Zonal wavenumber
 %   - Lx: Zonal domain length
@@ -46,7 +46,7 @@
 %   - dy, dz: Grid spacings
 % - Uses jk2lw to map 2D indices (j,k) to linear weighted indices for vertical motion.
 
-% Dependencies:
+% DEPENDENCIES:
 % - jk2lw: Converts 2D indices (j, k) to a weighted linear index.
 % - jk2l: Converts 2D indices (j, k) to a linear index.
 
@@ -54,7 +54,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function [F1, F2, F3] = row_F123(params, XV, Ubar)
+function [F1, F2, F3] = eady_F123(params, XV, Ubar)
 
     %% Extract parameters
     jj = params.jj;

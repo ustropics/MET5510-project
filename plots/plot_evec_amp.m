@@ -2,11 +2,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: rossby_evec_amp.m
+% FILENAME: plot_evec_amp.m
 
-% Description: Plots the eigenvector amplitude contour and saves it as an image.
+% DESCRIPTION: Plots the eigenvector amplitude contour and saves it as an image.
 
-% Input:
+% INPUT:
 % - yy: Latitude coordinates (degrees)
 % - zz: Height coordinates (km)
 % - eVec_amp: Eigenvector amplitude matrix
@@ -15,14 +15,16 @@
 % - growth_rate: Growth rate
 % - omega: Imaginary eigenvalue
 
-% Output:
-% - Saves plot to 'output/plots/evec_amp.png'
+% OUTPUT:
+% - Saves plot to 'output/figures/evec_amp.png'
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, model)
+
+    %% Create figure
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
     contourf(yy, zz, eVec_amp', 'linestyle', 'none');
     xlabel('Latitude')
@@ -36,7 +38,8 @@ function plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, model)
     % set global font size
     set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
 
-    % Save plot
+    %% Save plot
     saveas(gcf, ['output', filesep, 'figures', filesep, 'evec_amp_', model, '_m0_', num2str(m0), '.png']);
     close(gcf);
+
 end

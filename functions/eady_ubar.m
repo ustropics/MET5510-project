@@ -1,14 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: init_ubar.m
+% FILENAME: eady_ubar.m
 
-% Description: Initializes the mean zonal wind field (Ubar) for the Rossby 
+% DESCRIPTION: Initializes the mean zonal wind field (Ubar) for the Eady
 % wave model in the quasi-geostrophic framework, based on a linear vertical 
 % profile derived from the potential temperature gradient.
 
-% Input:
+% INPUT:
 % - jj: Number of latitude grid points
 % - kk: Number of height grid points
 % - gg: Gravitational acceleration (m s^-2)
@@ -19,7 +19,7 @@
 % - ZZ: Vertical grid coordinates (m)
 % - Ubar0: Base zonal wind speed (m/s)
 
-% Output:
+% OUTPUT:
 % - Ubar: Mean zonal wind field (jj+1 x kk+1 array, m/s)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -27,8 +27,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function Ubar = eady_ubar(jj, kk, gg, f0, Theta0, dTbar, Ly, ZZ, Ubar0)
-Ubar = zeros(jj + 1, kk + 1);
-for k = 1:kk + 1
-    Ubar(:, k) = (gg / f0 / Theta0) * (dTbar / Ly) * ZZ(k) + Ubar0;
-end
+
+    Ubar = zeros(jj + 1, kk + 1);
+    
+    % Calculate the mean zonal wind field based on the vertical profile
+    for k = 1:kk + 1
+        Ubar(:, k) = (gg / f0 / Theta0) * (dTbar / Ly) * ZZ(k) + Ubar0;
+    end
+
 end

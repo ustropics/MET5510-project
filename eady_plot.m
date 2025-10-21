@@ -1,17 +1,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: eady_plot.m
+% FILENAME: eady_plot.m
 
-% Description: Script for plotting results from the Eady wave model, including
-% eigenvector amplitude, geopotential height, Hovmoller diagram, zonal wind,
-% meridional wind, temperature, potential vorticity, additional cross-sections,
-% Hovmoller diagrams, and background state fields. Loads data from 'eady_wave_#.mat',
-% computes necessary fields, and saves plots to 'output/plots/'.
+% DESCRIPTION: Script for plotting results from the Eady wave model, 
+% including eigenvector amplitude, geopotential height, Hovmoller diagram, 
+% zonal wind, meridional wind, temperature, potential vorticity, additional 
+% cross-sections, Hovmoller diagrams, and background state fields. Loads 
+% data from 'eady_wave_#.mat', computes necessary fields, and saves plots 
+% to 'output/plots/'.
 
-% Functions used:
-% - eady_config: Loads model parameters
+% SCRIPTS:
+% - eady_config.m: Loads model parameters
+
+% PLOTS:
 % - plot_evec_amp: Plots eigenvector amplitude contour
 % - plot_geopotential_height: Plots geopotential height contour
 % - plot_hovmoller: Plots Hovmoller diagram
@@ -26,6 +29,8 @@
 % - plot_dpvdym_int: Plots d(PVbar)/dy interior contour
 % - plot_dpvdym_boundaries: Plots d(PVbar)/dy at boundaries with beta
 % - plot_background_flow: Plots combined background flow (Ubar, interior PV, boundaries)
+
+% FUNCTIONS:
 % - XV2field: Computes 3D field from streamfunction vector
 % - XV2streamxtime: Computes Hovmoller data for streamfunction
 % - XV2ugxtime: Computes Hovmoller data for zonal wind

@@ -1,17 +1,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: rossby_plot.m
+% FILENAME: rossby_plot.m
 
-% Description: Script for plotting results from the Rossby wave model, including
-% eigenvector amplitude, geopotential height, Hovmoller diagram, zonal wind,
-% meridional wind, temperature, potential vorticity, additional cross-sections,
-% Hovmoller diagrams, and background state fields. Loads data from 'rossby_wave_#.mat',
-% computes necessary fields, and saves plots to 'output/figures/'.
+% DESCRIPTION: Script for plotting results from the Rossby wave model, 
+% including eigenvector amplitude, geopotential height, Hovmoller diagram, 
+% zonal wind, meridional wind, temperature, potential vorticity, additional 
+% cross-sections, Hovmoller diagrams, and background state fields. Loads 
+% data from 'rossby_wave_#.mat', computes necessary fields, and saves 
+% plots to 'output/figures/'.
 
-% Functions used:
-% - rossby_config: Loads model parameters
+% SCRIPTS:
+% - rossby_config.m: Loads model parameters
+
+% PLOTS:
 % - plot_evec_amp: Plots eigenvector amplitude contour
 % - plot_gph: Plots geopotential height contour
 % - plot_hovmoller: Plots Hovmoller diagram
@@ -26,6 +29,8 @@
 % - plot_dpvdym_int: Plots d(PVbar)/dy interior contour
 % - plot_dpvdym_boundaries: Plots d(PVbar)/dy at boundaries with beta
 % - plot_background_flow: Plots combined background flow (Ubar, interior PV, boundaries)
+
+% FUNCTIONS:
 % - XV2field: Computes 3D field from streamfunction vector
 % - XV2streamxtime: Computes Hovmoller data for streamfunction
 % - XV2ugxtime: Computes Hovmoller data for zonal wind
@@ -117,46 +122,48 @@ end
 %% Save results
 if ~exist(params.rossby_plot_dir, 'dir')
     mkdir(params.rossby_plot_dir);
-end
+end 
 
-%% Plot amplitude
+
+%% List of plots to be generated
+% Plot amplitude
 plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, model);
 
-%% Plot geopotential height
+% Plot geopotential height
 plot_gph(xx, zz, gpt_h, jj, model, m0);
 
-%% Plot Hovmoller diagram
+%Plot Hovmoller diagram
 plot_hovmoller(xx, time, gpt_h_hovmoler, model, m0);
 
-%% Plot zonal wind
+% Plot zonal wind
 plot_zonal_wind(xx, yy, ug, model, m0);
 
-%% Plot meridional wind
+% Plot meridional wind
 plot_meridional_wind(xx, yy, vg, model, m0);
 
-%% Plot temperature at mid-level
+% Plot temperature at mid-level
 plot_temperature(xx, yy, temp, kk, model, m0);
 
-%% Plot geopotential height at top boundary
+% Plot geopotential height at top boundary
 plot_gph_top(xx, yy, gpt_h, model, m0);
 
-%% Plot potential vorticity at surface
+%%Plot potential vorticity at surface
 plot_pvfield(xx, yy, pvfield, model, m0);
 
-%% Plot meridional wind vertical cross-section
+% Plot meridional wind vertical cross-section
 plot_vg_cross_section(xx, zz, vg, jj, model, m0);
 
-%% Plot Hovmoller diagram for zonal wind
+% Plot Hovmoller diagram for zonal wind
 plot_ug_hovmoller(xx, time, ug_hovmoler, hlat, hlevel, model, m0);
 
-%% Plot Ubar contour
+% Plot Ubar contour
 plot_ubar_contour(yy, zz, Ubar, model, m0);
 
-%% Plot d(PVbar)/dy interior
+% Plot d(PVbar)/dy interior
 plot_dpvdym_int(yy, zz, BPVy, model, m0);
 
-%% Plot d(PVbar)/dy at boundaries with beta
+% Plot d(PVbar)/dy at boundaries with beta
 plot_dpvdym_boundaries(yy, BPVy, beta, kk, model, m0);
 
-%% Plot combined background flow
+% Plot combined background flow
 plot_rossby_bg_flow(yy, zz, Ubar, params.qy_surf, params.qy_trop, model, m0, jj, kk);

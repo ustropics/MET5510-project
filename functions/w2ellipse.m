@@ -2,24 +2,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: w2ellipse.m
+% FILENAME: w2ellipse.m
 
-% Description: Transforms the vertical velocity field into an elliptical 
+% DESCRIPTION: Transforms the vertical velocity field into an elliptical 
 % representation for visualizing wave structures or perturbation shapes in the 
 % quasi-geostrophic model. This function applies an elliptical operator to the 
 % vertical velocity, incorporating zonal, meridional, and vertical derivatives, 
 % which is useful for analyzing wave dynamics and stability in the atmosphere.
 
-% Input:
+% INPUT:
 % - w: 1D array representing the vertical velocity field (m/s), with length LW
 
-% Output:
+% OUTPUT:
 % - EW: 1D array representing the elliptical transformation of the vertical 
 %       velocity (s^-2), with length LW
 
-% Math/functions: EW = -(k² * w) + (∂²w/∂y²) + (f₀²/N²) * (∂²w/∂z²)
+% MATH/FUNCTIONS: EW = -(k² * w) + (∂²w/∂y²) + (f₀²/N²) * (∂²w/∂z²)
 
-% - Variables:
+% - VARIABLES:
 %   - k = 2π * m0 / Lx is the zonal wavenumber
 %   - ∂²w/∂y² is the second meridional derivative, computed via finite differences
 %   - ∂²w/∂z² is the second vertical derivative, scaled by (f₀/dz)² / N²
@@ -38,9 +38,10 @@ function EW = w2ellipse (w)
     global jj kk LW NN2 m0 f0 dy dz Lx 
     EW=zeros(LW,1);
     
-    % boundary condition at j = 1
+    %% boundary condition at j = 1
     j = 1;
     for k = 2:kk
+
         l = jk2lw(j,k);
         ln3=jk2lw(3,k);
         ln2=jk2lw(2,k);
@@ -60,11 +61,13 @@ function EW = w2ellipse (w)
         EW(l) = -(2*pi*m0/Lx)^2*w(l) ...
                 +(w(ln3)-2*w(ln2)+w(l))/dy^2 ...
         +(f0/dz)^2*( wup-2*w(l)+wdn )/NN2;
+
     end
     
-    % boundary condition at j = jj + 1
+    %% boundary condition at j = jj + 1
     j = jj + 1;
     for k = 2:kk
+
         l = jk2lw(j,k);
         ls3=jk2lw(jj-1,k);
         ls2=jk2lw(jj,k);
@@ -82,10 +85,12 @@ function EW = w2ellipse (w)
         EW(l) = -(2*pi*m0/Lx)^2*w(l) ...
                 +(w(l)-2*w(ls2)+w(ls3))/dy^2 ...
         +(f0/dz)^2*( wup-2*w(l)+wdn )/NN2;
+
     end
     
-    % interior points
+    %% interior points
     for j = 2:jj
+
         for k = 2:kk
         l = jk2lw(j,k);
         ln1=jk2lw(j+1,k);
@@ -106,4 +111,5 @@ function EW = w2ellipse (w)
         +(f0/dz)^2*( wup-2*w(l)+wdn )/NN2;   
         end
     end
+    
 end

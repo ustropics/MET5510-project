@@ -2,17 +2,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: rossby_zonal_wind.m
+% FILENAME: plot_zonal_wind.m
 
-% Description: Plots the zonal wind contour at the surface (k=1) across longitude
+% DESCRIPTION: Plots the zonal wind contour at the surface (k=1) across longitude
 % and latitude, and saves it as an image.
 
-% Input:
+% INPUT:
 % - xx: Longitude coordinates (degrees)
 % - yy: Latitude coordinates (degrees)
 % - ug: Zonal wind field (ii+1 x jj+1 x kk+1 array, m/s)
 
-% Output:
+% OUTPUT:
 % - Saves plot to 'output/plots/zonal_wind.png'
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -20,6 +20,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function plot_zonal_wind(xx, yy, ug, model, m0)
+
+    %% Create figure
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
     contourf(xx, yy, squeeze(ug(:,:,1))', 'LineStyle', 'none');
     colorbar;
@@ -31,7 +33,7 @@ function plot_zonal_wind(xx, yy, ug, model, m0)
     % set global font size
     set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
     
-    % Save plot
+    %% Save plot
     saveas(gcf, ['output', filesep, 'figures', filesep, 'zonal_wind_', model, '_m0_', num2str(m0), '.png']);
     close(gcf);
 end

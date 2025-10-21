@@ -1,15 +1,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: hwme_main.m
+% FILENAME: hwme_main.m
 
-% Description: Main script for the Hoskins-West modified Eady-type model in the
+% DESCRIPTION: Main script for the Hoskins-West modified Eady-type model in the
 % quasi-geostrophic framework. Initializes parameters, computes mean zonal wind
 % (Ubar) and PV gradient (BPVy), constructs matrices for PV inversion and
 % advection, solves the eigenvalue problem for wave stability, and saves results.
 
-% This version uses the Hoskins–West Eady-type mean flow from
+% This version uses the Hoskins–West Modified Eady-type mean flow from
 % Sample_basic_flows.pdf (p. 9):
 %
 %   U(y,z) = (g / (f0 * Theta0)) * (H * ΔT / Ly) *
@@ -18,14 +18,25 @@
 %
 % where μ = 0 → Eady model; μ = 0.5 or 1 → Hoskins–West Eady-type.
 
+% SCRIPTS:
+% - hwme_config.m: Loads model parameters
+
+% FUNCTIONS:
+% - hwme_ubar: Initializes mean zonal wind field
+% - bpvy: Initializes potential vorticity gradient field
+% - matrices: Constructs matrices B, C, D for PV inversion and advection
+% - eigen: Solves eigenvalue problem and sorts results
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global jj kk ll BPVy NN2 f0 dy m0 dz Lx Ubar beta cplx model
+global jj kk ll HH ZZ YY BPVy NN2 f0 gg dy m0 dz Lx Theta0 dTbar N mu ... 
+    Ubar beta cplx model Lr Ly hwme_data
 tic
 
 addpath('functions'); % add functions folder
-addpath('config');
+addpath('config'); % add config folder
+addpath('plots') % add plots folder
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%% INITIALIZATION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -54,23 +65,21 @@ ZZ = params.ZZ; % vertical grid coordinates (m)
 YY = params.YY; % meridional grid coordinates (m)
 dTbar = params.dTbar; % potential temperature gradient (K)
 mu = params.mu; % curvature parameter
-% y_s = params.y_s; % reference latitude (m)
 N = params.N; % Brunt-Vaisala frequency (s^-1)
 Lr = params.Lr; % Rossby radius of deformation (m)
 Ly = params.Ly; % meridional domain length (50° latitude range, m)
-prefac = params.prefac; % prefactor for Ubar calculation
 hwme_data = fullfile(params.hwme_data_dir, params.hwme_data_filename);
 
 %% Initialize Ubar and BPVy
 Ubar = hwme_ubar(jj, kk, gg, f0, Theta0, dTbar, HH, Ly, ZZ, YY, mu, Lr);
-BPVy = hwme_bpvy(jj, kk, beta, Ubar, dy, f0, NN2, dz);
+BPVy = bpvy(model, jj, kk, beta, Ubar, dy, f0, NN2, dz);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%% MATRIX CONSTRUCTION & EIGENVALUES %%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Construct matrices B, C, D
-[B, C, D] = hwme_matrices(ll, @stream2pv, @stream2xPVadv, @stream2yPVadv);
+[B, C, D] = matrices(ll, @stream2pv, @stream2xPVadv, @stream2yPVadv);
 
 %% Solve eigenvalue problem
 A = B^(-1) * (C + D);
@@ -101,7 +110,7 @@ save(hwme_data, 'Ubar', 'BPVy', 'eigVec', 'eigVal', 'eigVec2', 'eigVal2', ...
     'Lx', 'beta', 'cplx', 'gg', 'Theta0', 'HH', 'B', 'C', 'D', 'model');
 
 %% Plot Ubar
-contourf(YY/1e6, ZZ/1e3, Ubar');
-xlabel('y (×10^6 m)'); ylabel('z (km)');
-title('Hoskins–West Eady-type Ū(y,z)');
-colorbar
+% contourf(YY/1e6, ZZ/1e3, Ubar');
+% xlabel('y (×10^6 m)'); ylabel('z (km)');
+% title('Hoskins–West Eady-type Ū(y,z)');
+% colorbar

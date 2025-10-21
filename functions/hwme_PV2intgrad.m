@@ -2,17 +2,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: PV2intgrad.m
+% FILENAME: PV2intgrad.m
 
-% Description: Computes the interior potential vorticity (PV) gradient for the 
+% DESCRIPTION: Computes the interior potential vorticity (PV) gradient for the 
 % Hoskins-West Model in the quasi-geostrophic framework. This function calculates 
 % the meridional gradient of PV at interior grid points, incorporating the 
 % planetary beta effect, meridional variations of the mean flow, and vertical 
 % shear effects. The resulting gradients are essential for analyzing wave 
 % propagation, stability, and dynamics within the model atmosphere.
 
-% Input:
-% - params: Structure containing model parameters (from hoskins_config.m)
+% INPUT:
+% - params: Structure containing model parameters (from hwme_config.m)
 %   - jj: Number of latitude grid points (integer)
 %   - kk: Number of height grid points (integer)
 %   - dy: Grid spacing in the meridional direction (m)
@@ -27,19 +27,19 @@
 %   - NN2: Brunt-Vaisala frequency squared (s^-2)
 %   - beta: Planetary vorticity gradient (s^-1 m^-1)
 
-% Output:
+% OUTPUT:
 % - dPVdy_interior: 2D array of interior PV gradients (s^-1) with dimensions 
 %                   (jj+1, kk+1), representing the meridional PV gradient at 
 %                   interior grid points
 
-% Math/functions: 
+% MATH/FUNCTIONS: 
 % - dPVdy_interior = β + ∂²U/∂y² - (f₀²/N²) * ∂²U/∂z², where
 %   - β is the planetary vorticity gradient
 %   - ∂²U/∂y² = -Λ * H * m_y² * sinh(γ * z / H) / sinh(γ) * cos(m_y * (y - y₀))
 %   - ∂²U/∂z² = Λ * H * (1/H - μ * 2 * z / H² + γ * cosh(γ * z / H) / sinh(γ) * cos(m_y * (y - y₀)))
 %   - For small γ, sinh(γ * z / H) / sinh(γ) ≈ z/H and cosh(γ * z / H) / sinh(γ) ≈ 1
 
-% - Variables:
+% - VARIABLES:
 %   - Λ: Mean zonal wind amplitude
 %   - H: Scale height
 %   - m_y: Meridional wavenumber
@@ -56,7 +56,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function dPVdy_interior = compute_dPVdy_interior(params)
+function dPVdy_interior = hwme_PV2intgrad(params)
 
     %% Extract parameters
     jj = params.jj;

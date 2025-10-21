@@ -1,20 +1,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: solve_eigen.m
+% FILENAME: eigen.m
 
-% Description: Solves the eigenvalue problem for the quasi-geostrophic model,
+% DESCRIPTION: Solves the eigenvalue problem for the quasi-geostrophic model,
 % computing eigenvectors and eigenvalues of the matrix A = B^(-1) * (C + D),
 % and sorts them by descending real part and ascending imaginary part.
 
-% Input:
+% INPUT:
 % - B: PV inversion matrix (ll x ll)
 % - C: Zonal PV advection matrix (ll x ll)
 % - D: Meridional PV advection matrix (ll x ll)
 % - cplx: Imaginary unit
 
-% Output:
+% OUTPUT:
 % - eigVec: Eigenvectors (unsorted)
 % - eigVal: Eigenvalues (unsorted)
 % - eigVec2: Eigenvectors sorted by descending real part
@@ -27,18 +27,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function [eigVec, eigVal, eigVec2, eigVal2, eigVec3, eigVal3] = eigen(B, C, D, cplx)
-%% Solve eigenvalue problem
-A = B^(-1) * (C + D);
-[eigVec, eigValm] = eig(A); % eigVec = eigenvectors, eigValm = eigenvalue matrix
-eigVal = diag(eigValm);
 
-% Sort by descending real part
-[~, sortdx] = sort(real(eigVal), 'descend');
-eigVal2 = eigVal(sortdx);
-eigVec2 = eigVec(:, sortdx);
+    %% Solve eigenvalue problem
+    A = B^(-1) * (C + D);
+    [eigVec, eigValm] = eig(A); % eigVec = eigenvectors, eigValm = eigenvalue matrix
+    eigVal = diag(eigValm);
+    
+    %% Sort by descending real part
+    [~, sortdx] = sort(real(eigVal), 'descend');
+    eigVal2 = eigVal(sortdx);
+    eigVec2 = eigVec(:, sortdx);
+    
+    %% Sort by ascending real part of imaginary eigenvalue
+    [~, sortdx] = sort(real(cplx * eigVal), 'ascend');
+    eigVal3 = eigVal(sortdx);
+    eigVec3 = eigVec(:, sortdx);
 
-% Sort by ascending real part of imaginary eigenvalue
-[~, sortdx] = sort(real(cplx * eigVal), 'ascend');
-eigVal3 = eigVal(sortdx);
-eigVec3 = eigVec(:, sortdx);
 end

@@ -2,24 +2,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: XV2XVz.m
+% FILENAME: XV2XVz.m
 
-% Description: Computes the z-derivative (vertical) of the 1D eigenvector (XV) 
+% DESCRIPTION: Computes the z-derivative (vertical) of the 1D eigenvector (XV) 
 % to derive the vertical component of the streamfunction gradient in the 
 % quasi-geostrophic model. This function is used to calculate temperature or 
 % vertical velocity fields, critical for analyzing thermal structures and vertical 
 % motion in wave dynamics and perturbation evolution within the QG framework.
 
-% Input:
+% INPUT:
 % - XV: 1D array representing the streamfunction eigenvector (m²/s), with length ll
 
-% Output:
+% OUTPUT:
 % - XVz: 1D array representing the vertical derivative of the streamfunction 
 %        (m/s), with length ll
 
-% Math/functions: XVz = ∂XV/∂z
+% MATH/FUNCTIONS: XVz = ∂XV/∂z
 
-% - Variables:
+% - VARIABLES:
 %   - Interior points: ∂XV/∂z = (XV(j,k+1) - XV(j,k-1)) / (2 * dz)
 %   - Bottom boundary (k=1): ∂XV/∂z = (XV(j,2) - XV(j,1)) / dz
 %   - For top boundary (k=kk+1): ∂XV/∂z = (XV(j,kk+1) - XV(j,kk)) / dz

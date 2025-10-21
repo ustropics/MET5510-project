@@ -2,17 +2,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: rossby_hovmoller.m
+% FILENAME: plot_hovmoller.m
 
-% Description: Plots the Hovmoller diagram and saves it as an image.
+% DESCRIPTION: Plots the Hovmoller diagram and saves it as an image.
 
-% Input:
+% INPUT:
 % - xx: Longitude coordinates (degrees)
 % - time: Time coordinates (days)
 % - gpt_h_hovmoler: Hovmoller data
 
-% Output:
-% - Saves plot to 'output/plots/hovmoller.png'
+% OUTPUT:
+% - Saves plot to 'output/figures/hovmoller.png'
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

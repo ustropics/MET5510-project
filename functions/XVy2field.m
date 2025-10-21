@@ -2,23 +2,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: XVy2field.m
+% FILENAME: XVy2field.m
 
-% Description: Converts the y-derivative of the eigenvector (XVy) into a 
+% DESCRIPTION: Converts the y-derivative of the eigenvector (XVy) into a 
 % 3D zonal wind field over the grid in the quasi-geostrophic model, 
 % accounting for geostrophic balance.
 
-% Input:
+% INPUT:
 % - XV: Eigenvector representing the streamfunction
 % - ii: Number of grid points in the x-direction
 % - dx: Grid spacing in the x-direction
 
-% Output:
+% OUTPUT:
 % - field: 3D array representing the zonal wind field
 
-% Math/functions: u' = -(g/f₀) ∂ψ/∂y
+% MATH/FUNCTIONS: u' = -(g/f₀) ∂ψ/∂y
 
-% - Variables:
+% - VARIABLES:
 %   - ψ is streamfunction
 %   - g is gravity
 %   - f₀ is Coriolis parameter
@@ -60,12 +60,14 @@ function field= XVy2field(XV,ii,dx)
     
     %% Boundary conditions for j=1 and j=jj+1
     for k = 1:kk+1
+
         lj2=jk2l(2,k); % index at j=2
         ljj=jk2l(jj,k); % index at j=jj
         for i = 1:ii
            xlon=(i-1)*dx;
-           field(i,1,k)=-real((XV(lj2)-0.0)*exp(cplx*2*pi*m0*xlon/Lx))/dy;
-           field(i,jj+1,k)=-real((0-XV(ljj))*exp(cplx*2*pi*m0*xlon/Lx))/dy;
+           field(i,1,k)=-real((XV(lj2)-0.0)*exp(cplx*2*pi*m0*xlon/Lx))/dy; % southern boundary
+           field(i,jj+1,k)=-real((0-XV(ljj))*exp(cplx*2*pi*m0*xlon/Lx))/dy; % northern boundary
         end
     end
-    end
+
+end

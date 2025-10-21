@@ -1,26 +1,32 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: eady_main.m
+% FILENAME: eady_main.m
 
-% Description: Main script for the Eady wave model in the quasi-geostrophic
+% DESCRIPTION: Main script for the Eady wave model in the quasi-geostrophic
 % framework. Initializes parameters, computes Ubar and BPVy, constructs 
 % matrices for PV inversion and advection, solves the eigenvalue problem for 
 % wave stability, and saves results.
 
-% Functions used:
-% - eady_config: Loads model parameters
+% SCRIPTS:
+% - eady_config.m: Loads model parameters
+
+% FUNCTIONS:
 % - eady_ubar: Initializes mean zonal wind field
-% - eady_bpvy: Initializes potential vorticity gradient field
-% - construct_matrices: Constructs matrices B, C, D for PV inversion and advection
-% - solve_eigen: Solves eigenvalue problem and sorts results
+% - bpvy: Initializes potential vorticity gradient field
+% - matrices: Constructs matrices B, C, D for PV inversion and advection
+% - eigen: Solves eigenvalue problem and sorts results
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global jj kk ll BPVy NN2 f0 dy m0 dz Lx Ubar beta cplx model
+global jj kk ll HH ZZ YY BPVy NN2 f0 gg dy m0 dz Lx Theta0 dTbar ... 
+    Ubar Ubar0 beta cplx model eady_data
+
 addpath('functions'); % add functions folder
+addpath('config'); % add config folder
+addpath('plots') % add plots folder
 
 tic
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -78,9 +84,3 @@ end
 save(eady_data, 'Ubar', 'BPVy', 'eigVec', 'eigVal', 'eigVec2', 'eigVal2', ...
     'eigVec3', 'eigVal3', 'jj', 'kk', 'll', 'NN2', 'f0', 'dy', 'dz', 'm0', ...
     'Lx', 'beta', 'cplx', 'gg', 'Theta0', 'HH', 'B', 'C', 'D', 'model');
-
-%% Plot Ubar
-contourf(YY/1e6, ZZ/1e3, Ubar');
-xlabel('y (×10^6 m)'); ylabel('z (km)');
-title('Eady Model Ū(y,z)');
-colorbar

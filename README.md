@@ -2,51 +2,45 @@
 This repository contains the files, code, and plots for Grace and Matthew's MET5510 project under the guidance of Dr. Cai and Dr. Sun.
 
 ## Project Overview
-The program simulates various atmospheric wave patterns using different modeling techniques for mid-latitude systems. Currently, simulations can be run for **Rossby waves**, the **Modified Hoskins-West** model, and the **Hoskins-West Eady-type** model. The program computes potential vorticity (PV) gradients, mean zonal wind fields, and related dynamics for the Eady-type and Hoskins-West models. The scripts are designed for wave propagation, stability analysis, and quasi-geostrophic dynamics studies.
+The program simulates various atmospheric wave patterns using different modeling techniques for mid-latitude systems. Currently, simulations can be run for the **Hoskins-West Modified Eady-tpe** model, the **Rossby Wave** mode, and the **Eady Wave** model. The program computes potential vorticity (PV) gradients, mean zonal wind fields, and related dynamics for the Eady-type and Hoskins-West models. The scripts are designed for wave propagation, stability analysis, and quasi-geostrophic dynamics studies.
 
 ### Available Models
-- **ROS** - Rossby Wave Model
-- **HWM** - Hoskins-West Modified Model
-- **HWE** - Hoskins-West Eady-type Model
+- **HWME** - Hoskins-West Eady-type Model
+- **Rossby** - Rossby Wave Model
+- **Eady** - Eady Wave Model
+
 
 ## Instructions
 ### Calculate Model Data
-1. `row_main.m` to process the Rossby Wave Model calculations
-2. `hwm_main.m` to process the Hoskins-West Modified calculations
-3. `hwe_main.m` to process the Hoskins-West Eady-type calculations
+1. `hwme_main.m` to process the Hoskins-West Modified Eady-type calculations
+2. `rossby_main.m` to process the Rossby Wave calculations
+3. `eady_main.m` to process the Eady calculations
 4. Generated data files are saved in `output/data/*.mat`
 
 ### Create Initial Plots
-1. `row_plot.m` to generate initial plots using the generated Rossby Wave data
-2. `hwm_plot.m` to generate initial plots using the generated Hoskins-West Modified data
-3. `hwe_plot.m` to generate initial plots using the generated Hoskins-West Eady-type data
-4. Generated plots are saved in `output/plots/*.png`
+1. `hwme_plot.m` to generate initial plots using the Hoskins-West Modified data
+2. `rossby_plot.m` to generate initial plots using the Rossby Wave data
+3. `eady_plot.m` to generate initial plots using the Eady data
+4. Generated plots are saved in `output/figures/*.png`
 
 ### Config Options
-1. `row_config.m` contains all config, variable, and constants needed for Rossby Wave calculations
-2. `hwm_config.m` contains all config, variable, and constants needed for Hoskins-West Modified calculations
-3. `hwe_config.m` contains all config, variable, and constants needed for Hoskins-West Eady-type data
+1. `hwme_config.m` contains all config, variable, and constants needed for Hoskins-West Modified Eady-type calculations
+2. `rossby_config.m` contains all config, variable, and constants needed for Rossby Wave calculations
+3. `eady_config.m` contains all the config, variable, and constants needed for Eady calculations
 4. Config files are stored in `config/*.m`
 
 ## File Structure
 ### Functions are stored in /functions
 
-#### Hoskins-West Eady-Type Model Scripts
-- `hwe_BPVyCalc.m`: Computes the meridional PV gradient at interior grid points for the Eady-type model, using a $\cos^4$-modulated mean zonal wind $\bar{u}(y, z)$.
-- `hwe_PV2bndgrad.m`: Calculates PV gradients at the surface ($z=0$) and tropopause ($z=HH$) for the Eady-type model, incorporating vertical shear with $\cos^4$ meridional variation. 
-- `hwe_PV2intgrad.m`: Determines the interior PV gradient for the Eady-type model, including the meridional second derivative of the mean flow.
-- `hwe_ubar.m`: Generates the mean zonal wind field $\bar{u}(y, z)$ for the Eady-type model, using linear shear with $\cos^4$ meridional modulation.
-
-#### Hoskins-West Modified Model Scripts
-- `hwm_BPVyCalc.m`: Computes the meridional PV gradient for the original Hoskins-West model, using sinusoidal modulation and vertical shear terms.
-- `hwm_PV2bndgrad.m`: Calculates PV gradients at boundaries for the Hoskins-West model, incorporating complex shear terms.
-- `hwm_PV2intgrad.m`: Computes the interior PV gradient for the Hoskins-West model, using planetary $\beta$ and vertical shear effects.
-- `hwm_ubar.m`: Generates the mean zonal wind field for the Hoskins-West model with sinh-based modulation.
-
-#### Rossby Wave Model Scripts
-- `row_F123.m`: Generates row vectors $F1$, $F2$, and $F3$ for matrix assembly, supporting the linearized PV equation.
+#### Ubar Calculations and other Model Dependant Scripts
+- `hwme_ubar.m`: Generates the mean zonal wind field $\bar{u}(y, z)$ for the Hoskins-West Modified Eady-type model in the quasi-geostrophic framework.
+- `rossby_ubar.m`: Initializes for the Rossby wave model in the quasi-geostrophic framework, set to a constant value.
+- `eady_ubar.m`: Initializes  for the Eady wave model in the quasi-geostrophic framework, based on a linear vertical profile derived from PV gradient.
+- `hwme_PV2intgrad.m`: Determines the interior PV gradient for the Eady-type model, including the meridional second derivative of the mean flow.
+- `eady_F123.m`: Computes the forcing terms F1, F2, and F3 for vertical motion calculations in the Eady wave model within the quasi-geostrophic framework.
 
 #### Utility Scripts
+- `bpvy.m`: PVY computes the background potential vorticity gradient (dPV/dy)for Rossby, Eady, or HWME models.
 - `jk2l.m`: Converts 2D indices $(j, k)$ to a single linear index for grid operations, facilitating array manipulation.
 - `jk2lw.m`: Transforms 2D indices $(j, k)$ to a linear index with weighting, used for specific grid indexing tasks.
 - `l2jk.m`: Converts a linear index back to 2D indices $(j, k)$, supporting grid coordinate recovery.

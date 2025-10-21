@@ -2,21 +2,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: lw2jk.m
+% FILENAME: lw2jk.m
 
-% Description: Converts a single linear index (l) to 2D grid indices (j, k) 
+% DESCRIPTION: Converts a single linear index (l) to 2D grid indices (j, k) 
 % representing latitude and height in the quasi-geostrophic model.
 
-% Input:
+% INPUT:
 % - l: Linear index
 
-% Output:
+% OUTPUT:
 % - j: Latitude index
 % - k: Height index
 
-% Math/functions: [j, k] = [l - (k-2)*(jj+1), floor((l-1)/(jj+1))+2]
+% MATH/FUNCTIONS: [j, k] = [l - (k-2)*(jj+1), floor((l-1)/(jj+1))+2]
 
-% - Variables:
+% - VARIABLES:
 %   - j is the number of latitude points
 %   - l is the linear index
 %   - jj is the number of latitude points
@@ -26,8 +26,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function [j,k] = lw2jk(l)
-    global jj
+    
+global jj
     
     k = floor((l-1)/(jj+1))+2;
     j = l - (k-2)*(jj+1);
-    end
+    
+end

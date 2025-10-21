@@ -2,21 +2,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Filename: stream2pv.m
+% FILENAME: stream2pv.m
 
-% Description: Converts streamfunction (XV) to potential vorticity (QV) 
+% DESCRIPTION: Converts streamfunction (XV) to potential vorticity (QV) 
 % for the quasi-geostrophic model, applying boundary conditions and 
 % interior PV calculation.
 
-% Input:
+% INPUT:
 % - XV: Eigenvector representing the streamfunction
 
-% Output:
+% OUTPUT:
 % - QV: 1D array representing the potential vorticity field
 
-% Math/functions: Q = ∇²ψ + (f₀²/N²) ∂²ψ/∂z², where 
+% MATH/FUNCTIONS: Q = ∇²ψ + (f₀²/N²) ∂²ψ/∂z², where 
 
-% - Variables:
+% - VARIABLES:
 %   - ψ is streamfunction
 %   - f₀ is Coriolis parameter
 %   - N² is Brunt-Vaisala frequency
@@ -27,6 +27,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function QV = stream2pv(XV)
+
     global jj kk ll NN2 m0 f0 dy dz Lx
     
     QV = zeros(ll,1);
@@ -80,4 +81,5 @@ function QV = stream2pv(XV)
                 + (f0/dz)^2 * (XV(lup) - 2*XV(l) + XV(ldn)) / NN2;
         end
     end
-    end
+
+end
