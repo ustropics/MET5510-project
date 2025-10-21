@@ -60,8 +60,20 @@ The program simulates various atmospheric wave patterns using different modeling
 - `XVy2field.m`: Converts the y-derivative of an eigenvector to a 3D field, aiding meridional perturbation visualization.
 - `XVz2field.m`: Converts the z-derivative of an eigenvector to a 3D field, supporting vertical perturbation analysis.
 
-### Plots are stored in /plots
-- `output/plots/*.png` with model prefixes
+### Figures are stored in /figures
+- `plot_evec_amp.m`: Plots eigenvector amplitude contour
+- `plot_gph.m`: Plots geopotential height contour
+- `plot_hovmoller.m`: Plots Hovmoller diagram
+- `plot_zonal_wind.m`: Plots zonal wind contour
+- `plot_meridional_wind.m`: Plots meridional wind contour
+- `plot_temperature.m`: Plots temperature contour
+- `plot_gph_top.m`: Plots geopotential height at top boundary
+- `plot_pvfield.m`: Plots potential vorticity contour
+- `plot_vg_cross_section.m`: Plots meridional wind vertical cross-section
+- `plot_ug_hovmoller.m`: Plots Hovmoller diagram for zonal wind
+- `plot_ubar_contour.m`: Plots Ubar contour
+- `plot_dpvdym_int.m`: Plots d(PVbar)/dy interior contour
+- `plot_dpvdym_boundaries.m`: Plots d(PVbar)/dy at boundaries with beta
 
 #### Example Plots
 **Hoskins-West Modified Background Flow**
