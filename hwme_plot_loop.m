@@ -78,110 +78,125 @@ zz = params.zz;
 hlat = params.hlat;
 hlevel = params.hlevel;
 time = params.time;
-n_mode = params.n_mode;
-
-% additional code to calculate l_max and n_total
-n_total=30;
-l_max=zeros(n_total,1);
-
-for n = 1:n_total 
-    if (real(eigVal2(n)) > 1.0e-10)
-  
-        XV(:)=eigVec2(:,n);
-        
-        xv2d = reshape(XV,jj-1,kk+1);
-        amp=abs(xv2d);
-        l_max(n)=sum(islocalmax(amp(:,1)));
-        if(amp(1,1) > amp(2,1))
-            l_max(n)=l_max(n)+1;
-        end
-        if(amp(end,1) > amp(end-1,1))
-            l_max(n)=l_max(n)+1;
-        end 
-    end
-end
 
 %% Load data from hwme_wave_#.mat
 hwme_data = fullfile(params.hwme_data_dir, params.hwme_data_filename);
 load(hwme_data)
 
-%% Select mode and compute properties
-XV = zeros(ll, 1);
-XV(:) = eigVec2(:, n_mode);
-omega = imag(eigVal2(n_mode));
-phase_speed = -omega / (2 * pi * m0 / Lx);
-growth_rate = real(eigVal2(n_mode));
-eFolding = (1 / growth_rate) / 86400; % in days
+%% Define maximum number of modes
+n_max = 3; % Set the number of modes to loop through
+l_max = zeros(n_max, 1); % Initialize l_max array
 
-%% Normalize XV
-valuemax = max(XV2field(XV, ii, dx) * f0 / gg, [], 'all');
-XV = (10 / valuemax) * XV;
-
-%% Compute fields
-QV = B * XV;
-XVy = XV2XVy(XV);
-XVx = XV2XVx(XV);
-XVz = XV2XVz(XV);
-
-gpt_h = XV2field(XV, ii, dx) * f0 / gg;
-temp = (f0 * HH / 287) * XV2field(XVz, ii, dx);
-ug = -XV2field(XVy, ii, dx);
-vg = XV2field(XVx, ii, dx);
-pvfield = XV2field(QV, ii, dx);
-
-%% Compute Hovmoller diagrams
-gpt_h_hovmoler = XV2streamxtime(XV, ii, dx, omega, hlat, hlevel) * f0 / gg;
-ug_hovmoler = XV2ugxtime(XVy, ii, dx, omega, hlat, hlevel);
-
-if ~exist(params.hwme_plot_dir, 'dir')
-    mkdir(params.hwme_plot_dir);
+% Check if n_max is valid
+if n_max > size(eigVec2, 2)
+    error('n_max (%d) exceeds number of available modes (%d)', n_max, size(eigVec2, 2));
 end
 
-%% Plot eigenvector amplitude
-eVec_amp = zeros(jj + 1, kk + 1);
-for l = 1 : ll
-    [j, k] = l2jk(l);
-    eVec_amp(j, k) = XV(l) .* conj(XV(l));
+%% Loop over modes
+for n_mode = 1:n_max
+    %% Select mode and compute properties
+    XV = zeros(ll, 1);
+    XV(:) = eigVec2(:, n_mode);
+    omega = imag(eigVal2(n_mode));
+    phase_speed = -omega / (2 * pi * m0 / Lx);
+    growth_rate = real(eigVal2(n_mode));
+    if growth_rate ~= 0
+        eFolding = (1 / growth_rate) / 86400; % in days
+    else
+        eFolding = Inf; % Handle zero growth rate
+    end
+
+    %% Compute l_max for this mode
+    if (real(eigVal2(n_mode)) > 1.0e-10)
+        xv2d = reshape(XV, jj-1, kk+1);
+        amp = abs(xv2d);
+        l_max(n_mode) = sum(islocalmax(amp(:,1)));
+        if (amp(1,1) > amp(2,1))
+            l_max(n_mode) = l_max(n_mode) + 1;
+        end
+        if (amp(end,1) > amp(end-1,1))
+            l_max(n_mode) = l_max(n_mode) + 1;
+        end
+    end
+
+    %% Normalize XV
+    valuemax = max(XV2field(XV, ii, dx) * f0 / gg, [], 'all');
+    if valuemax ~= 0
+        XV = (10 / valuemax) * XV;
+    else
+        warning('valuemax is zero for n_mode = %d, skipping normalization', n_mode);
+    end
+
+    %% Compute fields
+    QV = B * XV;
+    XVy = XV2XVy(XV);
+    XVx = XV2XVx(XV);
+    XVz = XV2XVz(XV);
+
+    gpt_h = XV2field(XV, ii, dx) * f0 / gg;
+    temp = (f0 * HH / 287) * XV2field(XVz, ii, dx);
+    ug = -XV2field(XVy, ii, dx);
+    vg = XV2field(XVx, ii, dx);
+    pvfield = XV2field(QV, ii, dx);
+
+    %% Compute Hovmoller diagrams
+    gpt_h_hovmoler = XV2streamxtime(XV, ii, dx, omega, hlat, hlevel) * f0 / gg;
+    ug_hovmoler = XV2ugxtime(XVy, ii, dx, omega, hlat, hlevel);
+
+    %% Create output directory if it doesn't exist
+    if ~exist(params.hwme_plot_dir, 'dir')
+        mkdir(params.hwme_plot_dir);
+    end
+
+    %% Plot eigenvector amplitude
+    eVec_amp = zeros(jj + 1, kk + 1);
+    for l = 1 : ll
+        [j, k] = l2jk(l);
+        eVec_amp(j, k) = XV(l) .* conj(XV(l));
+    end
+    plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, model, fig_path);
+
+    %% Create list of figures to plot
+    % Plot geopotential height
+    plot_gph(xx, zz, gpt_h, jj, model, m0, n_mode, fig_path);
+
+    % Plot Hovmoller diagram
+    plot_hovmoller(xx, time, gpt_h_hovmoler, model, m0, n_mode, fig_path);
+
+    % Plot zonal wind
+    plot_zonal_wind(xx, yy, ug, model, m0, n_mode, fig_path);
+
+    % Plot meridional wind
+    plot_meridional_wind(xx, yy, vg, model, m0, n_mode, fig_path);
+
+    % Plot temperature at mid-level
+    plot_temperature(xx, yy, temp, kk, model, m0, n_mode, fig_path);
+
+    % Plot geopotential height at top boundary
+    plot_gph_top(xx, yy, gpt_h, model, m0, n_mode, fig_path);
+
+    % Plot potential vorticity at surface
+    plot_pvfield(xx, yy, pvfield, model, m0, n_mode, fig_path);
+
+    % Plot meridional wind vertical cross-section
+    plot_vg_cross_section(xx, zz, vg, jj, model, m0, n_mode, fig_path);
+
+    % Plot Hovmoller diagram for zonal wind
+    plot_ug_hovmoller(xx, time, ug_hovmoler, hlat, hlevel, model, m0, n_mode, fig_path);
+
+    % Plot Ubar contour
+    plot_ubar_contour(yy, zz, Ubar, model, m0, n_mode, fig_path);
+
+    % Plot d(PVbar)/dy interior
+    plot_dpvdym_int(yy, zz, BPVy, model, m0, n_mode, fig_path);
+
+    % Plot d(PVbar)/dy at boundaries with beta
+    plot_dpvdym_boundaries(yy, BPVy, beta, kk, model, m0, n_mode, fig_path);
+
+    % Plot combo plot for hwme
+    plot_hwme_bg_flow(yy, zz, jj, kk, Ubar, BPVy, model, m0, n_mode, fig_path);
 end
-plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, model, fig_path);
 
-
-%% Create list of figures to plot
-% Plot geopotential height
-plot_gph(xx, zz, gpt_h, jj, model, m0, n_mode, fig_path);
-
-% Plot Hovmoller diagram
-plot_hovmoller(xx, time, gpt_h_hovmoler, model, m0, n_mode, fig_path);
-
-% Plot zonal wind
-plot_zonal_wind(xx, yy, ug, model, m0, n_mode, fig_path);
-
-% Plot meridional wind
-plot_meridional_wind(xx, yy, vg, model, m0, n_mode, fig_path);
-
-% Plot temperature at mid-level
-plot_temperature(xx, yy, temp, kk, model, m0, n_mode, fig_path);
-
-% Plot geopotential height at top boundary
-plot_gph_top(xx, yy, gpt_h, model, m0, n_mode, fig_path);
-
-% Plot potential vorticity at surface
-plot_pvfield(xx, yy, pvfield, model, m0, n_mode, fig_path);
-
-% Plot meridional wind vertical cross-section
-plot_vg_cross_section(xx, zz, vg, jj, model, m0, n_mode, fig_path);
-
-% Plot Hovmoller diagram for zonal wind
-plot_ug_hovmoller(xx, time, ug_hovmoler, hlat, hlevel, model, m0, n_mode, fig_path);
-
-% Plot Ubar contour
-plot_ubar_contour(yy, zz, Ubar, model, m0, n_mode, fig_path);
-
-% Plot d(PVbar)/dy interior
-plot_dpvdym_int(yy, zz, BPVy, model, m0, n_mode, fig_path);
-
-% Plot d(PVbar)/dy at boundaries with beta
-plot_dpvdym_boundaries(yy, BPVy, beta, kk, model, m0, n_mode, fig_path);
-
-% Plot combo plot for hwme
-plot_hwme_bg_flow(yy, zz, jj, kk, Ubar, BPVy, model, m0, n_mode, fig_path)
+%% Display l_max for all modes
+disp('l_max for each mode:');
+disp(l_max);
