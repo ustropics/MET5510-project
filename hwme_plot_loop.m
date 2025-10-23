@@ -80,7 +80,26 @@ hlevel = params.hlevel;
 time = params.time;
 n_mode = params.n_mode;
 
+% additional code to calculate l_max and n_total
+n_total=30;
+l_max=zeros(n_total,1);
 
+for n = 1:n_total 
+    if (real(eigVal2(n)) > 1.0e-10)
+  
+        XV(:)=eigVec2(:,n);
+        
+        xv2d = reshape(XV,jj-1,kk+1);
+        amp=abs(xv2d);
+        l_max(n)=sum(islocalmax(amp(:,1)));
+        if(amp(1,1) > amp(2,1))
+            l_max(n)=l_max(n)+1;
+        end
+        if(amp(end,1) > amp(end-1,1))
+            l_max(n)=l_max(n)+1;
+        end 
+    end
+end
 
 %% Load data from hwme_wave_#.mat
 hwme_data = fullfile(params.hwme_data_dir, params.hwme_data_filename);

@@ -25,7 +25,7 @@ function plot_ug_hovmoller(xx, time, ug_hovmoler, hlat, hlevel, model, m0, n_mod
 
     %% Create figure
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
-    contourf(xx, time, ug_hovmoler', 'LineStyle', 'none');
+    contourf(xx, time, ug_hovmoler'*10, 'LineStyle', 'none');
     colorbar;
     xlabel('Longitude')
     ylabel('Time (days)')
