@@ -20,11 +20,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function plot_gph(xx, zz, gpt_h, jj, model, m0, n_mode, fig_path)
+function plot_gph(xx, zz, gpt_h, jj, model, m0, n_mode, fig_path, jmax)
 
     %% Create figure
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
     contourf(xx, zz, squeeze(gpt_h(:,floor(jj/2)+1,:))', 'LineStyle', 'none');
+    % contourf(xx, zz, squeeze(gpt_h(:,jmax,:))', 'LineStyle', 'none');
     colorbar;
     xlabel('Longitude')
     ylabel('Height (km)')
@@ -36,7 +37,7 @@ function plot_gph(xx, zz, gpt_h, jj, model, m0, n_mode, fig_path)
     set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
 
     %% Save figure
-    outFile = fullfile(fig_path, [model, '_gph', '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    outFile = fullfile(fig_path, [model, '_gph', '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '_jmax.png']);
     saveas(gcf, outFile);
     close(gcf);
 

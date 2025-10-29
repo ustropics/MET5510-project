@@ -48,8 +48,8 @@ params = struct();
 %% Initial variables for complex and wave number
 params.model = 'hwme';
 params.cplx = sqrt(-1); % imaginary unit
-params.m0 = 7; % wave number
-params.n_mode = 1; % wave frequency
+params.m0 = 1; % wave number
+params.n_mode = 2; % wave frequency
 
 %% Grid point parameterization
 params.jj = 50; % number of latitude grid points
