@@ -2,7 +2,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% FILENAME: hwme_plot.m
+% FILENAME: hwme_plot_loop.m
 
 % DESCRIPTION: Script for plotting results from the Hoskins-West modified 
 % Eady-type model, including eigenvector amplitude, geopotential height, 
@@ -139,38 +139,51 @@ for n_mode = 1:n_max
     vg = XV2field(XVx, ii, dx);
     pvfield = XV2field(QV, ii, dx);
 
-    %% Compute Hovmoller diagrams
-    gpt_h_hovmoler = XV2streamxtime(XV, ii, dx, omega, hlat, hlevel) * f0 / gg;
-    ug_hovmoler = XV2ugxtime(XVy, ii, dx, omega, hlat, hlevel);
+    %% Compute Hovmoller diagrams for hlevel = 1 and hlevel = 51
+    gpt_h_hovmoler1  = XV2streamxtime(XV, ii, dx, omega, hlat, 1)  * f0 / gg;
+    gpt_h_hovmoler51 = XV2streamxtime(XV, ii, dx, omega, hlat, 51) * f0 / gg;
+    ug_hovmoler1     = XV2ugxtime(XVy, ii, dx, omega, hlat, 1);
+    ug_hovmoler51    = XV2ugxtime(XVy, ii, dx, omega, hlat, 51);
 
     %% Create output directory if it doesn't exist
     if ~exist(params.hwme_plot_dir, 'dir')
         mkdir(params.hwme_plot_dir);
     end
 
-    %% Plot eigenvector amplitude
+    %% Build eigenvector amplitude matrix and find jmax
     eVec_amp = zeros(jj + 1, kk + 1);
     for l = 1 : ll
         [j, k] = l2jk(l);
         eVec_amp(j, k) = XV(l) .* conj(XV(l));
     end
+    [~, ind1] = max(eVec_amp(:));
+    [jmax, ~] = ind2sub(size(eVec_amp), ind1);
+
+    %% Plot eigenvector amplitude
     plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, model, fig_path);
 
     %% Create list of figures to plot
-    % Plot geopotential height
-    plot_gph(xx, zz, gpt_h, jj, model, m0, n_mode, fig_path);
+    % Plot geopotential height (now with jmax)
+    plot_gph(xx, zz, gpt_h, jj, model, m0, n_mode, fig_path, jmax);
 
-    % Plot Hovmoller diagram
-    plot_hovmoller(xx, time, gpt_h_hovmoler, model, m0, n_mode, fig_path);
+    % Plot Hovmoller diagrams for geopotential height at hlevel = 1 and 51
+    plot_hovmoller(xx, time, gpt_h_hovmoler1, model, m0, n_mode, fig_path, 1);
+    plot_hovmoller(xx, time, gpt_h_hovmoler51, model, m0, n_mode, fig_path, 51);
 
-    % Plot zonal wind
-    plot_zonal_wind(xx, yy, ug, model, m0, n_mode, fig_path);
+    % Plot zonal wind at hlevel = 1, 25, and 51
+    plot_zonal_wind(xx, yy, ug, 1, model, m0, n_mode, fig_path);
+    plot_zonal_wind(xx, yy, ug, 25, model, m0, n_mode, fig_path);
+    plot_zonal_wind(xx, yy, ug, 51, model, m0, n_mode, fig_path);
 
-    % Plot meridional wind
-    plot_meridional_wind(xx, yy, vg, model, m0, n_mode, fig_path);
+    % Plot meridional wind at hlevel = 1, 25, and 51
+    plot_meridional_wind(xx, yy, vg, 1, model, m0, n_mode, fig_path);
+    plot_meridional_wind(xx, yy, vg, 25, model, m0, n_mode, fig_path);
+    plot_meridional_wind(xx, yy, vg, 51, model, m0, n_mode, fig_path);
 
-    % Plot temperature at mid-level
-    plot_temperature(xx, yy, temp, kk, model, m0, n_mode, fig_path);
+    % Plot temperature at hlevel = 1, 25, and 51
+    plot_temperature(xx, yy, temp, 1, model, m0, n_mode, fig_path);
+    plot_temperature(xx, yy, temp, 25, model, m0, n_mode, fig_path);
+    plot_temperature(xx, yy, temp, 51, model, m0, n_mode, fig_path);
 
     % Plot geopotential height at top boundary
     plot_gph_top(xx, yy, gpt_h, model, m0, n_mode, fig_path);
@@ -181,8 +194,9 @@ for n_mode = 1:n_max
     % Plot meridional wind vertical cross-section
     plot_vg_cross_section(xx, zz, vg, jj, model, m0, n_mode, fig_path);
 
-    % Plot Hovmoller diagram for zonal wind
-    plot_ug_hovmoller(xx, time, ug_hovmoler, hlat, hlevel, model, m0, n_mode, fig_path);
+    % Plot Hovmoller diagram for zonal wind at hlevel = 1 and 51
+    plot_ug_hovmoller(xx, time, ug_hovmoler1, hlat, 1, model, m0, n_mode, fig_path);
+    plot_ug_hovmoller(xx, time, ug_hovmoler51, hlat, 51, model, m0, n_mode, fig_path);
 
     % Plot Ubar contour
     plot_ubar_contour(yy, zz, Ubar, model, m0, n_mode, fig_path);
