@@ -33,7 +33,12 @@ function plot_meridional_wind(xx, yy, vg, hlevel, model, m0, n_mode, fig_path)
     xlabel('Longitude')
     ylabel('Latitude')
     set(gca, 'xtick', 0:30:360)
-    title(['Meridional Wind at hlevel = ', num2str(hlevel)]);
+
+    title_str = [['Meridional Wind at hlevel = ', num2str(hlevel)], ...
+    ', wave number = ', num2str(m0), ...
+    ', eMode = ', num2str(n_mode)];
+
+    title(title_str);
 
     % Set global font size
     set(findall(gcf, '-property', 'FontSize'), 'FontSize', 20);

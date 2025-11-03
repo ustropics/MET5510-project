@@ -29,7 +29,12 @@ function plot_dpvdym_int(yy, zz, BPVy, model, m0, n_mode, fig_path)
     colorbar;
     xlabel('Latitude (degrees)')
     ylabel('Height (km)')
-    title('d(PVbar)/dy (Interior, 10^-12 s^-1)');
+
+    title_str = ['d(PVbar)/dy (Interior, 10^-12 s^-1)', ...
+    ', wave number = ', num2str(m0), ...
+    ', eMode = ', num2str(n_mode)];
+
+    title(title_str);
 
     % set global font size
     set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);

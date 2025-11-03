@@ -42,7 +42,11 @@ function plot_dpvdym_boundaries(yy, BPVy, beta, kk, model, m0, n_mode, fig_path)
 
     xlabel('Latitude (degrees)')
     ylabel('d(PVbar)/dy (10^-12 s^-1)')
-    title('d(PVbar)/dy at Boundaries with Beta');
+
+    title_str = ['d(PVbar)/dy at Boundaries with Beta', ...
+    ', wave number = ', num2str(m0), ...
+    ', eMode = ', num2str(n_mode)];
+
     legend('Location', 'best');
     grid on;
 

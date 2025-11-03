@@ -28,7 +28,12 @@ function plot_pvfield(xx, yy, pvfield, model, m0, n_mode, fig_path)
     xlabel('Longitude')
     ylabel('Latitude')
     set(gca, 'xtick', 0:30:360)
-    title('Potential Vorticity at Surface');
+
+    title_str = ['Potential Vorticity at Surface', ...
+    ', wave number = ', num2str(m0), ...
+    ', eMode = ', num2str(n_mode)];
+
+    title(title_str);
 
     % set global font size
     set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);

@@ -28,7 +28,12 @@ function rossby_gph_top(xx, yy, gpt_h, model, m0, n_mode, fig_path)
     xlabel('Longitude')
     ylabel('Latitude')
     set(gca, 'xtick', 0:30:360)
-    title('Geopotential Height at Top Boundary');
+
+    title_str = ['Geopotential Height at Top Boundary', ...
+    ', wave number = ', num2str(m0), ...
+    ', eMode = ', num2str(n_mode)];
+
+    title(title_str);
 
     %% set global font size
     set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);

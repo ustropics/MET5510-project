@@ -20,7 +20,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function plot_gph(xx, zz, gpt_h, jj, model, m0, n_mode, fig_path, jmax)
+function plot_gph(xx, zz, gpt_h, jj, model, m0, n_mode, fig_path)
 
     %% Create figure
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
@@ -31,7 +31,12 @@ function plot_gph(xx, zz, gpt_h, jj, model, m0, n_mode, fig_path, jmax)
     ylabel('Height (km)')
     set(gca, 'xtick', 0:30:360)
     set(gca, 'ytick', 0:2:10)
-    title('Geopotential Height at Middle Latitude');
+
+    title_str = ['Geopotential Height at Middle Latitude (25N)', ...
+        ', wave number = ', num2str(m0), ...
+        ', eMode = ', num2str(n_mode)];
+
+    title(title_str);
     
     % set global font size
     set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);

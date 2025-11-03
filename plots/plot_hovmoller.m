@@ -30,7 +30,12 @@ function plot_hovmoller(xx, time, gpt_h_hovmoler, model, m0, n_mode, fig_path, h
     contourf(xx, time, gpt_h_hovmoler', 'linestyle', 'none');
     xlabel('Longitude')
     ylabel('Time (days)')
-    title(['Hovmoller Diagram (hlevel = ', num2str(hlevel), ')']);
+
+    title_str = ['Hovmoller Diagram (hlevel = ', num2str(hlevel), ')', ...
+    ', wave number = ', num2str(m0), ...
+    ', eMode = ', num2str(n_mode)];
+
+    title(title_str);
     colorbar
 
     % Set global font size

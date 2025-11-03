@@ -114,8 +114,8 @@ gpt_h_hovmoler51 = XV2streamxtime(XV, ii, dx, omega, hlat, 51) * f0 / gg;
 ug_hovmoler1 = XV2ugxtime(XVy, ii, dx, omega, hlat, 1);
 ug_hovmoler51 = XV2ugxtime(XVy, ii, dx, omega, hlat, 51);
 
-[max1, ind1] = max(eVec_amp(:));
-[jmax, kmax] = ind2sub(size(eVec_amp), ind1);
+% [max1, ind1] = max(eVec_amp(:));
+% [jmax, kmax] = ind2sub(size(eVec_amp), ind1);
 
 if ~exist(params.hwme_plot_dir, 'dir')
     mkdir(params.hwme_plot_dir);
@@ -131,7 +131,7 @@ plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, model, fig_path)
 
 %% Create list of figures to plot
 % Plot geopotential height
-plot_gph(xx, zz, gpt_h, jj, model, m0, n_mode, fig_path, jmax);
+plot_gph(xx, zz, gpt_h, jj, model, m0, n_mode, fig_path);
 
 % Plot Hovmoller diagrams for geopotential height (hlevel = 1 and 51)
 plot_hovmoller(xx, time, gpt_h_hovmoler1, model, m0, n_mode, fig_path, 1);

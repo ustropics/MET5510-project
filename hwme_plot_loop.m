@@ -84,7 +84,7 @@ hwme_data = fullfile(params.hwme_data_dir, params.hwme_data_filename);
 load(hwme_data)
 
 %% Define maximum number of modes
-n_max = 3; % Set the number of modes to loop through
+n_max = 15; % Set the number of modes to loop through
 l_max = zeros(n_max, 1); % Initialize l_max array
 
 % Check if n_max is valid

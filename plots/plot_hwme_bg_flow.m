@@ -65,7 +65,13 @@ function plot_hwme_bg_flow(yy, zz, jj, kk, Ubar, BPVy, model, m0, n_mode, fig_pa
     colorbar;
     xlabel('Latitude (degrees)');
     ylabel('Height (km)');
-    title('$\frac{\partial \bar{q}}{\partial y} = 0$ (Interior)', 'Interpreter', 'latex');
+
+    title_str = ['$\frac{\partial \bar{q}}{\partial y} = 0$ (Interior)', 'Interpreter', 'latex', ...
+    ', wave number = ', num2str(m0), ...
+    ', eMode = ', num2str(n_mode)];
+
+    title(title_str)
+
 
     %% Subplot 3: Boundary d(PVbar)/dy with beta
     subplot(1, 3, 3);
@@ -78,7 +84,12 @@ function plot_hwme_bg_flow(yy, zz, jj, kk, Ubar, BPVy, model, m0, n_mode, fig_pa
 
     xlabel('Latitude (degrees)');
     ylabel('$\frac{d(\overline{PV})}{dy} \times 10^{-11} \, (s^{-1} m^{-1})$', 'Interpreter', 'latex');
-    title('$\frac{d(\overline{PV})}{dy}$ at surf./trop./beta (red/blue/black)', 'Interpreter', 'latex');
+    
+    title_str = ['$\frac{d(\overline{PV})}{dy}$ at surf./trop./beta (red/blue/black)', 'Interpreter', 'latex', ...
+    ', wave number = ', num2str(m0), ...
+    ', eMode = ', num2str(n_mode)];
+
+    title(title_str)
 
     % Add equations as annotations with proper TeX syntax
     annotation('textbox', [0.67, 0.5, 0.25, 0.1], 'String', ...

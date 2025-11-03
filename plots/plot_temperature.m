@@ -33,6 +33,9 @@ function plot_temperature(xx, yy, temp, hlevel, model, m0, n_mode, fig_path)
     xlabel('Longitude')
     ylabel('Latitude')
     set(gca, 'xtick', 0:30:360)
+
+
+    
     title(['Temperature at hlevel = ', num2str(hlevel)]);
 
     % Set global font size

@@ -45,7 +45,12 @@ function plot_rossby_bg_flow(yy, zz, Ubar, qy_surf, qy_trop, model, m0, jj, kk, 
     colorbar;
     xlabel('Latitude (degrees)');
     ylabel('Height (km)');
-    title('$U_{\mathrm{bar}}$', 'Interpreter', 'latex');
+
+    title_str = ['$U_{\mathrm{bar}}$', 'Interpreter', 'latex', ...
+    ', wave number = ', num2str(m0), ...
+    ', eMode = ', num2str(n_mode)];
+
+    title(title_str);
     caxis([0 max(Ubar(:))]);
 
     %% Subplot 2: Interior ∂q/∂y
