@@ -26,7 +26,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function wfield= w2wfield(w,ii,dx)
+function wfield = w2wfield(w,ii,dx)
 
     global jj kk ll cplx m0 Lx LW
     wfield=zeros(ii+1,jj+1,kk+1);

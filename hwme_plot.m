@@ -108,6 +108,10 @@ ug = -XV2field(XVy, ii, dx);
 vg = XV2field(XVx, ii, dx);
 pvfield = XV2field(QV, ii, dx);
 
+[F1, F2, F3] = eady_F123(params, XV, Ubar);
+w = (f0/NN2)*(gg^-1)*(F1+F2+F3);
+wfield = w2wfield(w,ii,dx);
+
 %% Compute Hovmoller diagrams for hlevel = 1 and hlevel = 51
 gpt_h_hovmoler1 = XV2streamxtime(XV, ii, dx, omega, hlat, 1) * f0 / gg;
 gpt_h_hovmoler51 = XV2streamxtime(XV, ii, dx, omega, hlat, 51) * f0 / gg;
@@ -121,69 +125,71 @@ if ~exist(params.hwme_plot_dir, 'dir')
     mkdir(params.hwme_plot_dir);
 end
 
-%% Plot eigenvector amplitude
-eVec_amp = zeros(jj + 1, kk + 1);
-for l = 1 : ll
-    [j, k] = l2jk(l);
-    eVec_amp(j, k) = XV(l) .* conj(XV(l));
-end
-plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, model, fig_path);
+plot_zvt(vg, temp, m0, n_mode, fig_path);
 
-%% Create list of figures to plot
-% Plot geopotential height
-plot_gph(xx, zz, gpt_h, jj, model, m0, n_mode, fig_path);
-
-% Plot Hovmoller diagrams for geopotential height (hlevel = 1 and 51)
-plot_hovmoller(xx, time, gpt_h_hovmoler1, model, m0, n_mode, fig_path, 1);
-plot_hovmoller(xx, time, gpt_h_hovmoler51, model, m0, n_mode, fig_path, 51);
-
-% Plot zonal wind at hlevel = 1, 25, and 51
-fprintf('Generating zonal wind plot for hlevel = 1\n'); % Debug output
-plot_zonal_wind(xx, yy, ug, 1, model, m0, n_mode, fig_path);
-fprintf('Generating zonal wind plot for hlevel = 25\n'); % Debug output
-plot_zonal_wind(xx, yy, ug, 25, model, m0, n_mode, fig_path);
-fprintf('Generating zonal wind plot for hlevel = 51\n'); % Debug output
-plot_zonal_wind(xx, yy, ug, 51, model, m0, n_mode, fig_path);
-
-% Plot meridional wind at hlevel = 1, 25, and 51
-fprintf('Generating meridional wind plot for hlevel = 1\n'); % Debug output
-plot_meridional_wind(xx, yy, vg, 1, model, m0, n_mode, fig_path);
-fprintf('Generating meridional wind plot for hlevel = 25\n'); % Debug output
-plot_meridional_wind(xx, yy, vg, 25, model, m0, n_mode, fig_path);
-fprintf('Generating meridional wind plot for hlevel = 51\n'); % Debug output
-plot_meridional_wind(xx, yy, vg, 51, model, m0, n_mode, fig_path);
-
-% Plot temperature at hlevel = 1, 25, and 51
-fprintf('Generating temperature plot for hlevel = 1\n'); % Debug output
-plot_temperature(xx, yy, temp, 1, model, m0, n_mode, fig_path);
-fprintf('Generating temperature plot for hlevel = 25\n'); % Debug output
-plot_temperature(xx, yy, temp, 25, model, m0, n_mode, fig_path);
-fprintf('Generating temperature plot for hlevel = 51\n'); % Debug output
-plot_temperature(xx, yy, temp, 51, model, m0, n_mode, fig_path);
-
-% Plot geopotential height at top boundary
-plot_gph_top(xx, yy, gpt_h, model, m0, n_mode, fig_path);
-
-% Plot potential vorticity at surface
-plot_pvfield(xx, yy, pvfield, model, m0, n_mode, fig_path);
-
-% Plot meridional wind vertical cross-section
-plot_vg_cross_section(xx, zz, vg, jj, model, m0, n_mode, fig_path);
-
-% Plot Hovmoller diagrams for zonal wind (hlevel = 1 and 51)
-plot_ug_hovmoller(xx, time, ug_hovmoler1, hlat, 1, model, m0, n_mode, fig_path);
-plot_ug_hovmoller(xx, time, ug_hovmoler51, hlat, 51, model, m0, n_mode, fig_path);
-
-% Plot Ubar contour
-plot_ubar_contour(yy, zz, Ubar, model, m0, n_mode, fig_path);
-
-% Plot d(PVbar)/dy interior
-plot_dpvdym_int(yy, zz, BPVy, model, m0, n_mode, fig_path);
-
-% Plot d(PVbar)/dy at boundaries with beta
-plot_dpvdym_boundaries(yy, BPVy, beta, kk, model, m0, n_mode, fig_path);
-
-% Plot combo plot for hwme
-plot_hwme_bg_flow(yy, zz, jj, kk, Ubar, BPVy, model, m0, n_mode, fig_path);
-
-disp('All plots generated successfully.');
+% %% Plot eigenvector amplitude
+% eVec_amp = zeros(jj + 1, kk + 1);
+% for l = 1 : ll
+%     [j, k] = l2jk(l);
+%     eVec_amp(j, k) = XV(l) .* conj(XV(l));
+% end
+% plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, model, fig_path);
+% 
+% %% Create list of figures to plot
+% % Plot geopotential height
+% plot_gph(xx, zz, gpt_h, jj, model, m0, n_mode, fig_path);
+% 
+% % Plot Hovmoller diagrams for geopotential height (hlevel = 1 and 51)
+% plot_hovmoller(xx, time, gpt_h_hovmoler1, model, m0, n_mode, fig_path, 1);
+% plot_hovmoller(xx, time, gpt_h_hovmoler51, model, m0, n_mode, fig_path, 51);
+% 
+% % Plot zonal wind at hlevel = 1, 25, and 51
+% fprintf('Generating zonal wind plot for hlevel = 1\n'); % Debug output
+% plot_zonal_wind(xx, yy, ug, 1, model, m0, n_mode, fig_path);
+% fprintf('Generating zonal wind plot for hlevel = 25\n'); % Debug output
+% plot_zonal_wind(xx, yy, ug, 25, model, m0, n_mode, fig_path);
+% fprintf('Generating zonal wind plot for hlevel = 51\n'); % Debug output
+% plot_zonal_wind(xx, yy, ug, 51, model, m0, n_mode, fig_path);
+% 
+% % Plot meridional wind at hlevel = 1, 25, and 51
+% fprintf('Generating meridional wind plot for hlevel = 1\n'); % Debug output
+% plot_meridional_wind(xx, yy, vg, 1, model, m0, n_mode, fig_path);
+% fprintf('Generating meridional wind plot for hlevel = 25\n'); % Debug output
+% plot_meridional_wind(xx, yy, vg, 25, model, m0, n_mode, fig_path);
+% fprintf('Generating meridional wind plot for hlevel = 51\n'); % Debug output
+% plot_meridional_wind(xx, yy, vg, 51, model, m0, n_mode, fig_path);
+% 
+% % Plot temperature at hlevel = 1, 25, and 51
+% fprintf('Generating temperature plot for hlevel = 1\n'); % Debug output
+% plot_temperature(xx, yy, temp, 1, model, m0, n_mode, fig_path);
+% fprintf('Generating temperature plot for hlevel = 25\n'); % Debug output
+% plot_temperature(xx, yy, temp, 25, model, m0, n_mode, fig_path);
+% fprintf('Generating temperature plot for hlevel = 51\n'); % Debug output
+% plot_temperature(xx, yy, temp, 51, model, m0, n_mode, fig_path);
+% 
+% % Plot geopotential height at top boundary
+% plot_gph_top(xx, yy, gpt_h, model, m0, n_mode, fig_path);
+% 
+% % Plot potential vorticity at surface
+% plot_pvfield(xx, yy, pvfield, model, m0, n_mode, fig_path);
+% 
+% % Plot meridional wind vertical cross-section
+% plot_vg_cross_section(xx, zz, vg, jj, model, m0, n_mode, fig_path);
+% 
+% % Plot Hovmoller diagrams for zonal wind (hlevel = 1 and 51)
+% plot_ug_hovmoller(xx, time, ug_hovmoler1, hlat, 1, model, m0, n_mode, fig_path);
+% plot_ug_hovmoller(xx, time, ug_hovmoler51, hlat, 51, model, m0, n_mode, fig_path);
+% 
+% % Plot Ubar contour
+% plot_ubar_contour(yy, zz, Ubar, model, m0, n_mode, fig_path);
+% 
+% % Plot d(PVbar)/dy interior
+% plot_dpvdym_int(yy, zz, BPVy, model, m0, n_mode, fig_path);
+% 
+% % Plot d(PVbar)/dy at boundaries with beta
+% plot_dpvdym_boundaries(yy, BPVy, beta, kk, model, m0, n_mode, fig_path);
+% 
+% % Plot combo plot for hwme
+% plot_hwme_bg_flow(yy, zz, jj, kk, Ubar, BPVy, model, m0, n_mode, fig_path);
+% 
+% disp('All plots generated successfully.');

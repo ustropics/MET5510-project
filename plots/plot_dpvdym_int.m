@@ -42,6 +42,6 @@ function plot_dpvdym_int(yy, zz, BPVy, model, m0, n_mode, fig_path)
     %% Save figure
     outFile = fullfile(fig_path, [model, '_dpvdym_int_', '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
     saveas(gcf, outFile);
-    close(gcf);
+    % close(gcf);
 
 end
