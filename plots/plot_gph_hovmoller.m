@@ -23,7 +23,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function plot_hovmoller(xx, time, gpt_h_hovmoler, model, m0, n_mode, fig_path, hlevel)
+function plot_gph_hovmoller(xx, time, gpt_h_hovmoler, model, m0, n_mode, fig_path, hlevel)
 
     %% Create figure
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
@@ -31,9 +31,9 @@ function plot_hovmoller(xx, time, gpt_h_hovmoler, model, m0, n_mode, fig_path, h
     xlabel('Longitude')
     ylabel('Time (days)')
 
-    title_str = ['Hovmoller Diagram (hlevel = ', num2str(hlevel), ')', ...
+    title_str = ['Hovmoller Diagram (hlevel = ', num2str(hlevel), ...
     ', wave number = ', num2str(m0), ...
-    ', eMode = ', num2str(n_mode)];
+    ', eMode = ', num2str(n_mode), ')'];
 
     title(title_str);
     colorbar
@@ -42,8 +42,8 @@ function plot_hovmoller(xx, time, gpt_h_hovmoler, model, m0, n_mode, fig_path, h
     set(findall(gcf, '-property', 'FontSize'), 'FontSize', 20);
     
     %% Save figure
-    outFile = fullfile(fig_path, [model, '_hovmoller_', '_nmode-', num2str(n_mode), ...
-        '_m0-', num2str(m0), '_hlevel-', num2str(hlevel), '.png']);
+    outFile = fullfile(fig_path, ['gph-hovmoller_','hlevel-', num2str(hlevel), ... 
+        '_eMode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
     saveas(gcf, outFile);
     close(gcf);
 

@@ -32,7 +32,7 @@ function plot_gph(xx, zz, gpt_h, jj, model, m0, n_mode, fig_path)
     set(gca, 'xtick', 0:30:360)
     set(gca, 'ytick', 0:2:10)
 
-    title_str = ['Geopotential Height at Middle Latitude (25N)', ...
+    title_str = ['Geopotential Height', ...
         ', wave number = ', num2str(m0), ...
         ', eMode = ', num2str(n_mode)];
 
@@ -42,7 +42,7 @@ function plot_gph(xx, zz, gpt_h, jj, model, m0, n_mode, fig_path)
     set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
 
     %% Save figure
-    outFile = fullfile(fig_path, [model, '_gph', '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '_jmax.png']);
+    outFile = fullfile(fig_path, ['gph', '_eMode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
     saveas(gcf, outFile);
     close(gcf);
 

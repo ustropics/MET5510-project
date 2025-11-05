@@ -125,7 +125,7 @@ if ~exist(params.hwme_plot_dir, 'dir')
     mkdir(params.hwme_plot_dir);
 end
 
-plot_zvt(vg, temp, m0, n_mode, fig_path);
+% ckplot_zvt(vg, temp, m0, n_mode, fig_path);
 
 % %% Plot eigenvector amplitude
 % eVec_amp = zeros(jj + 1, kk + 1);
@@ -134,31 +134,34 @@ plot_zvt(vg, temp, m0, n_mode, fig_path);
 %     eVec_amp(j, k) = XV(l) .* conj(XV(l));
 % end
 % plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, model, fig_path);
-% 
-% %% Create list of figures to plot
-% % Plot geopotential height
+
+% Plot combo plot for hwme
+% plot_background_flow(yy, zz, jj, kk, Ubar, BPVy, model, m0, n_mode, fig_path);
+
+% Plot geopotential height
 % plot_gph(xx, zz, gpt_h, jj, model, m0, n_mode, fig_path);
-% 
-% % Plot Hovmoller diagrams for geopotential height (hlevel = 1 and 51)
-% plot_hovmoller(xx, time, gpt_h_hovmoler1, model, m0, n_mode, fig_path, 1);
-% plot_hovmoller(xx, time, gpt_h_hovmoler51, model, m0, n_mode, fig_path, 51);
-% 
-% % Plot zonal wind at hlevel = 1, 25, and 51
+
+
+% Plot Hovmoller diagrams for geopotential height (hlevel = 1 and 51)
+plot_gph_hovmoller(xx, time, gpt_h_hovmoler1, model, m0, n_mode, fig_path, 1);
+plot_gph_hovmoller(xx, time, gpt_h_hovmoler51, model, m0, n_mode, fig_path, 51);
+
+% Plot zonal wind at hlevel = 1, 25, and 51
 % fprintf('Generating zonal wind plot for hlevel = 1\n'); % Debug output
 % plot_zonal_wind(xx, yy, ug, 1, model, m0, n_mode, fig_path);
 % fprintf('Generating zonal wind plot for hlevel = 25\n'); % Debug output
 % plot_zonal_wind(xx, yy, ug, 25, model, m0, n_mode, fig_path);
 % fprintf('Generating zonal wind plot for hlevel = 51\n'); % Debug output
 % plot_zonal_wind(xx, yy, ug, 51, model, m0, n_mode, fig_path);
-% 
-% % Plot meridional wind at hlevel = 1, 25, and 51
-% fprintf('Generating meridional wind plot for hlevel = 1\n'); % Debug output
-% plot_meridional_wind(xx, yy, vg, 1, model, m0, n_mode, fig_path);
-% fprintf('Generating meridional wind plot for hlevel = 25\n'); % Debug output
-% plot_meridional_wind(xx, yy, vg, 25, model, m0, n_mode, fig_path);
-% fprintf('Generating meridional wind plot for hlevel = 51\n'); % Debug output
-% plot_meridional_wind(xx, yy, vg, 51, model, m0, n_mode, fig_path);
-% 
+
+% Plot meridional wind at hlevel = 1, 25, and 51
+fprintf('Generating meridional wind plot for hlevel = 1\n'); % Debug output
+plot_meridional_wind(xx, yy, vg, 1, model, m0, n_mode, fig_path);
+fprintf('Generating meridional wind plot for hlevel = 25\n'); % Debug output
+plot_meridional_wind(xx, yy, vg, 25, model, m0, n_mode, fig_path);
+fprintf('Generating meridional wind plot for hlevel = 51\n'); % Debug output
+plot_meridional_wind(xx, yy, vg, 51, model, m0, n_mode, fig_path);
+
 % % Plot temperature at hlevel = 1, 25, and 51
 % fprintf('Generating temperature plot for hlevel = 1\n'); % Debug output
 % plot_temperature(xx, yy, temp, 1, model, m0, n_mode, fig_path);

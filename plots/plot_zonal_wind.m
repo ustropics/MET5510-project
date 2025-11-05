@@ -33,14 +33,14 @@ function plot_zonal_wind(xx, yy, ug, hlevel, model, m0, n_mode, fig_path)
     xlabel('Longitude')
     ylabel('Latitude')
     set(gca, 'xtick', 0:30:360)
-    title(['Zonal Wind at hlevel = ', num2str(hlevel)]);
+    title(['Zonal Wind (hlevel = ', num2str(hlevel), ', eMode # = ', num2str(n_mode), ', wave # = ', num2str(m0), ')']);
 
     % Set global font size
     set(findall(gcf, '-property', 'FontSize'), 'FontSize', 20);
     
     %% Save figure
-    outFile = fullfile(fig_path, [model, '_zonal_wind_', '_nmode-', num2str(n_mode), ...
-        '_m0-', num2str(m0), '_hlevel-', num2str(hlevel), '.png']);
+    outFile = fullfile(fig_path, ['zonal_wind', '_hlevel-', num2str(hlevel), ...
+        '_eMode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
     fprintf('Saving zonal wind plot to: %s\n', outFile); % Debug output
     saveas(gcf, outFile);
     close(gcf);

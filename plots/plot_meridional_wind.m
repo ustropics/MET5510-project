@@ -34,9 +34,9 @@ function plot_meridional_wind(xx, yy, vg, hlevel, model, m0, n_mode, fig_path)
     ylabel('Latitude')
     set(gca, 'xtick', 0:30:360)
 
-    title_str = [['Meridional Wind at hlevel = ', num2str(hlevel)], ...
+    title_str = [['Meridional Wind (hlevel = ', num2str(hlevel)], ...
     ', wave number = ', num2str(m0), ...
-    ', eMode = ', num2str(n_mode)];
+    ', eMode = ', num2str(n_mode), ')'];
 
     title(title_str);
 
@@ -44,8 +44,8 @@ function plot_meridional_wind(xx, yy, vg, hlevel, model, m0, n_mode, fig_path)
     set(findall(gcf, '-property', 'FontSize'), 'FontSize', 20);
     
     %% Save figure
-    outFile = fullfile(fig_path, [model, '_meridional_wind_', '_nmode-', num2str(n_mode), ...
-        '_m0-', num2str(m0), '_hlevel-', num2str(hlevel), '.png']);
+    outFile = fullfile(fig_path, ['meridional_wind_', '_hlevel-', num2str(hlevel), ... 
+        'eMode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
     fprintf('Saving meridional wind plot to: %s\n', outFile); % Debug output
     saveas(gcf, outFile);
     close(gcf);
