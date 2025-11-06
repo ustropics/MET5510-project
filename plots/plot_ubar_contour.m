@@ -33,7 +33,7 @@ function plot_ubar_contour(yy, zz, Ubar, model, m0, n_mode, fig_path)
     set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
     
     %% Save figure
-    outFile = fullfile(fig_path, [model, '_ubar_', '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    outFile = fullfile(fig_path, ['ubar_', '_eMode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
     saveas(gcf, outFile);
     close(gcf);
     

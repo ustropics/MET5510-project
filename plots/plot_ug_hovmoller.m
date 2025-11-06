@@ -33,14 +33,20 @@ function plot_ug_hovmoller(xx, time, ug_hovmoler, hlat, hlevel, model, m0, n_mod
     colorbar;
     xlabel('Longitude')
     ylabel('Time (days)')
-    title(['Hovmoller Diagram for Zonal Wind at lat=', num2str(hlat), ', level=', num2str(hlevel)]);
+
+
+    title_str = ['Hovmoller Diagram for Zonal Wind (hlevel = ', num2str(hlat), ...
+        ', wave # = ', num2str(m0), ', eMode # = ', num2str(n_mode)];
+    title(title_str);
 
     % Set global font size
     set(findall(gcf, '-property', 'FontSize'), 'FontSize', 20);
 
     %% Save figure
-    outFile = fullfile(fig_path, [model, '_ug_hovmoller_', '_nmode-', num2str(n_mode), ...
-        '_m0-', num2str(m0), '_hlevel-', num2str(hlevel), '.png']);
+    outFile = fullfile(fig_path, ['ug_hovmoller',  '_hlevel-', num2str(hlevel), ... 
+        '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+
+    fprintf('Saving temperature plot to: %s\n', outFile)
     saveas(gcf, outFile);
     close(gcf);
     

@@ -30,9 +30,9 @@ function plot_dpvdym_int(yy, zz, BPVy, model, m0, n_mode, fig_path)
     xlabel('Latitude (degrees)')
     ylabel('Height (km)')
 
-    title_str = ['d(PVbar)/dy (Interior, 10^-12 s^-1)', ...
+    title_str = ['d(PVbar)/dy (Interior, 10^-12 s^-1, ', ...
     ', wave number = ', num2str(m0), ...
-    ', eMode = ', num2str(n_mode)];
+    ', eMode = ', num2str(n_mode), ')'];
 
     title(title_str);
 
@@ -40,7 +40,7 @@ function plot_dpvdym_int(yy, zz, BPVy, model, m0, n_mode, fig_path)
     set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
 
     %% Save figure
-    outFile = fullfile(fig_path, [model, '_dpvdym_int_', '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    outFile = fullfile(fig_path, ['dpvdym_int_', '_eMode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
     saveas(gcf, outFile);
     % close(gcf);
 

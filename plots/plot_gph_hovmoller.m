@@ -32,8 +32,8 @@ function plot_gph_hovmoller(xx, time, gpt_h_hovmoler, model, m0, n_mode, fig_pat
     ylabel('Time (days)')
 
     title_str = ['Hovmoller Diagram (hlevel = ', num2str(hlevel), ...
-    ', wave number = ', num2str(m0), ...
-    ', eMode = ', num2str(n_mode), ')'];
+    ', wave # = ', num2str(m0), ...
+    ', eMode # = ', num2str(n_mode), ')'];
 
     title(title_str);
     colorbar

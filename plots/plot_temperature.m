@@ -33,18 +33,20 @@ function plot_temperature(xx, yy, temp, hlevel, model, m0, n_mode, fig_path)
     xlabel('Longitude')
     ylabel('Latitude')
     set(gca, 'xtick', 0:30:360)
-
-
     
-    title(['Temperature at hlevel = ', num2str(hlevel)]);
+    title_str = ['Temperature at (hlevel = ', num2str(hlevel), ...
+        ', eMode # = ', num2str(n_mode), ', wave # = ', num2str(m0), ')'];
+
+    title(title_str);
 
     % Set global font size
     set(findall(gcf, '-property', 'FontSize'), 'FontSize', 20);   
 
     %% Save figure
-    outFile = fullfile(fig_path, [model, '_temperature_', '_nmode-', num2str(n_mode), ...
-        '_m0-', num2str(m0), '_hlevel-', num2str(hlevel), '.png']);
-    fprintf('Saving temperature plot to: %s\n', outFile); % Debug output
+    outFile = fullfile(fig_path, ['temperature', '_hlevel-', num2str(hlevel), ...
+        '_eMode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    
+    fprintf('Saving temperature plot to: %s\n', outFile)
     saveas(gcf, outFile);
     close(gcf);
     

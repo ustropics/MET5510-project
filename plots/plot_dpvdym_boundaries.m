@@ -43,15 +43,16 @@ function plot_dpvdym_boundaries(yy, BPVy, beta, kk, model, m0, n_mode, fig_path)
     xlabel('Latitude (degrees)')
     ylabel('d(PVbar)/dy (10^-12 s^-1)')
 
-    title_str = ['d(PVbar)/dy at Boundaries with Beta', ...
-    ', wave number = ', num2str(m0), ...
-    ', eMode = ', num2str(n_mode)];
+    title_str = ['d(PVbar)/dy at Boundaries with Beta (', ...
+    'wave # = ', num2str(m0), ...
+    ', eMode # = ', num2str(n_mode)];
 
+    title(title_str)
     legend('Location', 'best');
     grid on;
 
     %% Save figure
-    outFile = fullfile(fig_path, [model, '_dpvdym_boundaries_', '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    outFile = fullfile(fig_path, ['dpvdym_boundaries', '_eMode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
     saveas(gcf, outFile);
     close(gcf);
 

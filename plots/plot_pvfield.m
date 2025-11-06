@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function plot_pvfield(xx, yy, pvfield, model, m0, n_mode, fig_path)
+function plot_pvfield(xx, yy, pvfield, hlevel, model, m0, n_mode, fig_path)
 
     %% Create figure
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
@@ -29,9 +29,10 @@ function plot_pvfield(xx, yy, pvfield, model, m0, n_mode, fig_path)
     ylabel('Latitude')
     set(gca, 'xtick', 0:30:360)
 
-    title_str = ['Potential Vorticity at Surface', ...
-    ', wave number = ', num2str(m0), ...
-    ', eMode = ', num2str(n_mode)];
+    title_str = ['Potential Vorticity (', ...
+    'hlevel = ', num2str(hlevel), ...
+    ', wave # = ', num2str(m0), ...
+    ', eMode # = ', num2str(n_mode)];
 
     title(title_str);
 
@@ -39,7 +40,9 @@ function plot_pvfield(xx, yy, pvfield, model, m0, n_mode, fig_path)
     set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
 
     %% Save figure
-    outFile = fullfile(fig_path, [model, '_pvfield_', '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    outFile = fullfile(fig_path, ['pvfield', '_hlevel-', num2str(hlevel), '_eMode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    
+    fprintf('Saving temperature plot to: %s\n', outFile)
     saveas(gcf, outFile);
     close(gcf);
     

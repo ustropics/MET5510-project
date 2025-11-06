@@ -30,13 +30,18 @@ function plot_vg_cross_section(xx, zz, vg, jj, model, m0, n_mode, fig_path)
     ylabel('Height (km)')
     set(gca, 'xtick', 0:30:360)
     set(gca, 'ytick', 0:2:10)
-    title('Meridional Wind Vertical Cross-Section');
+
+    title_str = ['Meridional Wind Vertical Cross-Section (', ...
+        'wave # = ', num2str(m0), ', eMode # = ', num2str(n_mode)];
+    title(title_str);
 
     % set global font size
     set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
 
     %% Save figure
-    outFile = fullfile(fig_path, [model, '_vg_cross_section_', '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    outFile = fullfile(fig_path, ['vg_cross_section', '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    
+    fprintf('Saving temperature plot to: %s\n', outFile)
     saveas(gcf, outFile);
     close(gcf);
     

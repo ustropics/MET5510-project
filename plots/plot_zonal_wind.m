@@ -41,7 +41,7 @@ function plot_zonal_wind(xx, yy, ug, hlevel, model, m0, n_mode, fig_path)
     %% Save figure
     outFile = fullfile(fig_path, ['zonal_wind', '_hlevel-', num2str(hlevel), ...
         '_eMode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
-    fprintf('Saving zonal wind plot to: %s\n', outFile); % Debug output
+    fprintf('Saving zonal wind plot to: %s\n', outFile);
     saveas(gcf, outFile);
     close(gcf);
     
