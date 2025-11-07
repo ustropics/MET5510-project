@@ -33,7 +33,7 @@ function plot_ug_hovmoller(xx, time, ug_hovmoler, hlat, hlevel, m0, n_mode, fig_
 
 
     title_str = ['Hovmoller Diagram for Zonal Wind (hlevel = ', num2str(hlat), ...
-        ', zonal wave # = ', num2str(m0), ', eMode # = ', num2str(n_mode)];
+        ', zonal wave # = ', num2str(m0), ', eMode # = ', num2str(n_mode), ')'];
     title(title_str);
 
     % Set global font size

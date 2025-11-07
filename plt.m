@@ -32,7 +32,7 @@
 % - fig_path: Output directory for plots
 % - Functions used: plot_gph, plot_zvu, plot_zvt, plot_zwt, plot_gph_hovmoller,
 %   plot_evec_amp, plot_zonal_wind, plot_meridional_wind, plot_temperature,
-%   plot_gph_top, plot_pvfield, plot_vg_xsec, plot_ug_hovmoller,
+%   plot_gph_top, plot_pvfield, plot_meridional_xsec, plot_ug_hovmoller,
 %   plot_ubar_contour, plot_dpvdym_int, plot_dpvdym_boundaries, plot_background_flow
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -122,7 +122,7 @@ plot_gph_top(xx, yy, gpt_h, 51, m0, n_mode, fig_path);
 plot_pvfield(xx, yy, pvfield, m0, n_mode, fig_path);
 
 % Meridional wind cross-section
-plot_vg_xsec(xx, zz, vg, jj, m0, n_mode, fig_path);
+plot_meridional_xsec(xx, zz, vg, jj, m0, n_mode, fig_path);
 
 % Zonal wind Hovmoller
 plot_ug_hovmoller(xx, time, ug_hovmoler1, hlat, 1, m0, n_mode, fig_path);

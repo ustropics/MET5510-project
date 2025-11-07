@@ -17,7 +17,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function plot_vg_xsec(xx, zz, vg, jj, m0, n_mode, fig_path)
+function plot_meridional_xsec(xx, zz, vg, jj, m0, n_mode, fig_path)
     
     %% Create figure
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
@@ -29,7 +29,7 @@ function plot_vg_xsec(xx, zz, vg, jj, m0, n_mode, fig_path)
     set(gca, 'ytick', 0:2:10)
 
     title_str = ['Meridional Wind Vertical Cross-Section (', ...
-        'zonal wave # = ', num2str(m0), ', eMode # = ', num2str(n_mode)];
+        'zonal wave # = ', num2str(m0), ', eMode # = ', num2str(n_mode), ')'];
     title(title_str);
 
     % set global font size

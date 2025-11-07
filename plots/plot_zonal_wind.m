@@ -30,7 +30,7 @@ function plot_zonal_wind(xx, yy, ug, hlevel, m0, n_mode, fig_path)
     xlabel('Longitude')
     ylabel('Latitude')
     set(gca, 'xtick', 0:30:360)
-    title(['Zonal Wind (hlevel = ', num2str(hlevel), ', eMode # = ', num2str(n_mode), ', wave # = ', num2str(m0), ')']);
+    title(['Zonal Wind (hlevel = ', num2str(hlevel), ', zonal wave # = ', num2str(m0), ', eMode # = ', num2str(n_mode), ')']);
 
     % Set global font size
     set(findall(gcf, '-property', 'FontSize'), 'FontSize', 20);
