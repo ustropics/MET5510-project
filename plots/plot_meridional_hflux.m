@@ -45,7 +45,6 @@ function plot_meridional_hflux(vg, temp, m0, n_mode, fig_path)
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
     contourf(zvt_calc', 'LineStyle', 'none');
     colorbar;
-    colormap('turbo');
     xlabel('Latitude')
     ylabel('z-level')
     % set(gca, 'xtick', 0:30:360)
