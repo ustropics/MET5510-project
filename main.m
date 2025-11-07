@@ -33,7 +33,7 @@
 global jj kk ll HH ZZ YY BPVy NN2 f0 gg dy m0 dz Lx Theta0 dTbar N mu ... 
     Ubar beta cplx model Lr Ly data
 
-fprintf('Starting to compile data for Quasi-Geostrophic Cyclogenesis And Instability (QG-CAI) model...\nthis might take ~1 minute (BRB cig break)...')
+fprintf('Starting to compile data for Quasi-Geostrophic Cyclogenesis, Advection, and Instability (QG-CAI) model...\nthis might take ~1 minute (BRB cig break)...')
 tic
 
 addpath('functions'); % add functions folder
