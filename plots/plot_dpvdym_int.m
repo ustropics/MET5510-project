@@ -13,14 +13,11 @@
 % - zz: Height coordinates (km)
 % - BPVy: Meridional gradient of background PV (jj+1 x kk+1 array, s^-1)
 
-% OUTPUT:
-% - Saves plot to 'output/figures/dpvdym_int.png'
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function plot_dpvdym_int(yy, zz, BPVy, model, m0, n_mode, fig_path)
+function plot_dpvdym_int(yy, zz, BPVy, m0, n_mode, fig_path)
 
     %% Create figure
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
@@ -31,8 +28,8 @@ function plot_dpvdym_int(yy, zz, BPVy, model, m0, n_mode, fig_path)
     ylabel('Height (km)')
 
     title_str = ['d(PVbar)/dy (Interior, 10^-12 s^-1, ', ...
-    ', wave number = ', num2str(m0), ...
-    ', eMode = ', num2str(n_mode), ')'];
+    ', zonal wave # = ', num2str(m0), ...
+    ', eMode # = ', num2str(n_mode), ')'];
 
     title(title_str);
 
@@ -40,7 +37,7 @@ function plot_dpvdym_int(yy, zz, BPVy, model, m0, n_mode, fig_path)
     set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
 
     %% Save figure
-    outFile = fullfile(fig_path, ['dpvdym_int_', '_eMode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    outFile = fullfile(fig_path, ['dpvdym-int', '_eMode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
     saveas(gcf, outFile);
     % close(gcf);
 

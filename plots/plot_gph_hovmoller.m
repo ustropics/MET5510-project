@@ -4,7 +4,8 @@
 
 % FILENAME: plot_hovmoller.m
 
-% DESCRIPTION: Plots the Hovmoller diagram and saves it as an image, including hlevel in title and filename.
+% DESCRIPTION: Plots the Hovmoller diagram and saves it as an image,
+% including hlevel in title and filename.
 
 % INPUT:
 % - xx: Longitude coordinates (degrees)
@@ -16,14 +17,11 @@
 % - fig_path: Directory path for saving figure
 % - hlevel: Height level (e.g., 1 or 51) for title and filename
 
-% OUTPUT:
-% - Saves plot to 'fig_path/model_hovmoller_nmode-n_mode_m0-m0_hlevel-hlevel.png'
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function plot_gph_hovmoller(xx, time, gpt_h_hovmoler, model, m0, n_mode, fig_path, hlevel)
+function plot_gph_hovmoller(xx, time, gpt_h_hovmoler, m0, n_mode, fig_path, hlevel)
 
     %% Create figure
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
@@ -32,7 +30,7 @@ function plot_gph_hovmoller(xx, time, gpt_h_hovmoler, model, m0, n_mode, fig_pat
     ylabel('Time (days)')
 
     title_str = ['Hovmoller Diagram (hlevel = ', num2str(hlevel), ...
-    ', wave # = ', num2str(m0), ...
+    ', zonal wave # = ', num2str(m0), ...
     ', eMode # = ', num2str(n_mode), ')'];
 
     title(title_str);

@@ -15,14 +15,11 @@
 % - growth_rate: Growth rate
 % - omega: Imaginary eigenvalue
 
-% OUTPUT:
-% - Saves plot to 'output/figures/evec_amp.png'
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, model, fig_path)
+function plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, fig_path)
 
     %% Create figure
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
@@ -40,7 +37,7 @@ function plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, model, 
 
 
     %% Save figure
-    outFile = fullfile(fig_path, [model, '_evac_amp_', '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    outFile = fullfile(fig_path, ['evac-amp', '_eMode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
     saveas(gcf, outFile);
     close(gcf);
 

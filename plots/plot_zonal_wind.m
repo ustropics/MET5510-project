@@ -17,14 +17,11 @@
 % - n_mode: Mode number for filename
 % - fig_path: Directory path for saving figure
 
-% OUTPUT:
-% - Saves plot to 'fig_path/model_zonal_wind_nmode-n_mode_m0-m0_hlevel-hlevel.png'
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function plot_zonal_wind(xx, yy, ug, hlevel, model, m0, n_mode, fig_path)
+function plot_zonal_wind(xx, yy, ug, hlevel, m0, n_mode, fig_path)
 
     %% Create figure
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')

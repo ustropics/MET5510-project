@@ -14,12 +14,13 @@
 % OUTPUT:
 % - l: Linear index
 
-% MATH/FUNCTIONS: l = (k-1) * (jj-1) + (j-1)
+% MATH/FUNCTIONS: 
+% - l = (k-1) * (jj-1) + (j-1)
 
-% - VARIABLES:
-%   - jj is the number of latitude points
-%   - j is the latitude index (1 to jj-1 for interior)
-%   - k is the height index (1 to kk+1)
+% VARIABLES:
+% - jj is the number of latitude points
+% - j is the latitude index (1 to jj-1 for interior)
+% - k is the height index (1 to kk+1)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

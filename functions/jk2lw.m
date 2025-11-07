@@ -15,7 +15,7 @@
 % - l: Linear index
 
 % MATH/FUNCTIONS: 
-% l = j + (k-2)*(jj+1)
+% - l = j + (k-2)*(jj+1)
 
 % VARIABLES:
 % - jj is the number of latitude points

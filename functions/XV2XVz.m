@@ -17,23 +17,25 @@
 % - XVz: 1D array representing the vertical derivative of the streamfunction 
 %        (m/s), with length ll
 
-% MATH/FUNCTIONS: XVz = ∂XV/∂z
+% MATH/FUNCTIONS: 
+% - XVz = ∂XV/∂z
 
-% - VARIABLES:
-%   - Interior points: ∂XV/∂z = (XV(j,k+1) - XV(j,k-1)) / (2 * dz)
-%   - Bottom boundary (k=1): ∂XV/∂z = (XV(j,2) - XV(j,1)) / dz
-%   - For top boundary (k=kk+1): ∂XV/∂z = (XV(j,kk+1) - XV(j,kk)) / dz
-%   - dz: Vertical grid spacing (m)
-%   - The derivative is computed using centered finite differences for interior 
-%     points and one-sided differences at boundaries
+% VARIABLES:
+% - Interior points: ∂XV/∂z = (XV(j,k+1) - XV(j,k-1)) / (2 * dz)
+% - Bottom boundary (k=1): ∂XV/∂z = (XV(j,2) - XV(j,1)) / dz
+% - For top boundary (k=kk+1): ∂XV/∂z = (XV(j,kk+1) - XV(j,kk)) / dz
+% - dz: Vertical grid spacing (m)
+% - The derivative is computed using centered finite differences for interior 
+%   points and one-sided differences at boundaries
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function XVz = XV2XVz(XV)
+
     global jj kk ll dz
-    XVz = zeros(ll,1);
+    XVz = zeros(ll,1); % initialize output array
     
     %% Interior points
     for k = 2:kk

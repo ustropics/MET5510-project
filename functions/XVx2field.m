@@ -16,13 +16,14 @@
 % OUTPUT:
 % - field: 3D array representing the meridional wind field
 
-% MATH/FUNCTIONS: v' = (g/f₀) ∂ψ/∂x
+% MATH/FUNCTIONS: 
+% - v' = (g/f₀) ∂ψ/∂x
 
-% - VARIABLES:
-%   - ψ is streamfunction
-%   - g is gravity
-%   - f₀ is Coriolis parameter
-%   - ∂/∂x is derived from XVx
+% VARIABLES:
+% - ψ is streamfunction
+% - g is gravity
+% - f₀ is Coriolis parameter
+% - ∂/∂x is derived from XVx
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -39,6 +40,7 @@ function field= XVx2field(XV,ii,dx)
         for i = 1:ii
             xlon=(i-1)*dx; % longitude coordinate
     
+            % Compute the x-derivative using spectral method
             field(i,j,k)=real( (cplx*2*pi*m0/Lx)*XV(l) ...
                 *exp(cplx*2*pi*m0*xlon/Lx) );
         

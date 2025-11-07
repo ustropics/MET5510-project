@@ -27,18 +27,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function ugxtime = XV2ugxtime(XVy, ii, dx, omega, ylat, zlev)
-global cplx m0 Lx
+    global cplx m0 Lx
 
-ugxtime = zeros(ii+1, 51);
+    ugxtime = zeros(ii+1, 51);
 
-l = jk2l(ylat, zlev);
-for day = 1:51
-    sec = (day-1)*86400; % time in seconds
-    for n = 1:ii+1 % loop over longitude grid points
-        xlon = (n-1)*dx;
+    %% Get linear index for specified latitude and height
+    l = jk2l(ylat, zlev);
+    for day = 1:51
+        sec = (day-1)*86400; % time in seconds
+        for n = 1:ii+1 % loop over longitude grid points
+            xlon = (n-1)*dx;
 
-        % Compute ug at (n, day)
-        ugxtime(n, day) = real( - XVy(l) * exp(cplx * (2 * pi * m0 * xlon / Lx + omega * sec)));
+            % Compute ug at (n, day)
+            ugxtime(n, day) = real( - XVy(l) * exp(cplx * (2 * pi * m0 * xlon / Lx + omega * sec)));
+        end
     end
-end
+
 end

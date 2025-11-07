@@ -8,7 +8,7 @@
 % to derive the meridional component of the streamfunction gradient in the 
 % quasi-geostrophic model. This function is used to calculate the zonal wind 
 % component or related fields, critical for analyzing wave dynamics and 
-% perturbation evolution in the linear QG framework.
+% perturbation evolution within the QG framework.
 
 % INPUT:
 % - XV: 1D array representing the streamfunction eigenvector (m²/s), with length ll
@@ -17,13 +17,18 @@
 % - XVy: 1D array representing the meridional derivative of the streamfunction 
 %        (m/s), with length ll
 
-% MATH/FUNCTIONS: XVy = ∂XV/∂y = (XV(j+1,k) - XV(j-1,k)) / (2 * dy), where
+% MATH/FUNCTIONS: 
+% - XVy = ∂XV/∂y
+
+% VARIABLES:
+% - Interior points: ∂XV/∂y = (XV(j+1,k) - XV(j-1,k)) / (2 * dy)
+% - Southern boundary (j=2): ∂XV/∂y = (XV(j+1,k) - 0) / (2 * dy)  [since XV=0 at j=1 (ghost)]
+% - Northern boundary (j=jj): ∂XV/∂y = (0 - XV(j-1,k)) / (2 * dy)  [since XV=0 at j=jj+1 (ghost)]
 % - dy: Meridional grid spacing (m)
-% - XV(j+1,k) and XV(j-1,k) are streamfunction values at neighboring meridional 
-%   grid points, with boundary conditions setting XV=0 at j=2 (southern) and 
-%   j=jj (northern) boundaries
 % - The derivative is computed using centered finite differences for interior 
-%   points
+%   points, with Dirichlet boundary conditions XV=0 enforced at the southern 
+%   (j=1, ghost) and northern (j=jj+1, ghost) walls via zero values at j=2 and j=jj 
+%   when evaluating the stencil at the boundary-adjacent interior points.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

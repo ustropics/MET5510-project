@@ -8,7 +8,6 @@
 % gradient (dPV/dy)for Rossby, Eady, or HWME models.
 
 % Inputs:
-% - model - 'Rossby', 'Eady', or 'HWME'
 % - jj: Number of latitude grid points
 % - kk: Number of height grid points
 % - beta: Planetary vorticity gradient (m^-1 s^-1)

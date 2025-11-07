@@ -18,14 +18,11 @@
 % - n_mode: Mode number for filename
 % - fig_path: Directory path for saving figure
 
-% OUTPUT:
-% - Saves plot to 'fig_path/model_ug_hovmoller_nmode-n_mode_m0-m0_hlevel-hlevel.png'
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function plot_ug_hovmoller(xx, time, ug_hovmoler, hlat, hlevel, model, m0, n_mode, fig_path)
+function plot_ug_hovmoller(xx, time, ug_hovmoler, hlat, hlevel, m0, n_mode, fig_path)
 
     %% Create figure
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
@@ -36,15 +33,15 @@ function plot_ug_hovmoller(xx, time, ug_hovmoler, hlat, hlevel, model, m0, n_mod
 
 
     title_str = ['Hovmoller Diagram for Zonal Wind (hlevel = ', num2str(hlat), ...
-        ', wave # = ', num2str(m0), ', eMode # = ', num2str(n_mode)];
+        ', zonal wave # = ', num2str(m0), ', eMode # = ', num2str(n_mode)];
     title(title_str);
 
     % Set global font size
     set(findall(gcf, '-property', 'FontSize'), 'FontSize', 20);
 
     %% Save figure
-    outFile = fullfile(fig_path, ['ug_hovmoller',  '_hlevel-', num2str(hlevel), ... 
-        '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    outFile = fullfile(fig_path, ['ug-hovmoller',  '_hlevel-', num2str(hlevel), ... 
+        '_eMode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
 
     fprintf('Saving temperature plot to: %s\n', outFile)
     saveas(gcf, outFile);

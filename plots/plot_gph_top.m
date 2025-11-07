@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function rossby_gph_top(xx, yy, gpt_h, hlevel, model, m0, n_mode, fig_path)
+function plot_gph_top(xx, yy, gpt_h, hlevel, m0, n_mode, fig_path)
 
     %% Create figure
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
@@ -30,7 +30,7 @@ function rossby_gph_top(xx, yy, gpt_h, hlevel, model, m0, n_mode, fig_path)
     set(gca, 'xtick', 0:30:360)
 
     title_str = ['Geopotential Height at Top Boundary (', ...
-    ', wave # = ', num2str(m0), ...
+    'zonal wave # = ', num2str(m0), ...
     ', eMode # = ', num2str(n_mode), ')'];
 
     title(title_str);
@@ -39,7 +39,7 @@ function rossby_gph_top(xx, yy, gpt_h, hlevel, model, m0, n_mode, fig_path)
     set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
 
     %% Save figure
-    outFile = fullfile(fig_path, ['gph_top', '_nmode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    outFile = fullfile(fig_path, ['gph_top', '_eMode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
     saveas(gcf, outFile);
     close(gcf);
 

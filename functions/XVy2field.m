@@ -16,38 +16,41 @@
 % OUTPUT:
 % - field: 3D array representing the zonal wind field
 
-% MATH/FUNCTIONS: u' = -(g/f₀) ∂ψ/∂y
+% MATH/FUNCTIONS: 
+% - u' = -(g/f₀) ∂ψ/∂y
 
-% - VARIABLES:
-%   - ψ is streamfunction
-%   - g is gravity
-%   - f₀ is Coriolis parameter
-%   - ∂/∂y is derived from XVy
+% VARIABLES:
+% - ψ is streamfunction
+% - g is gravity
+% - f₀ is Coriolis parameter
+% - ∂/∂y is derived from XVy
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function field= XVy2field(XV,ii,dx) 
+function field = XVy2field(XV,ii,dx)
+
     global jj kk ll cplx m0 Lx dy
     
-    field=zeros(ii+1,jj+1,kk+1); % initialize 3D field
+    field = zeros(ii+1,jj+1,kk+1); % initialize 3D field
     
-    for l = 1:ll
+    for l = 1:ll % convert linear index to (j,k)
         [j,k]=l2jk(l);
-        for i = 1:ii
-            xlon=(i-1)*dx;
+        
+        %% Apply boundary conditions and compute finite difference
+        for i = 1:ii % loop over x-direction
+            xlon = (i-1)*dx;
             
-            %% Apply boundary conditions and compute finite difference
             % For forward difference at southern boundary
             if (j == 2)
-                lnh=jk2l(j+1,k);
-                field(i,j,k)=-real((XV(lnh)-0.0)*exp(cplx*2*pi*m0*xlon/Lx))/(2*dy); % forward difference at southern boundary
+                lnh = jk2l(j+1,k);
+                field(i,j,k) = -real((XV(lnh)-0.0)*exp(cplx*2*pi*m0*xlon/Lx))/(2*dy); % forward difference at southern boundary
 
             % For backward difference at northern boundary
             elseif (j == jj)
-                lsh=jk2l(j-1,k);
-                field(i,j,k)=-real( (0-XV(lsh))*exp(cplx*2*pi*m0*xlon/Lx) )/(2*dy);
+                lsh = jk2l(j-1,k);
+                field(i,j,k) = -real( (0-XV(lsh))*exp(cplx*2*pi*m0*xlon/Lx) )/(2*dy);
 
             % For centered difference at interior points
             else

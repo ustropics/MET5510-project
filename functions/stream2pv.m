@@ -14,13 +14,14 @@
 % OUTPUT:
 % - QV: 1D array representing the potential vorticity field
 
-% MATH/FUNCTIONS: Q = ∇²ψ + (f₀²/N²) ∂²ψ/∂z², where 
+% MATH/FUNCTIONS: 
+% - Q = ∇²ψ + (f₀²/N²) ∂²ψ/∂z², where 
 
-% - VARIABLES:
-%   - ψ is streamfunction
-%   - f₀ is Coriolis parameter
-%   - N² is Brunt-Vaisala frequency
-%   - derivatives are calculated via finite differences
+% VARIABLES:
+% - ψ is streamfunction
+% - f₀ is Coriolis parameter
+% - N² is Brunt-Vaisala frequency
+% - derivatives are calculated via finite differences
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

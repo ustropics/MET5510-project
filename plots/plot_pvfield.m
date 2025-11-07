@@ -12,16 +12,13 @@
 % - yy: Latitude coordinates (degrees)
 % - pvfield: Potential vorticity field (ii+1 x jj+1 x kk+1 array, s^-1)
 
-% OUTPUT:
-% - Saves plot to 'output/figures/pvfield.png'
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function plot_pvfield(xx, yy, pvfield, hlevel, model, m0, n_mode, fig_path)
+function plot_pvfield(xx, yy, pvfield, m0, n_mode, fig_path)
 
-    %% Create figure
+    %% create figure
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
     contourf(xx, yy, squeeze(pvfield(:,:,1))', 'LineStyle', 'none');
     colorbar;
@@ -29,18 +26,18 @@ function plot_pvfield(xx, yy, pvfield, hlevel, model, m0, n_mode, fig_path)
     ylabel('Latitude')
     set(gca, 'xtick', 0:30:360)
 
+    % set the title
     title_str = ['Potential Vorticity (', ...
-    'hlevel = ', num2str(hlevel), ...
-    ', wave # = ', num2str(m0), ...
-    ', eMode # = ', num2str(n_mode)];
+    'zonal wave # = ', num2str(m0), ...
+    ', eMode # = ', num2str(n_mode), ')'];
 
     title(title_str);
 
     % set global font size
     set(findall(gcf, '-property', 'FontSize'), 'FontSize',20);
 
-    %% Save figure
-    outFile = fullfile(fig_path, ['pvfield', '_hlevel-', num2str(hlevel), '_eMode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
+    %% save figure
+    outFile = fullfile(fig_path, ['pvfield', '_eMode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
     
     fprintf('Saving temperature plot to: %s\n', outFile)
     saveas(gcf, outFile);

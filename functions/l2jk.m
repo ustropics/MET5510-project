@@ -14,12 +14,13 @@
 % - j: Latitude index
 % - k: Height index
 
-% MATH/FUNCTIONS: [j, k] = [l+1 - (k-1)*(jj-1), floor((l-1)/(jj-1))+1]
+% MATH/FUNCTIONS: 
+% - [j, k] = [l+1 - (k-1)*(jj-1), floor((l-1)/(jj-1))+1]
 
-% - VARIABLES:
-%   - j is the number of latitude points
-%   - l is the linear index adjusted for interior points 
-%   - (1 to ll, where ll = (jj-1)*(kk+1))
+% VARIABLES:
+% - j is the number of latitude points
+% - l is the linear index adjusted for interior points 
+% - (1 to ll, where ll = (jj-1)*(kk+1))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

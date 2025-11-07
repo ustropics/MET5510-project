@@ -1,4 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%&
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -19,13 +19,14 @@
 % OUTPUT:
 % - xtime: 2D array representing the streamfunction field over longitude and time
 
-% MATH/FUNCTIONS: ψ(x,t) = XV * exp(i(kx - ωt))
+% MATH/FUNCTIONS: 
+% - ψ(x,t) = XV * exp(i(kx - ωt))
 
-% - VARIABLES:
-%   - k is wavenumber
-%   - ω is growth rate from eigenvalues
-%   - x is longitude
-%   - t is time
+% VARIABLES:
+% - k is wavenumber
+% - ω is growth rate from eigenvalues
+% - x is longitude
+% - t is time
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -37,6 +38,7 @@ function xtime = XV2streamxtime(XV,ii,dx,omega,ylat,zlev)
     
     xtime = zeros(ii+1, 51); % initialize output array
     
+    %% Get linear index for specified latitude and height
     l = jk2l(ylat, zlev);
     for day = 1: 51 % loop over days
         sec = (day-1)*86400; % time in seconds

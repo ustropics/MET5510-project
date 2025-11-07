@@ -1,9 +1,0 @@
-Some functions to test if gph hovmoller is accurate
-- follow perturbation from 0 to end of graph
-- determine number of days this occurs
-- calculate phase speed
-    -omega*Lx/(2*pi*7)
-
-- calculate number of days
-    -Lx/#_days/86400
-
