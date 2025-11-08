@@ -44,13 +44,13 @@ function plot_momentum_flux(vg, ug, m0, n_mode, fig_path)
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
     contourf(zvu_calc', 'LineStyle', 'none');
     colorbar;
-    colormap(cmap_RdYlBl(256))
+    colormap(cmap_twilight(256));
     xlabel('Latitude')
     ylabel('z-level')
     % set(gca, 'xtick', 0:30:360)
 
     % Set title
-    title_str = ['Mean Zonal Flow', ' (zonal wave # = ', ...
+    title_str = ['Momentum Flux', ' (zonal wave # = ', ...
      num2str(m0), ', eMode # = ', num2str(n_mode), ')'];
 
     title(title_str);
@@ -59,7 +59,7 @@ function plot_momentum_flux(vg, ug, m0, n_mode, fig_path)
     set(findall(gcf, '-property', 'FontSize'), 'FontSize', 20);
 
     %% Save figure
-    outFile = fullfile(fig_path, ['momentum-flux', '_eMode-', num2str(n_mode), ...
+    outFile = fullfile(fig_path, ['momentum_flux', '_eMode-', num2str(n_mode), ...
         '_m0-', num2str(m0), '.png']);
     fprintf('Saving zonal wind plot to: %s\n', outFile); % Debug output
     saveas(gcf, outFile);

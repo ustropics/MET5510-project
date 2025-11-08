@@ -24,6 +24,7 @@ function plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, fig_pat
     %% Create figure
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
     contourf(yy, zz, eVec_amp', 'linestyle', 'none');
+    hold on
     xlabel('Latitude')
     ylabel('Height (km)')
     set(gca, 'fontsize', 22, 'color', 'w')

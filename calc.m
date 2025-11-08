@@ -99,6 +99,7 @@ F3 = F3matrix(XV);
 F2 = F2matrix(XV,Ubar);
 F1 = F1matrix(XV,Ubar);
 
+%% Calculate wind field
 w_vec   = w2vec(G,F1,F2,F3);
 wfield  = w2field(w_vec, ii, dx);
 
@@ -118,7 +119,7 @@ end
 
 calcFile = fullfile(params.data_dir, params.calc_filename);
 
-% ---- 1. Save -------------------------------------------------
+%% Save data file
 save(calcFile, ...
     'gpt_h', 'temp', 'ug', 'vg', 'pvfield', 'wfield', ...
     'gpt_h_hovmoler1', 'gpt_h_hovmoler51', ...

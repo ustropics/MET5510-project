@@ -10,7 +10,7 @@
 % background state), and saves figures to disk. No computation is performed.
 %
 % INPUT:
-% - Precomputed results: from calc_wave-m0_eMode-n.mat
+% - Precomputed params: from calc_wave-m0_eMode-n.mat
 % - Model parameters: from cfg()
 %
 % OUTPUT:
@@ -42,34 +42,26 @@
 clear; clc;
 addpath(['functions', filesep])
 addpath(['plots', filesep])
-addpath(['config', filesep])
 
-%% Load config and computed results
+%% Load config and computed params
 params = cfg();
-load(fullfile(params.data_dir, params.calc_filename), 'results');
+load(fullfile(params.data_dir, params.calc_filename));
 
 jj = params.jj;
 kk = params.kk;
 ll = params.ll;
 
-% Unpack results from calculated date file
-xx = results.xx; yy = results.yy; zz = results.zz; time = results.time;
-gpt_h = results.gpt_h; temp = results.temp; ug = results.ug; vg = results.vg;
-pvfield = results.pvfield; wfield = results.wfield; XV = results.XV;
-gpt_h_hovmoler1 = results.gpt_h_hovmoler1;
-gpt_h_hovmoler51 = results.gpt_h_hovmoler51;
-ug_hovmoler1 = results.ug_hovmoler1;
-ug_hovmoler51 = results.ug_hovmoler51;
-Ubar = results.Ubar; BPVy = results.BPVy;
-m0 = results.m0; n_mode = results.n_mode;
-growth_rate = results.growth_rate; omega = results.omega;
-hlat = results.hlat;
+% Unpack params from calculated date file
+xx = params.xx; yy = params.yy; zz = params.zz; time = params.time;
+m0 = params.m0; n_mode = params.n_mode;
+hlat = params.hlat;
 
 fig_path = params.plot_dir;
+fig_path2 = fullfile(fig_path, 'combined');
 
 %% Ensure plot directory exists
-if ~exist(fig_path, 'dir')
-    mkdir(fig_path);
+if ~exist(fig_path2, 'dir')
+    mkdir(fig_path2);
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -106,13 +98,23 @@ end
 % Meridional wind at levels 1, 25, 51
 for h = hlevels
     fprintf('Plotting meridional wind at hlevel = %d\n', h);
-    plot_meridional_wind(xx, yy, vg, h, m0, n_mode, fig_path);
+    plot_meridional_wind(xx, yy, vg, h, m0, n_mode, fig_path)
 end
 
 % Temperature at levels 1, 25, 51
 for h = hlevels
     fprintf('Plotting temperature at hlevel = %d\n', h);
     plot_temp(xx, yy, temp, h, m0, n_mode, fig_path);
+end
+
+for h = hlevels
+    fprintf('Plotting combined meridional wind and temperature at hlevel = %d\n', h);
+    combined_meridional_wind_temp(xx, yy, vg, temp, h, m0, n_mode, fig_path2);
+end
+
+for h = hlevels
+    fprintf('Plotting combined zonal wind and temperature at hlevel = %d\n', h);
+    combined_zonal_wind_temp(xx, yy, ug, temp, h, m0, n_mode, fig_path2)
 end
 
 % Top boundary geopotential

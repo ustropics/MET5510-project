@@ -28,7 +28,8 @@ function plot_temp(xx, yy, temp, hlevel, m0, n_mode, fig_path)
     %% Create figure
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
     contourf(xx, yy, squeeze(temp(:,:,hlevel))', 'LineStyle', 'none');
-    colormap(flipud(cmap_RdYlBl(256)));
+    clim([-0.8 0.8]); % sets limit to contourf
+    colormap(flipud(cmap_twilight(256)));
     colorbar;
     xlabel('Longitude')
     ylabel('Latitude')

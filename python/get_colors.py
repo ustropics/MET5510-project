@@ -3,7 +3,7 @@ from matplotlib.colors import to_hex
 import numpy as np
 
 # Get the colormap
-cmap = plt.cm.twilight_shifted
+cmap = plt.cm.Spectral
 
 # Sample 10 colors (for example)
 colors = cmap(np.linspace(0, 1, 10))

@@ -27,6 +27,7 @@ function plot_zonal_wind(xx, yy, ug, hlevel, m0, n_mode, fig_path)
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
     contourf(xx, yy, squeeze(ug(:,:,hlevel))', 'LineStyle', 'none');
     colorbar;
+    colormap(cmap_RdYlBl(256));
     xlabel('Longitude')
     ylabel('Latitude')
     set(gca, 'xtick', 0:30:360)

@@ -24,10 +24,11 @@
 
 function plot_meridional_wind(xx, yy, vg, hlevel, m0, n_mode, fig_path)
 
-    %% Create figure
+    % Create figure
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
     contourf(xx, yy, squeeze(vg(:,:,hlevel))', 'LineStyle', 'none');
     colorbar;
+    colormap(cmap_RdYlBl(256));
     xlabel('Longitude')
     ylabel('Latitude')
     set(gca, 'xtick', 0:30:360)
@@ -41,7 +42,7 @@ function plot_meridional_wind(xx, yy, vg, hlevel, m0, n_mode, fig_path)
     % Set global font size
     set(findall(gcf, '-property', 'FontSize'), 'FontSize', 20);
     
-    %% Save figure
+    % Save figure
     outFile = fullfile(fig_path, ['meridional_wind_', '_hlevel-', num2str(hlevel), ... 
         '_eMode-', num2str(n_mode), '_m0-', num2str(m0), '.png']);
     fprintf('Saving meridional wind plot to: %s\n', outFile);

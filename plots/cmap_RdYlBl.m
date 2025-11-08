@@ -1,4 +1,4 @@
-function cmap = RdYlBl(n)
+function cmap = cmap_RdYlBl(n)
     % RdYlBl - Matplotlib's Red-Yellow-Blue divergent colormap
     % Usage: colormap(RdYlBl(256))
     if nargin < 1, n = 256; end
