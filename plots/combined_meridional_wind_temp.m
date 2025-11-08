@@ -31,8 +31,9 @@ function combined_meridional_wind_temp(xx, yy, vg, temp, hlevel, m0, n_mode, fig
     
     % Wind shading
     contourf(xx, yy, squeeze(vg(:,:,hlevel))', 'LineStyle','none');
+    clim([-1.4 1.4]);
     colorbar;
-    colormap(cmap_RdYlBl(256));
+    colormap(cmap_PRGn(256));
     hold on;
     
     % --- Temperature contours: white, solid(+), dashed(-) ---
@@ -42,12 +43,12 @@ function combined_meridional_wind_temp(xx, yy, vg, temp, hlevel, m0, n_mode, fig
     
     % Positive: solid white
     if zero_idx < length(levs)
-        contour(xx, yy, temp_slice, levs(zero_idx+1:end), 'k-', 'LineWidth', 2);
+        contour(xx, yy, temp_slice, levs(zero_idx+1:end), 'r-', 'LineWidth', 2);
     end
     
     % Negative: dashed white
     if zero_idx > 1
-        contour(xx, yy, temp_slice, levs(1:zero_idx-1), 'k--', 'LineWidth', 2);
+        contour(xx, yy, temp_slice, levs(1:zero_idx-1), 'b--', 'LineWidth', 2);
     end
     
     % Zero line: thin solid white (optional — comment out to hide)

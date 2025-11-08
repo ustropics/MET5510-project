@@ -47,7 +47,6 @@ addpath('plots') % add plots folder
 params = cfg();
 
 % Assign global variables
-model = params.model; % model name
 cplx = params.cplx; % imaginary unit
 m0 = params.m0; % wave number
 jj = params.jj; % number of latitude grid points
@@ -73,7 +72,7 @@ data = fullfile(params.data_dir, params.data_filename);
 
 %% Initialize Ubar and BPVy
 Ubar = ubar(jj, kk, gg, f0, Theta0, dTbar, HH, Ly, ZZ, YY, mu, Lr);
-BPVy = bpvy(model, jj, kk, beta, Ubar, dy, f0, NN2, dz);
+BPVy = bpvy(jj, kk, beta, Ubar, dy, f0, NN2, dz);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%% MATRIX CONSTRUCTION & EIGENVALUES %%%%%%%%%%%%%%%%%%%

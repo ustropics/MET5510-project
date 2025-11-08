@@ -31,8 +31,9 @@ function combined_zonal_wind_temp(xx, yy, ug, temp, hlevel, m0, n_mode, fig_path
     
     % Wind shading
     contourf(xx, yy, squeeze(ug(:,:,hlevel))', 'LineStyle','none');
+    clim([-1 1]);
     colorbar;
-    colormap(cmap_RdYlBl(256));
+    colormap(cmap_PRGn(256));
     hold on;
     
     % --- Temperature contours: black, solid(+), dashed(-) ---
@@ -42,12 +43,12 @@ function combined_zonal_wind_temp(xx, yy, ug, temp, hlevel, m0, n_mode, fig_path
     
     % Positive: solid black
     if zero_idx < length(levs)
-        contour(xx, yy, temp_slice, levs(zero_idx+1:end), 'k-', 'LineWidth', 2);
+        contour(xx, yy, temp_slice, levs(zero_idx+1:end), 'r-', 'LineWidth', 2);
     end
     
     % Negative: dashed black
     if zero_idx > 1
-        contour(xx, yy, temp_slice, levs(1:zero_idx-1), 'k--', 'LineWidth', 2);
+        contour(xx, yy, temp_slice, levs(1:zero_idx-1), 'b--', 'LineWidth', 2);
     end
     
     % Zero line: thin solid black (optional — comment out to hide)

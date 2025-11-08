@@ -78,6 +78,8 @@ plot_vertical_hflux(wfield, temp, m0, n_mode, fig_path);
 plot_gph_hovmoller(xx, time, gpt_h_hovmoler1, m0, n_mode, fig_path, 1);
 plot_gph_hovmoller(xx, time, gpt_h_hovmoler51, m0, n_mode, fig_path, 51);
 
+
+
 % Plot eigenvector amplitude
 eVec_amp = zeros(jj + 1, kk + 1);
 
@@ -87,6 +89,11 @@ for l = 1 : ll
 end
 
 plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, fig_path);
+
+combined_momentum_and_vertical_hflux(vg, ug, wfield, temp, m0, n_mode, fig_path2)
+combined_momentum_and_meridional_hflux(vg, ug, temp, m0, n_mode, fig_path2)
+combined_ubar_with_evec_amp(yy, zz, Ubar, eVec_amp, m0, n_mode, ...
+                                 growth_rate, omega, fig_path2)
 
 % Zonal wind at levels 1, 25, 51
 hlevels = [1, 25, 51];

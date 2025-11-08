@@ -24,9 +24,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function BPVy = bpvy(model, jj, kk, beta, Ubar, dy, f0, NN2, dz)
+function BPVy = bpvy(jj, kk, beta, Ubar, dy, f0, NN2, dz)
     
     BPVy = zeros(jj + 1, kk + 1);
+    model = 'HWME';
 
     % Compute for Rossby model
     if strcmpi(model, 'Rossby')

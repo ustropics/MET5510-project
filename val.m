@@ -1,7 +1,6 @@
 clc;
 
 %% Compute values
-
 sec_to_day      = 86400;                                    % day                                    
 growth_rate     = real(eigVal2(n_mode));                    % s^-1
 efolding        = 1/growth_rate/sec_to_day;                 % days                     
@@ -16,8 +15,8 @@ rossby_number   = max(abs(ug(:))) / (f0*rossby_radius);     % dimensionless
 max_T           = max(abs(temp(:)));                        % K
 max_w           = max(abs(wfield(:)));                      % cm s^-1
 
-max_bottom = max(eVec_amp(:,1));
-max_top    = max(eVec_amp(:,51));
+max_bottom      = max(eVec_amp(:,1));
+max_top         = max(eVec_amp(:,51));
 fprintf('bottom = %.4e , top = %.4e\n', max_bottom, max_top);
 
 %% Print values and units
