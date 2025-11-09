@@ -35,6 +35,9 @@ function combined_pvfield_temp(xx, yy, pvfield, temp, hlevel, m0, n_mode, fig_pa
     %% --------------------------------------------------------------------
     pv_slice = squeeze(pvfield(:,:,hlevel));
     contourf(xx, yy, pv_slice', 'LineStyle','none');
+    hold on
+    contour(xx, yy, pv_slice', 'LineColor', 'w', 'LineStyle', '-');
+    hold off
     
     % Symmetric color scaling (same as plot_pvfield.m)
     step = 0.2;

@@ -113,6 +113,10 @@ addpath(['cmaps', filesep])
             requireLevel(h);
             plot_temp(xx, yy, temp, h, m0, n_mode, fig_path);
 
+        case 'pvfield'
+            requireLevel(h);
+            plot_pvfield(xx, yy, pvfield, h, m0, n_mode, fig_path);
+
         case 'combined_meridional_wind_temp'
             requireLevel(h);
             combined_meridional_wind_temp(xx, yy, vg, temp, h, m0, n_mode, fig_path2);
@@ -131,19 +135,20 @@ addpath(['cmaps', filesep])
 
         case 'gph_hovmoller'
             requireLevel(h);
-            plot_gph_hovmoller(xx, time, gpt_h_hovmoler1, m0, n_mode, fig_path, h);
+            var_name = sprintf('gpt_h_hovmoler%d', h);
+            data = eval(var_name);
+            plot_gph_hovmoller(xx, time, data, hlat, h, m0, n_mode, fig_path);
 
         case 'zonal_hovmoller'
             requireLevel(h);
-            plot_zonal_hovmoller(xx, time, ug_hovmoler1, hlat, h, m0, n_mode, fig_path);    
+            var_name = sprintf('ug_hovmoler%d', h);
+            data = eval(var_name);
+            plot_zonal_hovmoller(xx, time, data, hlat, h, m0, n_mode, fig_path);    
 
         % === Top boundary and background ===
         case 'gph'
             requireLevel(h);
             plot_gph(xx, yy, gpt_h, h, m0, n_mode, fig_path);
-
-        case 'pvfield'
-            plot_pvfield(xx, yy, pvfield, m0, n_mode, fig_path);
 
         case 'meridional_xsec'
             plot_meridional_xsec(xx, zz, vg, jj, m0, n_mode, fig_path);

@@ -73,9 +73,11 @@ plot_momentum_flux(zz, yy, vg, ug, m0, n_mode, fig_path);
 plot_meridional_hflux(zz, yy, vg, temp, m0, n_mode, fig_path);
 plot_vertical_hflux(zz, yy, wfield, temp, m0, n_mode, fig_path);
 
-% Hovmoller: Geopotential height
-plot_gph_hovmoller(xx, time, gpt_h_hovmoler1, m0, n_mode, fig_path, 1);
-plot_gph_hovmoller(xx, time, gpt_h_hovmoler51, m0, n_mode, fig_path, 51);
+% Hovmoller: Geopotential height and zonal
+plot_gph_hovmoller(xx, time, gpt_h_hovmoler1, hlat, 1, m0, n_mode, fig_path);
+plot_gph_hovmoller(xx, time, gpt_h_hovmoler51, hlat, 51, m0, n_mode, fig_path);
+plot_zonal_hovmoller(xx, time, ug_hovmoler1, hlat, 1, m0, n_mode, fig_path);
+plot_zonal_hovmoller(xx, time, ug_hovmoler51, hlat, 51, m0, n_mode, fig_path);
 
 % Plot eigenvector amplitude
 eVec_amp = zeros(jj + 1, kk + 1);
@@ -114,10 +116,6 @@ plot_gph_xsec(xx, zz, gpt_h, jj, m0, n_mode, fig_path);
 % Plot cross-sections
 plot_meridional_xsec(xx, zz, vg, jj, m0, n_mode, fig_path);
 combined_gph_meridional_xsec(xx, zz, gpt_h, vg, jj, m0, n_mode, fig_path2)
-
-% Zonal wind Hovmoller
-plot_zonal_hovmoller(xx, time, ug_hovmoler1, hlat, 1, m0, n_mode, fig_path);
-plot_zonal_hovmoller(xx, time, ug_hovmoler51, hlat, 51, m0, n_mode, fig_path);
 
 % Background state
 plot_ubar(yy, zz, Ubar, m0, n_mode, fig_path);

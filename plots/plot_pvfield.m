@@ -50,8 +50,9 @@ function plot_pvfield(xx, yy, pvfield, hlevel, m0, n_mode, fig_path)
     % Create the figure and set it's size [left, bottom, width, height]
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
     contourf(xx, yy, data', 'LineStyle', 'none');
+    colormap(cmap_berlin(256));
     hold on
-    contour(xx, yy, data', 'LineColor', 'k', 'LineStyle', '-');
+    contour(xx, yy, data', 'LineColor', 'w', 'LineStyle', '-');
     hold off
 
     colorbar;
@@ -65,7 +66,7 @@ function plot_pvfield(xx, yy, pvfield, hlevel, m0, n_mode, fig_path)
     % Create title string with input variables and set it
     title_str = ['Potential Vorticity', newline ...
                 'hlevel = ', num2str(hlevel), ... 
-                'zonal wave # = ', num2str(m0), ...
+                ', zonal wave # = ', num2str(m0), ...
                 ', eMode # = ', num2str(n_mode)];
 
     title(title_str);

@@ -23,7 +23,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function plot_gph_hovmoller(xx, time, gpt_h_hovmoler, m0, n_mode, fig_path, hlevel)
+function plot_gph_hovmoller(xx, time, gpt_h_hovmoler, hlat, hlevel, m0, n_mode, fig_path)
 
     %% --------------------------------------------------------------------
     %% 1. Extract the data and compute limits
@@ -67,7 +67,8 @@ function plot_gph_hovmoller(xx, time, gpt_h_hovmoler, m0, n_mode, fig_path, hlev
 
     % Set x and y-label text as well as tick spacing for grid labels
     title_str = ['Geopotential Height Hovmoller Diagram', newline ...
-        'hlevel = ', num2str(hlevel), ...
+        'latitude = ', num2str(hlat), ...
+        ', hlevel = ', num2str(hlevel), ...
         ', zonal wave # = ', num2str(m0), ...
         ', eMode # = ', num2str(n_mode)];
 
