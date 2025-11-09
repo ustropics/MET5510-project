@@ -43,7 +43,7 @@ function combined_pvfield_temp(xx, yy, pvfield, temp, hlevel, m0, n_mode, fig_pa
     caxis([vmin vmax]);
     
     colorbar;
-    colormap(cmap_coolwarm(256));  % or use your preferred colormap
+    colormap(cmap_berlin(256));  % or use your preferred colormap
     hold on;
     
     %% --------------------------------------------------------------------
@@ -74,7 +74,7 @@ function combined_pvfield_temp(xx, yy, pvfield, temp, hlevel, m0, n_mode, fig_pa
     ylabel('Latitude')
     set(gca,'xtick',0:30:360)
     
-    title_str = ['Potential Vorticity (shaded) with Temperature Differences (contoured)', newline ...
+    title_str = ['Potential Vorticity (shaded) & Temperature Perturbations (contoured)', newline ...
                  'hlevel = ', num2str(hlevel), ...
                  ', zonal wave # = ', num2str(m0), ...
                  ', eMode # = ', num2str(n_mode)];

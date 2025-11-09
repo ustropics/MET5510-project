@@ -40,7 +40,7 @@ function combined_zonal_wind_temp(xx, yy, ug, temp, hlevel, m0, n_mode, fig_path
     
     contourf(xx, yy, squeeze(ug(:,:,hlevel))', 'LineStyle','none');
     colorbar;
-    colormap(cmap_PRGn(256));
+    colormap(flipud(cmap_PuOr(256)));
     hold on;
 
     %% --------------------------------------------------------------------
@@ -76,7 +76,7 @@ function combined_zonal_wind_temp(xx, yy, ug, temp, hlevel, m0, n_mode, fig_path
     set(gca,'xtick',0:30:360)
     
     % Create title string with input variables and set it 
-    title_str = ['Zonal Wind (shaded) with Temperature Differences (contoured)', newline ...
+    title_str = ['Zonal Wind (shaded) & Temperature Perturbations (contoured)', newline ...
         'hlevel = ', num2str(hlevel), ...
         ', zonal wave # = ', num2str(m0), ...
         ', eMode # = ', num2str(n_mode)];
