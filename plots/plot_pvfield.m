@@ -22,21 +22,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function plot_pvfield(xx, yy, pvfield, m0, n_mode, fig_path)
+function plot_pvfield(xx, yy, pvfield, hlevel, m0, n_mode, fig_path)
 
     %% --------------------------------------------------------------------
     %% 1. Extract the data and compute limits
     %% --------------------------------------------------------------------
 
     % Get 2d data for our potential vorticity contours at surface
-    data = squeeze(pvfield(:,:,1)); % get our data to plot
+    data = squeeze(pvfield(:,:,hlevel)); % get our data to plot
 
     % get the maximum and minimum values
     vmin = min(data(:));   % absolute minimum
     vmax = max(data(:));   % absolute maximum
     
     % print maximum and minimum values
-    fprintf('\nPotential vorticity contours at surface:\n')
+    fprintf('\nPotential vorticity contours at hlevel = %d :\n', hlevel)
     fprintf('Maximum Value: %.2f and Minimum Value: %.2f\n', vmax, vmin)
     
     % sets the +/- value to add to contourf (0.2 = ~20%)  
@@ -56,7 +56,7 @@ function plot_pvfield(xx, yy, pvfield, m0, n_mode, fig_path)
     hold off
 
     colorbar;
-    caxis([vmin vmax]); % sets limits from section 1
+    % caxis([vmin vmax]); % sets limits from section 1
 
     % Set x and y-label text as well as tick spacing for grid labels    
     xlabel('Longitude (degrees)')
@@ -65,8 +65,9 @@ function plot_pvfield(xx, yy, pvfield, m0, n_mode, fig_path)
 
     % Create title string with input variables and set it
     title_str = ['Potential Vorticity', newline ...
-    'zonal wave # = ', num2str(m0), ...
-    ', eMode # = ', num2str(n_mode)];
+                'hlevel = ', num2str(hlevel), ... 
+                'zonal wave # = ', num2str(m0), ...
+                ', eMode # = ', num2str(n_mode)];
 
     title(title_str);
 
@@ -79,6 +80,7 @@ function plot_pvfield(xx, yy, pvfield, m0, n_mode, fig_path)
 
     % Create filename to save our figure and set output directory    
     outFile = fullfile(fig_path, ['pvfield', ...
+        '_hlevel-', num2str(hlevel), ... 
         '_eMode-', num2str(n_mode), ...
         '_m0-', num2str(m0), '.png']);
     

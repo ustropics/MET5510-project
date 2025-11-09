@@ -44,7 +44,7 @@ function combined_meridional_wind_temp(xx, yy, vg, temp, hlevel, m0, n_mode, fig
     %% 3. Overlay temperature contours: black, solid(+), dashed(-)
     %% --------------------------------------------------------------------
     temp_slice = squeeze(temp(:,:,hlevel))';
-    levs = -0.6:0.1:0.6;                    % fine levels for small range
+    levs = -0.4:0.1:0.4;                    % fine levels for small range
     zero_idx = find(levs == 0);
     
     % Positive: solid red
@@ -68,9 +68,10 @@ function combined_meridional_wind_temp(xx, yy, vg, temp, hlevel, m0, n_mode, fig
     ylabel('Latitude')
     set(gca,'xtick',0:30:360)
     
-    title_str = ['Meridional Wind (hlevel = ', num2str(hlevel), ...
+    title_str = ['Meridional Wind (shaded) with Temperature Differences (contoured)', newline ...
+                 'hlevel = ', num2str(hlevel), ...
                  ', zonal wave # = ', num2str(m0), ...
-                 ', eMode # = ', num2str(n_mode), ')'];
+                 ', eMode # = ', num2str(n_mode)];
     title(title_str);
     set(findall(gcf,'-property','FontSize'),'FontSize',20);
     

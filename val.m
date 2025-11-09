@@ -17,6 +17,9 @@ max_w           = max(abs(wfield(:)));                      % cm s^-1
 
 max_bottom      = max(eVec_amp(:,1));
 max_top         = max(eVec_amp(:,51));
+max_gph         = 10;
+
+
 fprintf('bottom = %.4e , top = %.4e\n', max_bottom, max_top);
 
 %% Print values and units
@@ -66,13 +69,9 @@ fprintf('Wave energy flux: %.3f J/s\n', wave_energy_flux);
 
 % Calculate the wave number based on the group speed and phase speed
 wave_number = group_speed / phase_speed;  % rad/m
-fprintf('Wave number: % rad/m\n', wave_number);
+fprintf('Wave number: %.2f rad/m\n', wave_number);
 
 % Calculate the wave energy density
 wave_energy_density = wave_energy_flux / (Lx * sec_to_day);  % J/km^2
 fprintf('Wave energy density: %.4e J/km^2\n', wave_energy_density);
-
-% Calculate the dispersion relation for the wave
-dispersion_relation = (omega.^2 - (k.^2 * phase_speed^2)); 
-fprintf('Dispersion relation: %.4e \n', dispersion_relation);
 

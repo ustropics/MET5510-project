@@ -39,7 +39,7 @@ function plot_zonal_wind(xx, yy, ug, hlevel, m0, n_mode, fig_path)
     vmax = max(data(:));   % absolute maximum
     
     % print maximum and minimum values
-    fprintf('\nZonal wind contours at specific hlevel:\n')
+    fprintf('\nZonal wind contours at hlevel = %d:\n', hlevel)
     fprintf('Maximum Value: %.2f and Minimum Value: %.2f\n', vmax, vmin)
     
     % sets the +/- value to add to contourf (0.2 = ~20%)  

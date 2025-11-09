@@ -88,6 +88,9 @@ addpath(['cmaps', filesep])
         case 'combined_momentum_and_meridional_hflux'
             combined_momentum_and_meridional_hflux(vg, ug, temp, m0, n_mode, fig_path2);
 
+        case 'combined_gph_meridional_xsec'
+            combined_gph_meridional_xsec(xx, zz, gpt_h, vg, jj, m0, n_mode, fig_path2)
+
         case 'combined_ubar_with_evec_amp'
             eVec_amp = zeros(jj + 1, params.kk + 1);
             for l = 1 : params.ll
@@ -118,10 +121,20 @@ addpath(['cmaps', filesep])
             requireLevel(h);
             combined_zonal_wind_temp(xx, yy, ug, temp, h, m0, n_mode, fig_path2);
 
+        case 'combined_gph_temp'
+            requireLevel(h);
+            combined_gph_temp(xx, yy, gpt_h, temp, h, m0, n_mode, fig_path2);
+        
+        case 'combined_pvfield_temp'
+            requireLevel(h);
+            combined_pvfield_temp(xx, yy, pvfield, temp, h, m0, n_mode, fig_path2)
+
         case 'gph_hovmoller'
+            requireLevel(h);
             plot_gph_hovmoller(xx, time, gpt_h_hovmoler1, m0, n_mode, fig_path, h);
 
         case 'zonal_hovmoller'
+            requireLevel(h);
             plot_zonal_hovmoller(xx, time, ug_hovmoler1, hlat, h, m0, n_mode, fig_path);    
 
         % === Top boundary and background ===
@@ -174,12 +187,13 @@ function names = listAvailablePlots()
     names = {
         'gph_xsec', 'momentum_flux', 'meridional_hflux', 'vertical_hflux', ...
         'gph_hovmoller', 'zonal_hovmoller', ...
-        'evec_amp', 'combined_momentum_and_vertical_hflux', ...
-        'combined_momentum_and_meridional_hflux', 'combined_ubar_with_evec_amp', ...
+        'evec_amp', 'combined_momentum_vertical_hflux', ...
+        'combined_momentum_meridional_hflux', 'combined_ubar_evec_amp', ...
         'zonal_wind', 'meridional_wind', 'temperature', ...
         'combined_meridional_wind_temp', 'combined_zonal_wind_temp', ...
         'gph', 'pvfield', 'meridional_xsec', 'ubar', ...
-        'dpvdym_int', 'dpvdym_bnd', 'combined_bg_flow'
+        'dpvdym_int', 'dpvdym_bnd', 'combined_bg_flow', ...
+        'combined_gph_temp','combined_pvfield_temp', 'combined_gph_meridional_xsec'
     };
 
     names = sort(names); % sort them so they're alphabetical

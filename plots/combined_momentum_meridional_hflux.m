@@ -59,7 +59,7 @@ function combined_momentum_and_meridional_hflux(vg, ug, temp, m0, n_mode, fig_pa
     xlabel('Latitude','FontSize',20);
     ylabel('z-level','FontSize',20);
 
-    title_str = sprintf(['Momentum Flux (filled) & Meridional Heat Flux (contours)\n' ...
+    title_str = sprintf(['Momentum Flux (shaded) & Meridional Heat Flux (contours)\n' ...
                          '(zonal wave # = %d, eMode # = %d)'], m0, n_mode);
     title(title_str,'FontSize',20);
 

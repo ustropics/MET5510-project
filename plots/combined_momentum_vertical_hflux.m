@@ -60,8 +60,8 @@ function combined_momentum_and_vertical_hflux(vg, ug, wfield, temp, m0, n_mode, 
     xlabel('Latitude','FontSize',20);
     ylabel('z-level','FontSize',20);
 
-    title_str = sprintf(['Momentum Flux (filled) & Vertical Heat Flux (contours)\n' ...
-                         '(zonal wave # = %d, eMode # = %d)'], m0, n_mode);
+    title_str = sprintf(['Momentum Flux (shaded) & Vertical Heat Flux (contours)\n' ...
+                         'zonal wave # = %d, eMode # = %d'], m0, n_mode);
     title(title_str,'FontSize',20);
 
     set(findall(gcf,'-property','FontSize'),'FontSize',20);

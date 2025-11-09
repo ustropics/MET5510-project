@@ -68,8 +68,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PLOTTING %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Geopotential height (full field)
-plot_gph_xsec(xx, zz, gpt_h, jj, m0, n_mode, fig_path);
+% Plot fluxes
 plot_momentum_flux(zz, yy, vg, ug, m0, n_mode, fig_path);
 plot_meridional_hflux(zz, yy, vg, temp, m0, n_mode, fig_path);
 plot_vertical_hflux(zz, yy, wfield, temp, m0, n_mode, fig_path);
@@ -89,29 +88,32 @@ end
 plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, fig_path);
 
 % Combined plots
-combined_momentum_and_vertical_hflux(vg, ug, wfield, temp, m0, n_mode, fig_path2)
-combined_momentum_and_meridional_hflux(vg, ug, temp, m0, n_mode, fig_path2)
-combined_ubar_with_evec_amp(yy, zz, Ubar, eVec_amp, m0, n_mode, ...
+combined_momentum_vertical_hflux(vg, ug, wfield, temp, m0, n_mode, fig_path2)
+combined_momentum_meridional_hflux(vg, ug, temp, m0, n_mode, fig_path2)
+combined_ubar_evec_amp(yy, zz, Ubar, eVec_amp, m0, n_mode, ...
                                  growth_rate, omega, fig_path2)
 
-% Zonal wind at levels 1, 25, 51
-hlevels = [1, 25, 51];
+% Zonal wind at levels 1, 26, 51
+hlevels = [1, 26, 51];
 for h = hlevels
     plot_zonal_wind(xx, yy, ug, h, m0, n_mode, fig_path);
     plot_meridional_wind(xx, yy, vg, h, m0, n_mode, fig_path)
     plot_temp(xx, yy, temp, h, m0, n_mode, fig_path);
+    plot_pvfield(xx, yy, pvfield, h, m0, n_mode, fig_path);
+    plot_gph(xx, yy, gpt_h, h, m0, n_mode, fig_path);
     combined_meridional_wind_temp(xx, yy, vg, temp, h, m0, n_mode, fig_path2);
     combined_zonal_wind_temp(xx, yy, ug, temp, h, m0, n_mode, fig_path2)
+    combined_gph_temp(xx, yy, gpt_h, temp, h, m0, n_mode, fig_path2)
+    combined_pvfield_temp(xx, yy, pvfield, temp, h, m0, n_mode, fig_path2)
 end
 
 % Top boundary geopotential
-plot_gph(xx, yy, gpt_h, 51, m0, n_mode, fig_path);
+plot_gph_xsec(xx, zz, gpt_h, jj, m0, n_mode, fig_path);
 
-% Potential vorticity
-plot_pvfield(xx, yy, pvfield, m0, n_mode, fig_path);
 
-% Meridional wind cross-section
+% Plot cross-sections
 plot_meridional_xsec(xx, zz, vg, jj, m0, n_mode, fig_path);
+combined_gph_meridional_xsec(xx, zz, gpt_h, vg, jj, m0, n_mode, fig_path2)
 
 % Zonal wind Hovmoller
 plot_zonal_hovmoller(xx, time, ug_hovmoler1, hlat, 1, m0, n_mode, fig_path);

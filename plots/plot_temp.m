@@ -38,7 +38,7 @@ function plot_temp(xx, yy, temp, hlevel, m0, n_mode, fig_path)
     vmax = max(data(:));   % absolute maximum
     
     % print maximum and minimum values
-    fprintf('\nTemperature contours at specific hlevel:\n')
+    fprintf('\nTemperature contours at hlevel = %d:\n', hlevel)
     fprintf('Maximum Value: %.2f and Minimum Value: %.2f\n', vmax, vmin)
     
     % sets the +/- value to add to contourf (0.2 = ~20%)  
