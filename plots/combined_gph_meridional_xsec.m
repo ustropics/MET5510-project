@@ -2,7 +2,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% FILENAME: combined_gph_and_meridional_xsec.m
+% FILENAME: combined_gph_meridional_xsec.m
 %
 % DESCRIPTION: Plots geopotential height perturbation (filled contours) at
 %              mid-latitude with meridional wind (black contour lines)

@@ -15,14 +15,12 @@ The program simulates various atmospheric wave patterns using the Quasi-Geostrop
 ### Create Initial Plots
 1. `plt.m`: Plots all figuresfrom the calculated data from plotting functions in `plots`
 2. `plt_one('list')`: Command can be run in terminal to get a list of individual plots to generate
-3. `eady_plot.m` to generate initial plots using the Eady data
-4. Generated plots are saved in `output/figures/*.png`
+3. Generated plots are saved in `figures/*.png`
+4. Generated combined plots are saved in `figures/combined/*.png` 
 
-### Config Options
-1. `hwme_config.m` contains all config, variable, and constants needed for Hoskins-West Modified Eady-type calculations
-2. `rossby_config.m` contains all config, variable, and constants needed for Rossby Wave calculations
-3. `eady_config.m` contains all the config, variable, and constants needed for Eady calculations
-4. Config files are stored in `config/*.m`
+### Config Options and Values
+1. `cfg.m`: Contains the main config options that can be changed like zonal wave number (m0), eMode # (n_mode), latitude, etc.
+2. `val.m`: Calculates values and prints them to console
 
 ## File Structure
 ### Functions are stored in /functions
@@ -62,10 +60,10 @@ The program simulates various atmospheric wave patterns using the Quasi-Geostrop
 
 
 ### Figures are stored in /figures
-- `plot_dpvdym_boundaries.m`: Plots d(PVbar)/dy at boundaries with beta.
-- `plot_dpvdym_int.m`: Plots d(PVbar)/dy interior contour.
-- `plot_evec_amp.m`: Plots eigenvector amplitude contour.
-- `plot_gph_hovmoller.m`: Plots Hovmoller diagram for Geopotential Height across latitude-time in days (x-time).
+- `plot_dpvdym_bnd.m`: Plots d(PVbar)/dy at boundaries for surface, mid-level, and tropopause as line plots vs. latitude.
+- `plot_dpvdym_int.m`: Plots d(PVbar)/dy meridional gradient of background PV across latitude-height (y-z).
+- `plot_evec_amp.m`: Plots eigenvector amplitude across the latitude-height (y-z).
+- `plot_gph_hovmoller.m`: Plots Hovmoller diagram for geopotential height across llongitude-time in days (x-time).
 - `plot_gph.m`: Plots geopotential height contour at set hlevels across longitude-latitude (x-y).
 - `plot_gph_xsec.m`: Plots geopotential height perturbation at mid-latitude across longitude-height (x-z).
 - `plot_meridional_hflux.m`: Plots zonally-averaged meridional eddy heat flux at latitude-height (y-z).
@@ -73,34 +71,19 @@ The program simulates various atmospheric wave patterns using the Quasi-Geostrop
 - `plot_meridional_xsec.m`: Plots meridional wind vertical cross-section at mid-latitude across longitude-height (x-z).
 - `plot_meridional_flux.m`: Plots zonally-averaged meridional eddy momentum flux <v'u'> across latitude-height (y-z).
 - `plot_pvfield.m`: Plots potential vorticity perturbations at given hlevels across longitude-latitude (x-y).
+- `plot_temp.m`: Plots temperature perturbation at a specific vertical level across longitude-latitude (x-y).
+- `plot_ubar.m`: Plots background zonal wind Ubar across latitude-height (y-z).
+- `plot_vertical_hflux.m`: Plots of the zonally-averaged vertical heat flux <w'T'> across latitude-height (y-z).
+- `plot_zonal_hovmoller.m`: Plots Hovmoller diagram for zonal wind perturbation across longitude-time in days (x-time).
+- `plot_zonal_wind.m`: Plots zonal wind perturbation at a specified vertical level across longitude-latitude (x-y).
 
-- `plot_hovmoller.m`: Plots Hovmoller diagram
-- `plot_zonal_wind.m`: Plots zonal wind contour
-- `plot_meridional_wind.m`: Plots meridional wind contour
-- `plot_temperature.m`: Plots temperature contour
-- `plot_gph_top.m`: Plots geopotential height at top boundary
-- `plot_pvfield.m`: Plots potential vorticity contour
-- `plot_vg_cross_section.m`: Plots meridional wind vertical cross-section
-- `plot_ug_hovmoller.m`: Plots Hovmoller diagram for zonal wind
-- `plot_ubar_contour.m`: Plots Ubar contour
-- `plot_dpvdym_int.m`: Plots d(PVbar)/dy interior contour
-- `plot_dpvdym_boundaries.m`: Plots d(PVbar)/dy at boundaries with beta
-
-#### Example Plots
-**Hoskins-West Modified Background Flow**
-![hwm_background_flow.png](https://i.imgur.com/Eoe0sqx.png)
-
-**Hoskins-West Eady-type Background Flow**
-![hwm_background_flow.png](https://i.imgur.com/JfLbQt6.png)
-
-**Rossby Wave Eigenvector Amplitude**
-![row_eigenvector_amplitude.png](https://i.imgur.com/58LJSsK.png)
-
-**Rossby Wave Geopotential Height Hovmoller**
-![row_hovmoller_geopotential.png](https://i.imgur.com/KZIcWUE.png)
-
-**Rossby Wave Geopotential Height Hovmoller**
-![row_meridional_cross_section_geopotential.png](https://i.imgur.com/fsyTOZN.png)
-
-**Rossby Wave Vertical Motion Diagnosis**
-![row_vertical_motion_diagnosis.png](https://i.imgur.com/NriIuM2.png)
+#### Combined plots
+- `combined_bg_flow.m`: Generates a three-panel figure visualizing the background state.
+- `combined_gph_meridional_xsec.m`: Plots geopotential height perturbation (shaded) at mid-latitude with meridional wind (contours).
+- `combined_gph_temp.m`: Plots geopotential height (shaded) as a specified vertical level with temperature profile overlaid (contours).
+- `combined_meridional_wind_temp.m`:  Plots meridional wind (shaded) as a specified vertical level with temperature profile overlaid (contours).
+- `combined_momentum_meridional_hflux.m`: Plots momentum flux <v'u'> (shaded) at mid-latitude with meridional heat flux <w'T'> (contours).
+- `combined_momentum_vertical_hflux.m`: Plots momentum flux <v'u'> (shaded) at mid-latitude with vertical heat flux <w'T'> (contours).
+- `combined_pvfield_temp.m`: Plots potential vorticity (shaded) as a specified vertical level with temperature profile overlaid (contours).
+- `combined_ubar_evec_amp.m`: Plots background zonal flow (shaded) at mid-latitude with eigenvector amplitude overlaid (contours).
+- `combined_zonal_wind_temp.m`: Plots zonal wind (shaded) as a specified vertical level with temperature profile overlaid (contours).

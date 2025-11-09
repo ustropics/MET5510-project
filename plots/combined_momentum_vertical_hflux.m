@@ -2,7 +2,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% FILENAME: combined_momentum_and_vertical_hflux.m
+% FILENAME: combined_momentum_vertical_hflux.m
 
 % DESCRIPTION: Overlays vertical heat flux <w'T'> as black contour lines
 %              on a filled contour plot of momentum flux <v'u'>.
@@ -23,7 +23,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function combined_momentum_and_vertical_hflux(vg, ug, wfield, temp, m0, n_mode, fig_path)
+function combined_momentum_vertical_hflux(vg, ug, wfield, temp, m0, n_mode, fig_path)
     
     %% --------------------------------------------------------------------
     %% 1. Compute zonal means

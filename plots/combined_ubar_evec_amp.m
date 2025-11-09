@@ -2,7 +2,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% FILENAME: combined_ubar_with_evec_amp.m
+% FILENAME: combined_ubar_evec_amp.m
 
 % DESCRIPTION: Plots background zonal wind Ubar (filled contour) in the
 %              latitude-height plane with eigenvector amplitude overlaid
@@ -25,7 +25,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function combined_ubar_with_evec_amp(yy, zz, Ubar, eVec_amp, m0, n_mode, ...
+function combined_ubar_evec_amp(yy, zz, Ubar, eVec_amp, m0, n_mode, ...
                                      growth_rate, omega, fig_path)
     
     %% --------------------------------------------------------------------
