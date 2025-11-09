@@ -3,65 +3,90 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % FILENAME: plot_meridional_hflux.m
-%
-% DESCRIPTION: Generates a meridional-height (y-z) contour plot of the 
-% zonally-averaged meridional eddy heat flux <v'T'> in the quasi-geostrophic 
-% model. This diagnostic quantifies poleward heat transport by baroclinic 
-% waves, critical for understanding energy conversion and wave maintenance.
-%
+
+% DESCRIPTION: Generates a latitude-height (y-z) filled contour plot of the
+%              zonally-averaged meridional eddy heat flux <v'T'>. This
+%              diagnostic quantifies poleward heat transport by baroclinic
+%              waves, critical for energy conversion and wave maintenance.
+%              The figure is saved as a PNG with wavenumber and mode number.
+
 % INPUT:
-% - vg: 3D meridional wind perturbation (m/s), size (ii+1, jj+1, kk+1)
-% - temp: 3D temperature perturbation (K), size (ii+1, jj+1, kk+1)
-% - m0: Zonal wavenumber (integer)
-% - n_mode: Selected eigenmode index
-% - fig_path: Directory path for saving the figure
-%
+%   vg       - 3D meridional wind perturbation (ii+1 x jj+1 x kk+1 array, m/s)
+%   temp     - 3D temperature perturbation (ii+1 x jj+1 x kk+1 array, K)
+%   m0       - zonal wavenumber for title/filename
+%   n_mode   - mode number for title/filename
+%   fig_path - directory path for saving figure
+
 % OUTPUT:
-% - Saves figure to: fig_path/mean_meridional_heat_flux_eMode-n_m0-m.png
-%
-% MATH/FUNCTIONS:
-% - <v'T'> = mean(vg .* temp, 1)  →  squeeze → (jj+1 × kk+1) matrix
-% - Units: (m/s)·K = m·K/s
-%
-% VARIABLES:
-% - zvt_calc: Zonally-averaged meridional heat flux <v'T'> (m·K/s)
-% - vg: Meridional geostrophic wind anomaly (from XVx)
-% - temp: Temperature anomaly (from XVz)
-% - contourf: Filled contour plot with no lines
-% - colorbar: Shows scale in m·K/s
-% - Figure size: 16×12 inches, font size 20
-% - saveas: PNG format, automatically closed
+%   Saves: fig_path/meridional-hflux_eMode-<n>_m0-<m>.png
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function plot_meridional_hflux(vg, temp, m0, n_mode, fig_path)
+function plot_meridional_hflux(zz, yy, vg, temp, m0, n_mode, fig_path)
+
+    %% --------------------------------------------------------------------
+    %% 1. Extract the data and compute limits
+    %% --------------------------------------------------------------------
 
     %% Compute zonal mean of meridional heat flux: <v'T'> = mean(v'T', x)
-    zvt_calc = squeeze(mean(vg.*temp,1));
+    data = squeeze(mean(vg.*temp,1));
 
-    %% Create figure
+    % get the maximum and minimum values
+    vmin = min(data(:));   % absolute minimum
+    vmax = max(data(:));   % absolute maximum
+    
+    % print maximum and minimum values
+    fprintf('\nZonal mean of meridional heat flux:\n')
+    fprintf('Maximum Value: %.2e and Minimum Value: %.2e\n', vmax, vmin)
+    
+    % sets the +/- value to add to contourf (0.2 = ~20%)  
+    step = 0.2;                              
+    vmin = floor(vmin/step)*step;               
+    vmax = ceil (vmax/step)*step;
+
+    %% --------------------------------------------------------------------
+    %% 2. Create figure
+    %% --------------------------------------------------------------------    
+   
+    % Create the figure and set it's size [left, bottom, width, height]
     figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
-    contourf(zvt_calc', 'LineStyle', 'none');
+    contourf(yy, zz, data', 'LineStyle', 'none');
+    hold on
+    contour(yy, zz, data', 'LineColor', 'k', 'LineStyle', '-');
+    hold off
+    
+    colormap(flipud(cmap_spectral(256))); % set our colormap choice
     colorbar;
-    xlabel('Latitude')
-    ylabel('z-level')
+
+    % Set x and y-label text as well as tick spacing for grid labels    
+    xlabel('Latitude (degree)')
+    ylabel('Height (km)')
     % set(gca, 'xtick', 0:30:360)
 
-    % Set title
-    title_str = ['Meridional Heat Flux', ' (zonal wave # = ', ...
-     num2str(m0), ', eMode # = ', num2str(n_mode), ')'];
+    % Create title string with input variables and set it
+    title_str = ['Meridional Heat Flux', newline ...
+        'zonal wave # = ', num2str(m0), ... 
+        ', eMode # = ', num2str(n_mode)];
+
     title(title_str);
 
     % Set global font size
     set(findall(gcf, '-property', 'FontSize'), 'FontSize', 20);
-
         
-    %% Save figure
-    outFile = fullfile(fig_path, ['meridional-hflux', '_eMode-', num2str(n_mode), ...
+    %% --------------------------------------------------------------------
+    %% 3. Save figure
+    %% --------------------------------------------------------------------
+
+    % Create filename to save our figure and set output directory
+    outFile = fullfile(fig_path, ['meridional-hflux', ...
+        '_eMode-', num2str(n_mode), ...
         '_m0-', num2str(m0), '.png']);
-    fprintf('Saving zonal wind plot to: %s\n', outFile); % Debug output
+
+    fprintf('Saving meridional heat flux plot to: %s\n', outFile);
+
+    % Comment out 'close(gcf)' if you want to see the plot and save it    
     saveas(gcf, outFile);
     close(gcf);
     
