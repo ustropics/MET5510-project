@@ -8,7 +8,6 @@
 %              zonally-averaged meridional eddy heat flux <v'T'>. This
 %              diagnostic quantifies poleward heat transport by baroclinic
 %              waves, critical for energy conversion and wave maintenance.
-%              The figure is saved as a PNG with wavenumber and mode number.
 
 % INPUT:
 %   vg       - 3D meridional wind perturbation (ii+1 x jj+1 x kk+1 array, m/s)

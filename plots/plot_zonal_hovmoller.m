@@ -3,12 +3,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % FILENAME: plot_zonal_hovmoller.m
-%
-% DESCRIPTION: Plots a Hovmöller diagram of zonal wind perturbation at a
+
+% DESCRIPTION: Plots a Hovmoller diagram of zonal wind perturbation at a
 %              specified vertical level and latitude index across longitude
-%              and time. The figure is saved as a PNG including hlevel,
-%              wavenumber, and mode number.
-%
+%              and time.
+
 % INPUT:
 %   xx         - longitude coordinates (degrees)
 %   time       - time coordinates (days)
@@ -18,7 +17,7 @@
 %   m0         - zonal wavenumber for title/filename
 %   n_mode     - mode number for title/filename
 %   fig_path   - directory path for saving figure
-%
+
 % OUTPUT:
 %   Saves: fig_path/zonal-ug-hovmoller_hlevel-<h>_eMode-<n>_m0-<m>.png
 

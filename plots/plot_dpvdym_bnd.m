@@ -7,7 +7,6 @@
 % DESCRIPTION: Plots meridional PV gradient (∂q̄/∂y) at surface, mid-level,
 %              and tropopause (scaled ×10¹² s⁻¹) along with the planetary
 %              vorticity gradient β (scaled) as line plots vs. latitude.
-%              The figure is saved as a PNG including wavenumber and mode.
 
 % INPUT:
 %   yy       - Latitude coordinates (degrees), size (jj+1)

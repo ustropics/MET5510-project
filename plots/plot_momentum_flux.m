@@ -7,7 +7,6 @@
 % DESCRIPTION: Generates a latitude-height (y-z) filled contour plot of the
 %              zonally-averaged meridional eddy momentum flux <v'u'>. This
 %              diagnostic drives mean flow acceleration via EP flux divergence.
-%              The figure is saved as a PNG with wavenumber and mode number.
 
 % INPUT:
 %   vg       - 3D meridional wind perturbation (ii+1 x jj+1 x kk+1 array, m/s)

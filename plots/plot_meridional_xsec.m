@@ -6,7 +6,6 @@
 
 % DESCRIPTION: Plots meridional wind vertical cross-section at mid-latitude
 %              (jj/2+1) across longitude and height using filled contours.
-%              The figure is saved as a PNG with wavenumber and mode number.
 
 % INPUT:
 %   xx       - longitude coordinates (degrees)

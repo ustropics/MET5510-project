@@ -4,10 +4,9 @@
 
 % FILENAME: plot_gph.m
 
-% DESCRIPTION: Plots geopotential height perturbation at the top boundary
-%              (hlevel = kk+1) across longitude and latitude using filled
-%              contours. The figure is saved as a PNG with wavenumber and
-%              mode number.
+% DESCRIPTION: Plots geopotential height perturbation at a specified
+%              vertical level (hlevel = kk+1) across 
+%              longitude and latitude.
 
 % INPUT:
 %   xx       - longitude coordinates (degrees)

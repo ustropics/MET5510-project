@@ -6,8 +6,6 @@
 
 % DESCRIPTION: Plots a Hovmoller diagram of geopotential height perturbation
 %              at a specified vertical level across longitude and time.
-%              The figure is saved as a PNG including hlevel, wavenumber,
-%              and mode number in title and filename.
 
 % INPUT:
 %   xx       - longitude coordinates (degrees)

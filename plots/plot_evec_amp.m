@@ -6,8 +6,7 @@
 
 % DESCRIPTION: Plots eigenvector amplitude in the latitude-height plane
 %              using filled contours. Includes growth rate and frequency
-%              in title. The figure is saved as a PNG with wavenumber and
-%              mode number in filename.
+%              in title. 
 
 % INPUT:
 %   yy          - Latitude coordinates (degrees), size (jj+1)

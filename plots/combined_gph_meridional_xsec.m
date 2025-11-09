@@ -6,7 +6,7 @@
 %
 % DESCRIPTION: Plots geopotential height perturbation (filled contours) at
 %              mid-latitude with meridional wind (black contour lines)
-%              overlaid. Figure saved as PNG with wavenumber and mode number.
+%              overlaid.
 %
 % INPUT:
 %   xx       - Longitude coordinates (degrees), size (ii+1)

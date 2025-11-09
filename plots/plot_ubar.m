@@ -5,8 +5,7 @@
 % FILENAME: plot_ubar.m
 
 % DESCRIPTION: Plots background zonal wind Ubar(y,z) in the latitude-height
-%              plane using filled contours. The figure is saved as a PNG
-%              including wavenumber and mode number in filename.
+%              plane using filled contours.
 
 % INPUT:
 %   yy       - latitude coordinates (degrees), size (jj+1)

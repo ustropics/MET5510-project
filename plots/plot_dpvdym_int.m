@@ -6,8 +6,7 @@
 
 % DESCRIPTION: Plots the interior meridional gradient of background potential
 %              vorticity (∂q̄/∂y) scaled by 10¹² s⁻¹ in the latitude-height
-%              plane using filled contours. The figure is saved as a PNG
-%              including wavenumber and mode number in title and filename.
+%              plane using filled contours. .
 
 % INPUT:
 %   yy       - Latitude coordinates (degrees), size (jj+1)

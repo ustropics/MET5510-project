@@ -2,11 +2,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FILE DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% FILENAME: plot_gph.m
+% FILENAME: plot_gph_xsec.m
 
 % DESCRIPTION: Plots geopotential height perturbation at mid-latitude
 %              (jj/2+1) across longitude and height using filled contours.
-%              The figure is saved as a PNG with wavenumber and mode number.
 
 % INPUT:
 %   xx       - Longitude coordinates (degrees), size (ii+1)

@@ -4,9 +4,8 @@
 
 % FILENAME: plot_pvfield.m
 
-% DESCRIPTION: Plots potential vorticity perturbation at the surface (k=1)
-%              across longitude and latitude using filled contours. The
-%              figure is saved as a PNG with wavenumber and mode number.
+% DESCRIPTION: Plots potential vorticity perturbations at given hlevels
+%              across longitude and latitude using filled contours. 
 
 % INPUT:
 %   xx       - longitude coordinates (degrees)

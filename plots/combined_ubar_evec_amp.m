@@ -6,10 +6,7 @@
 
 % DESCRIPTION: Plots background zonal wind Ubar (filled contour) in the
 %              latitude-height plane with eigenvector amplitude overlaid
-%              as black contour lines. The figure is saved as a PNG
-%              including wavenumber, mode number, growth rate and frequency
-%              in title and filename.
-
+%              as black contour lines.
 % INPUT:
 %   yy          – latitude vector (degrees) , size (jj+1)
 %   zz          – height vector   (km)      , size (kk+1)

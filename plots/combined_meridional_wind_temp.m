@@ -7,9 +7,7 @@
 % DESCRIPTION: Plots meridional wind (filled contour) at a specified vertical
 %              level across longitude and latitude, with temperature
 %              overlaid as black contour lines (solid for positive,
-%              dashed for negative, thin solid for zero). The figure is
-%              saved as a PNG including hlevel, wavenumber, and mode number
-%              in title and filename.
+%              dashed for negative, thin solid for zero).
 
 % INPUT:
 %   xx       - Longitude coordinates (degrees)

@@ -5,9 +5,7 @@
 % FILENAME: combined_momentum_and_meridional_hflux.m
 
 % DESCRIPTION: Overlays meridional heat flux <v'T'> as black contour lines
-%              on a filled contour plot of momentum flux <v'u'>.  The
-%              figure is saved as a PNG with wavenumber and mode number
-%              in title and filename.
+%              on a filled contour plot of momentum flux <v'u'>.
 
 % INPUT:
 %   vg     - 3-D meridional wind perturbation (m/s)

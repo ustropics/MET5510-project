@@ -10,8 +10,6 @@
 %              2) interior meridional PV gradient ∂q̄/∂y = 0,
 %              3) boundary PV gradients at surface/tropopause with β.
 %              Useful for verifying thermal wind balance and PV structure.
-%              The figure is saved as a PNG including wavenumber and mode number
-%              in title and filename.
 
 % INPUT:
 %   yy       - Latitude coordinates (degrees), size (jj+1)

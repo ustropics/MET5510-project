@@ -7,7 +7,7 @@
 % DESCRIPTION: Generates a latitude-height (y-z) filled contour plot of the
 %              zonally-averaged vertical heat flux <w'T'>. This diagnostic
 %              drives diabatic heating/cooling in the QG thermodynamic
-%              equation. The figure is saved as a PNG with wavenumber and mode.
+%              equation.
 
 % INPUT:
 %   wfield   - 3D vertical velocity (ii+1 x jj+1 x kk+1 array, m/s)

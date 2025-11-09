@@ -6,8 +6,6 @@
 
 % DESCRIPTION: Plots meridional wind perturbation (filled contour) at a
 %              specified vertical level across longitude and latitude.
-%              The figure is saved as a PNG including hlevel, wavenumber,
-%              and mode number in title and filename.
 
 % INPUT:
 %   xx       - longitude coordinates (degrees)

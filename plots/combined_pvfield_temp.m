@@ -7,9 +7,7 @@
 % DESCRIPTION: Plots potential vorticity (filled contour) at a specified vertical
 %              level across longitude and latitude, with temperature
 %              overlaid as colored contour lines (solid red for positive,
-%              dashed blue for negative, thin solid black for zero). The figure is
-%              saved as a PNG including hlevel, wavenumber, and mode number
-%              in title and filename.
+%              dashed blue for negative, thin solid black for zero). 
 
 % INPUT:
 %   xx       - Longitude coordinates (degrees)
