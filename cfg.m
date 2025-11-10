@@ -95,7 +95,6 @@ params.LW = (params.jj+1)*(params.kk-1); % total number of interior grid points
 %% Constants for Ubar initialization
 params.dTbar = 60; % potential temperature gradient (K)
 params.mu = 1; % curvature parameter
-% params.y_s = ; % reference latitude (m)
 params.prefac = (params.gg / (params.f0 * params.Theta0)) * (params.HH * params.dTbar / params.Ly); % prefactor for Ubar
 
 %% Directory variables

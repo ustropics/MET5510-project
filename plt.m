@@ -43,6 +43,8 @@ addpath(['functions', filesep])
 addpath(['plots', filesep])
 addpath(['cmaps', filesep])
 
+fprintf('\nLoading calculated data to begin plotting...\n')
+
 %% Load config and computed params
 params = cfg();
 load(fullfile(params.data_dir, params.calc_filename));
