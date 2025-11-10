@@ -128,13 +128,8 @@ save(calcFile, ...
     'm0','n_mode','growth_rate','omega','phase_speed','eFolding', ...
     'hlat','params');  
 
-disp_str = ['All fields calculated and saved (individually) to ', calcFile];
+disp_str = ['All fields calculated and saved to ', calcFile];
 disp(disp_str);
 toc
 
 save(fullfile(params.data_dir, params.calc_filename));
-
-disp_str = ['All fields calculated and saved to ', params.data_dir, params.calc_filename];
-
-disp(disp_str);
-toc
