@@ -31,7 +31,7 @@ function combined_ubar_evec_amp(yy, zz, Ubar, eVec_amp, m0, n_mode, ...
     %% --------------------------------------------------------------------
     %% 1. Create figure
     %% --------------------------------------------------------------------
-    fig = figure('units','inch','position',[4 2 16 12],'Visible','off');
+    fig = figure('units','inch','position',[4 2 18 14],'Visible','off');
     hold on;
 
     %% --------------------------------------------------------------------

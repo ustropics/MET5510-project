@@ -28,7 +28,7 @@ function combined_gph_temp(xx, yy, gpt_h, temp, hlevel, m0, n_mode, fig_path)
     %% --------------------------------------------------------------------
     %% 1. Create figure
     %% --------------------------------------------------------------------
-    figure('units','inch','position',[4 2 16 12],'Visible','off')
+    figure('units','inch','position',[4 2 18 14],'Visible','off')
     
     %% --------------------------------------------------------------------
     %% 2. Filled contour of geopotential height (background)

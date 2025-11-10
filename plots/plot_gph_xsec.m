@@ -30,6 +30,8 @@ function plot_gph_xsec(xx, zz, gpt_h, jj, m0, n_mode, fig_path)
     %% 1. Extract mid-latitude slice and compute limits
     %% --------------------------------------------------------------------
     
+    lat = floor(jj/2) + 1;
+
     % Get 2d data for geopotential height contour at mid-latitude
     data = squeeze(gpt_h(:, floor(jj/2) + 1, :));  % (ii+1 x kk+1)
     vmin = min(data(:));
@@ -45,7 +47,7 @@ function plot_gph_xsec(xx, zz, gpt_h, jj, m0, n_mode, fig_path)
     %% --------------------------------------------------------------------
     %% 2. Create figure
     %% --------------------------------------------------------------------
-    figure('units','inch','position',[4,2,16,12],'Visible','off');
+    figure('units','inch','position',[4,2,18,14],'Visible','off');
     contourf(xx, zz, data', 'LineStyle','none');
     hold on
     contour(xx, zz, data', 'LineColor', 'k', 'LineStyle', '-');
@@ -59,8 +61,10 @@ function plot_gph_xsec(xx, zz, gpt_h, jj, m0, n_mode, fig_path)
     ylabel('Height (km)');
     set(gca, 'XTick', 0:30:360, 'YTick', 0:2:10);
 
-    title_str = ['Geopotential Height Perturbation (Mid-Latitude)' newline ...
-                 'zonal wave # = ', num2str(m0), ', eMode # = ', num2str(n_mode)];
+    title_str = ['Geopotential Height Perturbation (cross-section)' newline ...
+                 'zonal wave # = ', num2str(m0), ...
+                 ', eMode # = ', num2str(n_mode), ...
+                 ', latitude = ', num2str(lat)];
     title(title_str);
 
     set(findall(gcf,'-property','FontSize'),'FontSize',20);

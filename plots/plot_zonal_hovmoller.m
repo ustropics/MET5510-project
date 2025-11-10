@@ -25,74 +25,83 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function plot_zonal_hovmoller(xx, time, ug_hovmoler, hlat, hlevel, m0, n_mode, fig_path)
-
+function plot_zonal_hovmoller(xx, time, ug_hovmoler, hlat, hlevel, m0, n_mode, Lx, eigVal2, fig_path)
     %% --------------------------------------------------------------------
-    %% 1. Extract the data and compute limits
+    %% 1. Extract the data and compute phase speed
     %% --------------------------------------------------------------------
+    data = ug_hovmoler' * 10;  % scale by 10 for visibility (common in perturbations)
 
-    % Get data for hovmoller diagram of zonal wind at specified hlevel
-    data = ug_hovmoler'*10;
+    % Compute phase speed
+    omega = -imag(eigVal2(n_mode)); % angular frequency (rad/s)
+    k = 2*pi*m0 / Lx; % wavenumber (rad/m)
+    phase_speed = omega / k; % m/s
+    phase_speed_day = Lx / (phase_speed * 86400); % days per wavelength
 
-    % get the maximum and minimum values
-    vmin = min(data(:));   % absolute minimum
-    vmax = max(data(:));   % absolute maximum
-    
-    % print maximum and minimum values
-    fprintf('\nHovmoller diagram of zonal wind at specified hlevel:\n')
-    fprintf('Maximum Value: %.2f and Minimum Value: %.2f\n', vmax, vmin)
-    
-    % sets the +/- value to add to contourf (0.2 = ~20%)  
-    step = 0.2;                              
-    vmin = floor(vmin/step)*step;               
-    vmax = ceil (vmax/step)*step;
+    % Get data limits
+    vmin_data = min(data(:));
+    vmax_data = max(data(:));
+    fprintf('\nHovmoller diagram of zonal wind at hlevel = %d, hlat = %d:\n', hlevel, hlat);
+    fprintf('Max: %.2f, Min: %.2f (scaled x10)\n', vmax_data, vmin_data);
+
+    % Round to nearest 0.2 step
+    step = 0.2;
+    vmin = floor(vmin_data / step) * step;
+    vmax = ceil(vmax_data / step) * step;
 
     %% --------------------------------------------------------------------
     %% 2. Create figure
     %% --------------------------------------------------------------------
-
-    % Create the figure and set it's size [left, bottom, width, height]
-    figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
+    figure('units', 'inch', 'position', [4, 2, 18, 14], 'Visible', 'off');
     contourf(xx, time, data, 'LineStyle', 'none');
-    hold on
-    contour(xx, time, data, 'LineColor', 'k', 'LineStyle', '-')
+    hold on;
+    contour(xx, time, data, 'LineColor', 'k', 'LineStyle', '-');
 
-    
-    colormap(cmap_PuOr(256)); % set our colormap choice
+    colormap(cmap_PuOr(256));
     colorbar;
+    caxis([vmin vmax]);
 
-    caxis([vmin vmax]); % sets limits from section 1
+    % Labels
+    xlabel('Longitude (degrees)');
+    ylabel('Time (days)');
+    set(gca, 'XTick', 0:60:360);
 
-    % Set x and y-label text as well as tick spacing for grid labels
-    xlabel('Longitude (degrees)')
-    ylabel('Time (days)')
-
-    % Create title string with input variables and set it
-    title_str = ['Zonal Wind Hovmoller Diagram', newline ... 
+% Create title string with input variables and set it
+    title_str = ['Zonal Wind Hovmoller Diagram', newline ...
         'latitude = ', num2str(hlat), ...
         ', hlevel = ', num2str(hlevel), ...
         ', zonal wave # = ', num2str(m0), ...
-        ', eMode # = ', num2str(n_mode)];
+        ', eMode # = ', num2str(n_mode), ...
+        ', phase speed = ', num2str(phase_speed_day, '%.2f'), ' days'];
     
     title(title_str);
 
-    % Set global font size
+    % Font size
     set(findall(gcf, '-property', 'FontSize'), 'FontSize', 20);
 
     %% --------------------------------------------------------------------
-    %% 3. Save figure
+    %% 3. Add HORIZONTAL LINE at phase_speed_day (on TIME axis)
     %% --------------------------------------------------------------------
+    y_line = phase_speed_day;
+    x_limits = xlim;  % [xmin, xmax] — NO parentheses!
 
-    % Create filename to save our figure and set output directory
-    outFile = fullfile(fig_path, ['zonal-ug-hovmoller', ...
-        '_hlevel-', num2str(hlevel), ... 
-        '_eMode-', num2str(n_mode), ...
-        '_m0-', num2str(m0), '.png']);
+    % Draw horizontal line across full longitude
+    line(x_limits, [y_line y_line], ...
+         'Color', 'k', 'LineStyle', '--', 'LineWidth', 4);
 
-    fprintf('Saving Hovmoller diagram for zonal wind plot to: %s\n', outFile)
+    % Add label on the right
+    text(x_limits(2)*0.98, y_line, ...
+         sprintf(' %.2f days', phase_speed_day), ...
+         'Color', 'k', 'FontWeight', 'bold', ...
+         'HorizontalAlignment', 'right', ...
+         'VerticalAlignment', 'middle', 'FontSize', 18, ...
+         'BackgroundColor', 'white', 'EdgeColor', 'k', 'Margin', 2);
 
-    % Comment out 'close(gcf)' if you want to see the plot and save it
+    %% --------------------------------------------------------------------
+    %% 4. Save figure
+    %% --------------------------------------------------------------------
+    outFile = fullfile(fig_path, ...
+        sprintf('zonal-ug-hovmoller_hlevel-%d_eMode-%d_m0-%d.png', hlevel, n_mode, m0));
+    fprintf('Saving Hovmoller diagram to: %s\n', outFile);
     saveas(gcf, outFile);
     close(gcf);
-    
 end

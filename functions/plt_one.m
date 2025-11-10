@@ -137,13 +137,13 @@ addpath(['cmaps', filesep])
             requireLevel(h);
             var_name = sprintf('gpt_h_hovmoler%d', h);
             data = eval(var_name);
-            plot_gph_hovmoller(xx, time, data, hlat, h, m0, n_mode, fig_path);
+            plot_gph_hovmoller(xx, time, data, hlat, h, m0, n_mode, Lx, eigVal2, fig_path);
 
         case 'zonal_hovmoller'
             requireLevel(h);
             var_name = sprintf('ug_hovmoler%d', h);
             data = eval(var_name);
-            plot_zonal_hovmoller(xx, time, data, hlat, h, m0, n_mode, fig_path);    
+            plot_zonal_hovmoller(xx, time, data, hlat, h, m0, n_mode, Lx, eigVal2, fig_path);    
 
         % === Top boundary and background ===
         case 'gph'

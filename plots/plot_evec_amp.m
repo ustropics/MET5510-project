@@ -47,7 +47,7 @@ function plot_evec_amp(yy, zz, eVec_amp, m0, n_mode, growth_rate, omega, fig_pat
     %% --------------------------------------------------------------------
 
     % Create the figure and set it's size [left, bottom, width, height]
-    figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
+    figure('units', 'inch', 'position', [4,2,18,14], 'Visible', 'off')
     contourf(yy, zz, data', 'linestyle', 'none');
     hold on
     contour(yy, zz, data', 'LineColor', 'k', 'LineStyle', '-');

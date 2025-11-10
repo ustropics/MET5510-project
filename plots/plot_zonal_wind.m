@@ -33,24 +33,24 @@ function plot_zonal_wind(xx, yy, ug, hlevel, m0, n_mode, fig_path)
     data = squeeze(ug(:,:,hlevel)); % get our data to plot
 
     % get the maximum and minimum values
-    vmin = min(data(:));   % absolute minimum
-    vmax = max(data(:));   % absolute maximum
+    vmin_data = min(data(:));   % absolute minimum
+    vmax_data = max(data(:));   % absolute maximum
     
     % print maximum and minimum values
     fprintf('\nZonal wind contours at hlevel = %d:\n', hlevel)
-    fprintf('Maximum Value: %.2f and Minimum Value: %.2f\n', vmax, vmin)
+    fprintf('Maximum Value: %.2f and Minimum Value: %.2f\n', vmax_data, vmin_data)
     
     % sets the +/- value to add to contourf (0.2 = ~20%)  
     step = 0.2;                              
-    vmin = floor(vmin/step)*step;               
-    vmax = ceil (vmax/step)*step;
+    vmin = floor(vmin_data/step)*step;               
+    vmax = ceil (vmax_data/step)*step;
 
     %% --------------------------------------------------------------------
     %% 2. Create figure
     %% --------------------------------------------------------------------
 
     % Create the figure and set it's size [left, bottom, width, height]
-    figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
+    figure('units', 'inch', 'position', [4,2,18,14], 'Visible', 'off')
     contourf(xx, yy, data', 'LineStyle', 'none');
     hold on
     contour(xx, yy, data', 'LineColor', 'k', 'LineStyle', '-');
@@ -65,10 +65,12 @@ function plot_zonal_wind(xx, yy, ug, hlevel, m0, n_mode, fig_path)
     set(gca, 'xtick', 0:30:360)
 
     % Create title string with input variables and set it
-    title_str = ['Zonal Wind', newline ...
+    title_str = ['Zonal Wind Perturbation', newline ...
         'hlevel = ', num2str(hlevel), ...
         ', zonal wave # = ', num2str(m0), ...
-        ', eMode # = ', num2str(n_mode)];
+        ', eMode # = ', num2str(n_mode), ...
+        ', max val = ', num2str(vmax_data), ' m/s', ...
+        ', min val = ', num2str(vmin_data), ' m/s'];
 
     title(title_str);
 

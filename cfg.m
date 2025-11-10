@@ -63,7 +63,6 @@ params.xx = 0.0 : 360 / params.ii : 360; % longitude coordinates (degrees)
 params.yy = linspace(45 - 25, 45 + 25, params.jj + 1); % latitude coordinates (degrees)
 params.zz = linspace(0.0, 10, params.kk + 1); % height coordinates (km)
 params.hlat = 45; % lat for Hovmoller diagram
-params.hlevel = 1; % vertical level for Hovmoller diagram
 params.time = 0 : 1 : 50; % time coordinates (days)
 % params.n_mode = 7; % already defined
 

@@ -74,10 +74,10 @@ plot_meridional_hflux(zz, yy, vg, temp, m0, n_mode, fig_path);
 plot_vertical_hflux(zz, yy, wfield, temp, m0, n_mode, fig_path);
 
 % Hovmoller: Geopotential height and zonal
-plot_gph_hovmoller(xx, time, gpt_h_hovmoler1, hlat, 1, m0, n_mode, fig_path);
-plot_gph_hovmoller(xx, time, gpt_h_hovmoler51, hlat, 51, m0, n_mode, fig_path);
-plot_zonal_hovmoller(xx, time, ug_hovmoler1, hlat, 1, m0, n_mode, fig_path);
-plot_zonal_hovmoller(xx, time, ug_hovmoler51, hlat, 51, m0, n_mode, fig_path);
+plot_gph_hovmoller(xx, time, gpt_h_hovmoler1, hlat, 1, m0, n_mode, Lx, eigVal2, fig_path);
+plot_gph_hovmoller(xx, time, gpt_h_hovmoler51, hlat, 51, m0, n_mode, Lx, eigVal2, fig_path);
+plot_zonal_hovmoller(xx, time, ug_hovmoler1, hlat, 1, m0, n_mode, Lx, eigVal2, fig_path);
+plot_zonal_hovmoller(xx, time, ug_hovmoler51, hlat, 51, m0, n_mode, Lx, eigVal2, fig_path);
 
 % Plot eigenvector amplitude
 eVec_amp = zeros(jj + 1, kk + 1);

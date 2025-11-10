@@ -23,7 +23,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function plot_gph_hovmoller(xx, time, gpt_h_hovmoler, hlat, hlevel, m0, n_mode, fig_path)
+function plot_gph_hovmoller(xx, time, gpt_h_hovmoler, hlat, hlevel, m0, n_mode, Lx, eigVal2, fig_path)
 
     %% --------------------------------------------------------------------
     %% 1. Extract the data and compute limits
@@ -31,6 +31,12 @@ function plot_gph_hovmoller(xx, time, gpt_h_hovmoler, hlat, hlevel, m0, n_mode, 
 
     % Plot data for Hovmoller diagram for geopotential heights
     data = gpt_h_hovmoler; % get our data to plot
+
+    % Compute phase speed
+    omega = -imag(eigVal2(n_mode)); % angular frequency (rad/s)
+    k = 2*pi*m0 / Lx; % wavenumber (rad/m)
+    phase_speed = omega / k; % m/s
+    phase_speed_day = Lx / (phase_speed * 86400); % days per wavelength
 
     % get the maximum and minimum values
     vmin = min(data(:));   % absolute minimum
@@ -50,7 +56,7 @@ function plot_gph_hovmoller(xx, time, gpt_h_hovmoler, hlat, hlevel, m0, n_mode, 
     %% --------------------------------------------------------------------
 
     %% Create figure
-    figure('units', 'inch', 'position', [4,2,16,12], 'Visible', 'off')
+    figure('units', 'inch', 'position', [4,2,18,14], 'Visible', 'off')
     contourf(xx, time, data', 'linestyle', 'none');
     hold on
     contour(xx, time, data', 'LineColor', 'k', 'LineStyle', '-');
@@ -70,15 +76,34 @@ function plot_gph_hovmoller(xx, time, gpt_h_hovmoler, hlat, hlevel, m0, n_mode, 
         'latitude = ', num2str(hlat), ...
         ', hlevel = ', num2str(hlevel), ...
         ', zonal wave # = ', num2str(m0), ...
-        ', eMode # = ', num2str(n_mode)];
+        ', eMode # = ', num2str(n_mode), ...
+        ', phase speed = ', num2str(phase_speed_day, '%.2f'), ' days'];
 
     title(title_str);
 
     % Set global font size
     set(findall(gcf, '-property', 'FontSize'), 'FontSize', 20);
+
+    %% --------------------------------------------------------------------
+    %% 3. Add HORIZONTAL LINE at phase_speed_day (on TIME axis)
+    %% --------------------------------------------------------------------
+    y_line = phase_speed_day;
+    x_limits = xlim;  % [xmin, xmax] — NO parentheses!
+
+    % Draw horizontal line across full longitude
+    line(x_limits, [y_line y_line], ...
+         'Color', 'k', 'LineStyle', '--', 'LineWidth', 4);
+
+    % Add label on the right
+    text(x_limits(2)*0.98, y_line, ...
+         sprintf(' %.2f days', phase_speed_day), ...
+         'Color', 'k', 'FontWeight', 'bold', ...
+         'HorizontalAlignment', 'right', ...
+         'VerticalAlignment', 'middle', 'FontSize', 18, ...
+         'BackgroundColor', 'white', 'EdgeColor', 'k', 'Margin', 2);
     
     %% --------------------------------------------------------------------
-    %% 3. Save figure
+    %% 4. Save figure
     %% --------------------------------------------------------------------
 
     % Create filename to save our figure and set output directory

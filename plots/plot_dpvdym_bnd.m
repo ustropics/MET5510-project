@@ -45,7 +45,7 @@ function plot_dpvdym_bnd(yy, BPVy, beta, kk, m0, n_mode, fig_path)
     %% --------------------------------------------------------------------
     %% 2. Create figure
     %% --------------------------------------------------------------------
-    figure('units','inch','position',[4,2,16,12],'Visible','off');
+    figure('units','inch','position',[4,2,18,14],'Visible','off');
     hold on;
 
     plot(yy, dpvdy_surface, 'b-', 'LineWidth', 2, 'DisplayName', 'Surface');

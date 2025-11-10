@@ -33,7 +33,7 @@ function combined_momentum_meridional_hflux(vg, ug, temp, m0, n_mode, fig_path)
     %% --------------------------------------------------------------------
     %% 2. Create figure
     %% --------------------------------------------------------------------
-    figure('units','inch','position',[4 2 16 12],'Visible','off');
+    figure('units','inch','position',[4 2 18 14],'Visible','off');
     hold on;
 
     %% --------------------------------------------------------------------

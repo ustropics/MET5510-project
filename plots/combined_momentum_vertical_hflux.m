@@ -34,7 +34,7 @@ function combined_momentum_vertical_hflux(vg, ug, wfield, temp, m0, n_mode, fig_
     %% --------------------------------------------------------------------
     %% 2. Create figure
     %% --------------------------------------------------------------------
-    figure('units','inch','position',[4 2 16 12],'Visible','off');
+    figure('units','inch','position',[4 2 18 14],'Visible','off');
     hold on;
 
     %% --------------------------------------------------------------------
