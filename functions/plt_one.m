@@ -91,13 +91,13 @@ addpath(['cmaps', filesep])
         case 'combined_gph_meridional_xsec'
             combined_gph_meridional_xsec(xx, zz, gpt_h, vg, jj, m0, n_mode, fig_path2)
 
-        case 'combined_ubar_with_evec_amp'
+        case 'combined_ubar_evec_amp'
             eVec_amp = zeros(jj + 1, params.kk + 1);
             for l = 1 : params.ll
                 [j, k] = l2jk(l);
                 eVec_amp(j, k) = XV(l) .* conj(XV(l));
             end
-            combined_ubar_with_evec_amp(yy, zz, Ubar, eVec_amp, m0, n_mode, ...
+            combined_ubar_evec_amp(yy, zz, Ubar, eVec_amp, m0, n_mode, ...
                                         growth_rate, omega, fig_path2);
 
         % === Level-dependent plots ===

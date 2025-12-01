@@ -71,7 +71,7 @@ fprintf('Loading computed data from %s for QG-CAI model...\nCalculating paramete
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Loop through modes 1 to 12
-for n_mode = 1:12
+for n_mode = 2:2
     fprintf('\n========== Processing Mode %d ==========\n', n_mode);
     
     %% Select mode
@@ -121,7 +121,7 @@ for n_mode = 1:12
     end
     
     % Modify filename to include mode number
-    calcFile = fullfile(params.data_dir, sprintf('calc_wave-m0_eMode-%d.mat', n_mode));
+    calcFile = fullfile(params.data_dir, sprintf('calc_wave-m0-%d_eMode-%d.mat', m0, n_mode));
     
     %% Save entire workspace for this mode
     save(calcFile);  % Saves all variables, matching original behavior

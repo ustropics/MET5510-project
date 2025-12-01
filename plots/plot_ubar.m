@@ -56,7 +56,11 @@ function plot_ubar(yy, zz, Ubar, m0, n_mode, fig_path)
     hold off
 
     colormap(flipud(cmap_spectral(256))); % set our colormap choice
-    colorbar;
+    cb = colorbar;
+    cb.Label.String = 'Background zonal wind (m s^{-1})';  
+    cb.Label.FontSize = 22;                  
+    cb.FontSize = 18;        
+
     caxis([vmin vmax]); % sets limits from section 1
 
     % Set x and y-label text as well as tick spacing for grid labels    
@@ -65,9 +69,7 @@ function plot_ubar(yy, zz, Ubar, m0, n_mode, fig_path)
 
     % Create title string and set it
     title_str = ['Background Zonal Wind (Ubar)', newline ...
-    'zonal wave # = ', num2str(m0), ...
-    ', eMode # = ', num2str(n_mode), ...
-    ', max val = ', num2str(vmax_data, '%.2f'), ' m/s', ...
+    'max val = ', num2str(vmax_data, '%.2f'), ' m/s', ...
     ', min val = ', num2str(vmin_data), ' m/s'];
 
     title(title_str);

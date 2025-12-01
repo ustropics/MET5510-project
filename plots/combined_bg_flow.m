@@ -75,7 +75,7 @@ function combined_bg_flow(yy, zz, jj, kk, Ubar, BPVy, m0, n_mode, fig_path)
     colorbar;
     xlabel('Latitude (degrees)');
     ylabel('Height (km)');
-    title('$\frac{\partial \bar{q}}{\partial y} = 0$ (Interior)', 'Interpreter','latex');
+    title('$\frac{\partial \bar{q}}{\partial y} < 0$ caused by $\frac{\partial^2 \bar{u}}{\partial z^2} < 0$', 'Interpreter','latex');
     hold off;
 
     %% --------------------------------------------------------------------

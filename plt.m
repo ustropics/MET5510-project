@@ -53,13 +53,14 @@ params = cfg();
 jj = params.jj;
 kk = params.kk;
 ll = params.ll;
+m0 = params.m0;
 
 %% Loop through modes 1 to 12
-for n_mode = 1:12
+for n_mode = 1:1
     fprintf('\n========== Plotting Mode %d ==========\n', n_mode);
     
     % Load the specific mode's calculated data
-    calcFile = fullfile(params.data_dir, sprintf('calc_wave-m0_eMode-%d.mat', n_mode));
+    calcFile = fullfile(params.data_dir, sprintf('calc_wave-m0-%d_eMode-%d.mat', m0, n_mode));
     
     if ~exist(calcFile, 'file')
         warning('File not found: %s. Skipping mode %d.', calcFile, n_mode);

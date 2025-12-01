@@ -46,7 +46,7 @@ function params = cfg()
 params = struct();
 
 %% Initial variables for complex and wave number
-params.m0 = 4; % wave number
+params.m0 = 7; % wave number
 params.n_mode = 1; % wave frequency
 params.cplx = sqrt(-1); % imaginary unit
 
@@ -101,6 +101,6 @@ params.prefac = (params.gg / (params.f0 * params.Theta0)) * (params.HH * params.
 params.plot_dir = ['figures/', num2str(params.m0)]; % directory for saving plots
 params.data_dir = 'data/'; % directory for saving data
 params.data_filename = ['data_wave_', num2str(params.m0), '.mat']; % data filename
-params.calc_filename = ['calc_wave-', num2str(params.m0), '_eMode-', num2str(params.n_mode), '.mat']; % data filename
+params.calc_filename = ['calc_wave-m0-', num2str(params.m0), '_eMode-', num2str(params.n_mode), '.mat']; % data filename
 
 end

@@ -15,6 +15,14 @@ rossby_number   = max(abs(ug(:))) / (f0*rossby_radius);     % dimensionless
 max_T           = max(abs(temp(:)));                        % K
 max_w           = max(abs(wfield(:)));                      % cm s^-1
 
+% Eigenvector amplitude
+eVec_amp = zeros(jj + 1, kk + 1);
+
+for l = 1 : ll
+    [j, k] = l2jk(l);
+    eVec_amp(j, k) = XV(l) .* conj(XV(l));
+end
+
 max_bottom      = max(eVec_amp(:,1));
 max_top         = max(eVec_amp(:,51));
 max_gph         = 10;
